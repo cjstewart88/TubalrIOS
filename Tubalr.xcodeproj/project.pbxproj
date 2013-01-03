@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E501D16951A8800FFC7A1 /* libTestFlight.a */; };
+		BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E502116951B8F00FFC7A1 /* libz.dylib */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -19,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE3E501D16951A8800FFC7A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Tubalr/libTestFlight.a; sourceTree = "<group>"; };
+		BE3E501E16951A8800FFC7A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		BE3E502116951B8F00FFC7A1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -42,6 +47,8 @@
 				BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */,
 				BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */,
 				BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */,
+				BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */,
+				BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +75,8 @@
 		BEF8F5A5169512FC002F241E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE3E502116951B8F00FFC7A1 /* libz.dylib */,
+				BE3E501D16951A8800FFC7A1 /* libTestFlight.a */,
 				BEF8F5A6169512FC002F241E /* UIKit.framework */,
 				BEF8F5A8169512FC002F241E /* Foundation.framework */,
 				BEF8F5AA169512FC002F241E /* CoreGraphics.framework */,
@@ -88,6 +97,7 @@
 		BEF8F5AD169512FC002F241E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE3E501E16951A8800FFC7A1 /* TestFlight.h */,
 				BEF8F5AE169512FC002F241E /* Tubalr-Info.plist */,
 				BEF8F5AF169512FC002F241E /* InfoPlist.strings */,
 				BEF8F5B2169512FC002F241E /* main.m */,
@@ -241,6 +251,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tubalr/Tubalr-Prefix.pch";
 				INFOPLIST_FILE = "Tubalr/Tubalr-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Tubalr\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -252,6 +266,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tubalr/Tubalr-Prefix.pch";
 				INFOPLIST_FILE = "Tubalr/Tubalr-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Tubalr\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -276,6 +294,7 @@
 				BEF8F5C2169512FC002F241E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
