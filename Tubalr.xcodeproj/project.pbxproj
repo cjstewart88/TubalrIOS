@@ -263,6 +263,7 @@
 		BEF8F5C2169512FC002F241E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cody Stewart";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tubalr/Tubalr-Prefix.pch";
 				INFOPLIST_FILE = "Tubalr/Tubalr-Info.plist";
@@ -271,6 +272,7 @@
 					"\"$(SRCROOT)/Tubalr\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "624AAD65-6EA6-4DFC-92C5-28223195E829";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
