@@ -7,17 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import "NowPlayingViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //TestFlight Team Key in quotes
     [TestFlight takeOff:@"eab2d4a84191015273c8368e21e964fe_MTcxMjcxMjAxMy0wMS0wMiAyMDo0NTowOS4yNTczMjI"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.viewController = [[NowPlayingViewController alloc] init];
+    
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
