@@ -16,8 +16,8 @@
 
 #if defined (DEBUG) && defined (STAGING)
 NSString *const kAPIQueryVersionKey			= @"v1";
-NSString *const kAPIQueryURL				= @"http://www.tubalr.com";
-NSString *const kAPITrackURL                = @"http://www.tubalr.com";
+NSString *const kAPIQueryURL				= @"http://staging.tubalr.com";
+NSString *const kAPITrackURL                = @"http://staging.tubalr.com";
 #else
 NSString *const kAPIQueryVersionKey			= @"v1";
 NSString *const kAPIQueryURL				= @"http://www.tubalr.com";
