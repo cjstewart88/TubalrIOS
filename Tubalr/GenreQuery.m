@@ -10,6 +10,8 @@
 
 @implementation GenreQuery
 
+#pragma mark Public
+
 + (NSArray *)genres
 {
     static NSArray *arrayOfGenres;

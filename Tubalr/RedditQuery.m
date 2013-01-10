@@ -12,6 +12,8 @@ NSString *const kRedditQueryUrl             = @"http://www.reddit.com/r/%@/hot.j
 
 @implementation RedditQuery
 
+#pragma mark Public
+
 + (BOOL)checkWithString:(NSString *)string
 {
     NSRange redditSchemeRange = [string rangeOfString:@"/r/"];

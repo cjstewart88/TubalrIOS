@@ -11,5 +11,6 @@
 @interface EchonestQuery : NSObject
 
 + (void)artistSearch:(NSString *)string completion:(void (^)(NSArray *))completion;
++ (void)similarArtistSearch:(NSString *)string completion:(void (^)(NSArray *))completion;
 
 @end

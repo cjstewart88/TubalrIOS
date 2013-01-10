@@ -16,10 +16,26 @@ NSString *const kEchonestQueryURL           = @"http://developer.echonest.com/ap
 
 @implementation EchonestQuery
 
+#pragma mark Public
+
 + (void)artistSearch:(NSString *)string completion:(void (^)(NSArray *))completion
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"artist", @"songs", kApiKey, @"name", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kStart, kNumberOfSongs]];
     
+    [self searchWithUrl:url stringArray:[NSArray arrayWithObjects:@"songs", @"title", nil] completion:completion];
+}
+
++ (void)similarArtistSearch:(NSString *)string completion:(void (^)(NSArray *))completion
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"artist", @"similar", kApiKey, @"name", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kStart, kNumberOfSongs]];
+    
+    [self searchWithUrl:url stringArray:[NSArray arrayWithObjects:@"artists", @"name", nil] completion:completion];
+}
+
+#pragma mark Private
+
++ (void)searchWithUrl:(NSURL *)url stringArray:(NSArray *)array completion:(void (^)(NSArray *))completion
+{
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *data = [NSData dataWithContentsOfURL:url];
         NSError *error;
@@ -32,7 +48,11 @@ NSString *const kEchonestQueryURL           = @"http://developer.echonest.com/ap
             return;
         }
         
-        results = [response objectForKey:@"songs"];
+        NSMutableArray *mutableContainer = [[NSMutableArray alloc] init];
+        for(NSDictionary *dictionary in [response objectForKey:[array objectAtIndex:0]])
+            [mutableContainer addObject:[dictionary objectForKey:[array objectAtIndex:1]]];
+        
+        results = [NSArray arrayWithArray:mutableContainer];
         [self callCompletionOnMainThread:completion result:results];
     });
 }

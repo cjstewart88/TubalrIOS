@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    [APIQuery justSearchWithString:@"311" completion:^(NSArray* array) {
+    [APIQuery similarSearchWithString:@"311" completion:^(NSArray* array) {
         self.arrayOfData = array;
         [self.bottomTableView reloadData];
         

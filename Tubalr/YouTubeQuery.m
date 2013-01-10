@@ -12,12 +12,29 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
 
 @implementation YouTubeQuery
 
+#pragma mark Public
+
 + (void)searchWithArtist:(NSString *)artist songTitle:(NSString *)song completion:(void (^)(NSDictionary *))completion
 {
     //Artist - Song
     NSString *artistSong = [NSString stringWithFormat:@"%@ - %@", artist, song];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artistSong stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]]];
     
+    [self searchWithUrl:url completion:completion];
+}
+
++ (void)searchWithArtist:(NSString *)artist completion:(void (^)(NSDictionary *))completion
+{
+    //Arist
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artist stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]]];
+    
+    [self searchWithUrl:url completion:completion];
+}
+
+#pragma mark Private
+
++ (void)searchWithUrl:(NSURL *)url completion:(void (^)(NSDictionary *))completion
+{
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *data = [NSData dataWithContentsOfURL:url];
         NSError *error;
@@ -29,10 +46,14 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
         
         NSDictionary *entry = [entries objectAtIndex:0];
         
+        NSString *theUrl = (NSString *)[(NSDictionary *)[(NSArray *)[[entry objectForKey:@"media$group"] objectForKey:@"media$content"] objectAtIndex:0] objectForKey:@"url"];
+        NSString *theTitle = (NSString *)[[(NSString *)[[feed objectForKey:@"title"] objectForKey:@"$t"] componentsSeparatedByString:@": "] lastObject];
+        NSString *theYouTubeId = (NSString *)[[(NSString *)[[entry objectForKey:@"id"] objectForKey:@"$t"] componentsSeparatedByString:@":"] lastObject];
+        
         results = [NSDictionary dictionaryWithObjectsAndKeys:
-                   [(NSDictionary *)[(NSArray *)[[entry objectForKey:@"media$group"] objectForKey:@"media$content"] objectAtIndex:0] objectForKey:@"url"], @"url",
-                   [[(NSString *)[[feed objectForKey:@"title"] objectForKey:@"$t"] componentsSeparatedByString:@":"] lastObject], @"title",
-                   [[(NSString *)[[entry objectForKey:@"id"] objectForKey:@"$t"] componentsSeparatedByString:@":"] lastObject], @"youtube-id", nil];
+                   theUrl, @"url",
+                   theTitle, @"title",
+                   theYouTubeId, @"youtube-id", nil];
         
         //eventually this needs to loop AND do some checks (isNotBlocked etc)
         
@@ -40,7 +61,7 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
     });
 }
 
-+(void)callCompletionOnMainThread:(void (^)(id))completion result:(id)result
++ (void)callCompletionOnMainThread:(void (^)(id))completion result:(id)result
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         completion(result);
