@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BE0BD637169BC7CE0023BBBD /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */; };
 		BE0BD63C169BD4640023BBBD /* APIQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD63A169BD4640023BBBD /* APIQuery.m */; };
+		BE0BD647169E6CB60023BBBD /* EchonestQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD646169E6CB60023BBBD /* EchonestQuery.m */; };
+		BE0BD64A169E6CC90023BBBD /* YouTubeQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD649169E6CC90023BBBD /* YouTubeQuery.m */; };
+		BE0BD64D169E6CDF0023BBBD /* RedditQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */; };
+		BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */; };
 		BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E501D16951A8800FFC7A1 /* libTestFlight.a */; };
 		BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E502116951B8F00FFC7A1 /* libz.dylib */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
@@ -27,6 +31,14 @@
 		BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingViewController.m; sourceTree = "<group>"; };
 		BE0BD639169BD4640023BBBD /* APIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIQuery.h; sourceTree = "<group>"; };
 		BE0BD63A169BD4640023BBBD /* APIQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIQuery.m; sourceTree = "<group>"; };
+		BE0BD645169E6CB60023BBBD /* EchonestQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EchonestQuery.h; sourceTree = "<group>"; };
+		BE0BD646169E6CB60023BBBD /* EchonestQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EchonestQuery.m; sourceTree = "<group>"; };
+		BE0BD648169E6CC90023BBBD /* YouTubeQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeQuery.h; sourceTree = "<group>"; };
+		BE0BD649169E6CC90023BBBD /* YouTubeQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeQuery.m; sourceTree = "<group>"; };
+		BE0BD64B169E6CDF0023BBBD /* RedditQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedditQuery.h; sourceTree = "<group>"; };
+		BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedditQuery.m; sourceTree = "<group>"; };
+		BE0BD64E169E6CEB0023BBBD /* GenreQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenreQuery.h; sourceTree = "<group>"; };
+		BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenreQuery.m; sourceTree = "<group>"; };
 		BE3E501D16951A8800FFC7A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Tubalr/libTestFlight.a; sourceTree = "<group>"; };
 		BE3E501E16951A8800FFC7A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BE3E502116951B8F00FFC7A1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -61,10 +73,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE0BD651169E6D090023BBBD /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				BEF8F5B5169512FC002F241E /* AppDelegate.h */,
+				BEF8F5B6169512FC002F241E /* AppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		BE0BD652169E6D170023BBBD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BE0BD639169BD4640023BBBD /* APIQuery.h */,
+				BE0BD63A169BD4640023BBBD /* APIQuery.m */,
+				BE0BD645169E6CB60023BBBD /* EchonestQuery.h */,
+				BE0BD646169E6CB60023BBBD /* EchonestQuery.m */,
+				BE0BD648169E6CC90023BBBD /* YouTubeQuery.h */,
+				BE0BD649169E6CC90023BBBD /* YouTubeQuery.m */,
+				BE0BD64B169E6CDF0023BBBD /* RedditQuery.h */,
+				BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */,
+				BE0BD64E169E6CEB0023BBBD /* GenreQuery.h */,
+				BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BE0BD653169E6D330023BBBD /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE0BD635169BC7CE0023BBBD /* NowPlayingViewController.h */,
+				BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		BEF8F597169512FC002F241E = {
 			isa = PBXGroup;
 			children = (
 				BEF8F5AC169512FC002F241E /* Tubalr */,
+				BEF8F5AD169512FC002F241E /* Supporting Files */,
 				BEF8F5A5169512FC002F241E /* Frameworks */,
 				BEF8F5A3169512FC002F241E /* Products */,
 			);
@@ -93,13 +141,9 @@
 		BEF8F5AC169512FC002F241E /* Tubalr */ = {
 			isa = PBXGroup;
 			children = (
-				BE0BD639169BD4640023BBBD /* APIQuery.h */,
-				BE0BD63A169BD4640023BBBD /* APIQuery.m */,
-				BEF8F5B5169512FC002F241E /* AppDelegate.h */,
-				BEF8F5B6169512FC002F241E /* AppDelegate.m */,
-				BE0BD635169BC7CE0023BBBD /* NowPlayingViewController.h */,
-				BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */,
-				BEF8F5AD169512FC002F241E /* Supporting Files */,
+				BE0BD651169E6D090023BBBD /* Application */,
+				BE0BD652169E6D170023BBBD /* Models */,
+				BE0BD653169E6D330023BBBD /* View Controllers */,
 			);
 			path = Tubalr;
 			sourceTree = "<group>";
@@ -117,6 +161,7 @@
 				BEF8F5BC169512FC002F241E /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			path = Tubalr;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +233,10 @@
 				BEF8F5B7169512FC002F241E /* AppDelegate.m in Sources */,
 				BE0BD637169BC7CE0023BBBD /* NowPlayingViewController.m in Sources */,
 				BE0BD63C169BD4640023BBBD /* APIQuery.m in Sources */,
+				BE0BD647169E6CB60023BBBD /* EchonestQuery.m in Sources */,
+				BE0BD64A169E6CC90023BBBD /* YouTubeQuery.m in Sources */,
+				BE0BD64D169E6CDF0023BBBD /* RedditQuery.m in Sources */,
+				BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

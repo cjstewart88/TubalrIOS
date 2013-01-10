@@ -6,21 +6,9 @@
 //  Copyright (c) 2013 Chad Zeluff. All rights reserved.
 //
 
-@protocol APIQueryDelegate <NSObject>
+@interface APIQuery : NSObject
 
-- (void)didFailWithError:(NSError *)error;
-
-- (void)didReceiveDataDictionary:(NSDictionary *)dictionary;
-
-@end
-
-@interface APIQuery : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
-
-@property (nonatomic, weak) id <APIQueryDelegate> delegate;
-
-- (void)justSearchWithString:(NSString *)string;
-- (void)similarSearchWithString:(NSString *)string;
-
-+ (NSArray *)genres;
++ (void)justSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion;
++ (void)similarSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion;
 
 @end

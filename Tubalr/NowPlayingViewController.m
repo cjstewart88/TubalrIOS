@@ -9,7 +9,12 @@
 #import "NowPlayingViewController.h"
 #import "APIQuery.h"
 
-@interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate, APIQueryDelegate>
+@interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) UITableView *bottomTableView;
+
+@property (nonatomic, strong) NSArray *arrayOfData;
 
 @end
 
@@ -19,13 +24,14 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 180.0f)];
-    UITableView *bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(topView.frame), view.bounds.size.width, view.bounds.size.height - topView.bounds.size.height) style:UITableViewStylePlain];
-    bottomTableView.delegate = self;
+    self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 180.0f)];
+    self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), view.bounds.size.width, view.bounds.size.height - self.topView.bounds.size.height) style:UITableViewStylePlain];
+//    self.bottomTableView.delegate = self;
+//    self.bottomTableView.dataSource = self;
     
-    topView.backgroundColor = [UIColor blueColor];
-    [view addSubview:topView];
-    [view addSubview:bottomTableView];
+    self.topView.backgroundColor = [UIColor blueColor];
+    [view addSubview:self.topView];
+    [view addSubview:self.bottomTableView];
     
     self.view = view;
 }
@@ -34,9 +40,17 @@
 {
     [super viewDidLoad];
     
-    APIQuery *apiQuery = [[APIQuery alloc] init];
-    apiQuery.delegate = self;
-//    [apiQuery justSearchWithString:@"311"];
+    [APIQuery justSearchWithString:@"311" completion:^(NSArray* array) {
+        self.arrayOfData = array;
+        [self.bottomTableView reloadData];
+        
+        //Do something with the video here
+    }];
+}
+
+-(void)willRotateToInterfaceOrientation: (UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
+{
+    NSLog(@"Here");
 }
 
 @end
