@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    [APIQuery similarSearchWithString:@"311" completion:^(NSArray* array) {
+    [APIQuery justSearchWithString:@"311" completion:^(NSArray* array) {
         self.arrayOfData = array;
         [self.bottomTableView reloadData];
         
@@ -50,7 +50,11 @@
 
 -(void)willRotateToInterfaceOrientation: (UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
-    NSLog(@"Here");
+    NSLog(@"%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:0] objectForKey:@"title"]);
+//    NSLog(@"%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:9] objectForKey:@"title"]);
+//    NSLog(@"%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:19] objectForKey:@"title"]);
+//    NSLog(@"%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:29] objectForKey:@"title"]);
+//    NSLog(@"%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:39] objectForKey:@"title"]);
 }
 
 @end
