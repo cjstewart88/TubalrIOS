@@ -22,6 +22,8 @@
 		BE53DEE6169FC4C300D17B02 /* NSArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DEE5169FC4C300D17B02 /* NSArray+Shuffle.m */; };
 		BE53DEE9169FC60800D17B02 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DEE8169FC60800D17B02 /* MainViewController.m */; };
 		BE53DF25169FE8A800D17B02 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DF24169FE8A800D17B02 /* NavigationController.m */; };
+		BEA2F86816A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */; };
+		BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86B16A0BBD1005E7CC4 /* PlaylistManager.m */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -61,6 +63,10 @@
 		BE53DEE8169FC60800D17B02 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		BE53DF23169FE8A800D17B02 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		BE53DF24169FE8A800D17B02 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		BEA2F86616A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+objectForKeyList.h"; sourceTree = "<group>"; };
+		BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+objectForKeyList.m"; sourceTree = "<group>"; };
+		BEA2F86A16A0BBD1005E7CC4 /* PlaylistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistManager.h; sourceTree = "<group>"; };
+		BEA2F86B16A0BBD1005E7CC4 /* PlaylistManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistManager.m; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -107,6 +113,8 @@
 				BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */,
 				BE0BD64E169E6CEB0023BBBD /* GenreQuery.h */,
 				BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */,
+				BEA2F86A16A0BBD1005E7CC4 /* PlaylistManager.h */,
+				BEA2F86B16A0BBD1005E7CC4 /* PlaylistManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -140,6 +148,8 @@
 				BE53DEE5169FC4C300D17B02 /* NSArray+Shuffle.m */,
 				BE53DEDD169FB21D00D17B02 /* LBYouTubeExtractor.h */,
 				BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */,
+				BEA2F86616A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.h */,
+				BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */,
 			);
 			name = 3rdParty;
 			sourceTree = "<group>";
@@ -300,6 +310,8 @@
 				BE53DEE6169FC4C300D17B02 /* NSArray+Shuffle.m in Sources */,
 				BE53DEE9169FC60800D17B02 /* MainViewController.m in Sources */,
 				BE53DF25169FE8A800D17B02 /* NavigationController.m in Sources */,
+				BEA2F86816A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m in Sources */,
+				BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

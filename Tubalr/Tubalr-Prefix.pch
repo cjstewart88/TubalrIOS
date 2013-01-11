@@ -15,4 +15,5 @@
     #import <Crashlytics/Crashlytics.h>
     #import "TestFlight.h"
     #import "NSArray+Shuffle.h"
+    #import "NSDictionary+objectForKeyList.h"
 #endif

@@ -35,7 +35,7 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
         [EchonestQuery genreSearch:string completion:^(NSArray *arrayOfArtistSong) {
-            //We have successfully returned Echonest data, now perform YouTube searches for each artist
+            //We have successfully returned Echonest data, now perform YouTube searches for each artist song
             for(int i = 0; i < [arrayOfArtistSong count]; i++)
             {
                 [YouTubeQuery searchWithString:[arrayOfArtistSong objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
@@ -72,19 +72,19 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     
     [EchonestQuery artistSearch:string completion:^(NSArray *arrayOfSongs) {
         
-        //We have successfully returned Echonest data, now perform YouTube searches for artist - song
+        //We have successfully returned Echonest data, now perform YouTube searches for artist song
         for(int i = 0; i < [arrayOfSongs count]; i++)
         {
             NSString *artistSongString = [NSString stringWithFormat:@"%@ %@", string, [arrayOfSongs objectAtIndex:i]];
             [YouTubeQuery searchWithString:artistSongString completion:^(NSDictionary* videoDictionary) {
                 
                 dispatch_sync([self sharedQueue], ^{
-                    [array addObject:videoDictionary];
-                    if([array count] == [arrayOfSongs count])//if([array count] % 10 == 0)
-                    {
-                         [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
-                    }
+                    if(videoDictionary != nil)
+                        [array addObject:videoDictionary];
+                    if(i == [arrayOfSongs count] - 1)
+                        [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
                 });
+                
             }];
         }
     }];
@@ -102,12 +102,12 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
             [YouTubeQuery searchWithString:[arrayOfArtists objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
                 
                 dispatch_sync([self sharedQueue], ^{
-                    [array addObject:videoDictionary];
-                    if([array count] == [arrayOfArtists count])//if([array count] % 10 == 0)
-                    {
+                    if(videoDictionary != nil)
+                        [array addObject:videoDictionary];
+                    if(i == [arrayOfArtists count] - 1)
                         [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
-                    }
                 });
+                
             }];
         }
     }];
