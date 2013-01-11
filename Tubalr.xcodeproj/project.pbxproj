@@ -15,6 +15,9 @@
 		BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */; };
 		BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E501D16951A8800FFC7A1 /* libTestFlight.a */; };
 		BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E502116951B8F00FFC7A1 /* libz.dylib */; };
+		BE53DEBF169F8A3900D17B02 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE53DEBE169F8A3900D17B02 /* MediaPlayer.framework */; };
+		BE53DED4169F905300D17B02 /* NowPlayingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DED3169F905300D17B02 /* NowPlayingCell.m */; };
+		BE53DEDF169FB21D00D17B02 /* LBYouTubeExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -42,6 +45,11 @@
 		BE3E501D16951A8800FFC7A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Tubalr/libTestFlight.a; sourceTree = "<group>"; };
 		BE3E501E16951A8800FFC7A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BE3E502116951B8F00FFC7A1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BE53DEBE169F8A3900D17B02 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		BE53DED2169F905300D17B02 /* NowPlayingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingCell.h; sourceTree = "<group>"; };
+		BE53DED3169F905300D17B02 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingCell.m; sourceTree = "<group>"; };
+		BE53DEDD169FB21D00D17B02 /* LBYouTubeExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBYouTubeExtractor.h; sourceTree = "<group>"; };
+		BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBYouTubeExtractor.m; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE53DEBF169F8A3900D17B02 /* MediaPlayer.framework in Frameworks */,
 				BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */,
 				BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */,
 				BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */,
@@ -73,15 +82,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE0BD651169E6D090023BBBD /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				BEF8F5B5169512FC002F241E /* AppDelegate.h */,
-				BEF8F5B6169512FC002F241E /* AppDelegate.m */,
-			);
-			name = Application;
-			sourceTree = "<group>";
-		};
 		BE0BD652169E6D170023BBBD /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +106,24 @@
 				BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BE53DED1169F902600D17B02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE53DED2169F905300D17B02 /* NowPlayingCell.h */,
+				BE53DED3169F905300D17B02 /* NowPlayingCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BE53DEDC169FB20C00D17B02 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BE53DEDD169FB21D00D17B02 /* LBYouTubeExtractor.h */,
+				BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */,
+			);
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 		BEF8F597169512FC002F241E = {
@@ -134,6 +152,7 @@
 				BEF8F5A6169512FC002F241E /* UIKit.framework */,
 				BEF8F5A8169512FC002F241E /* Foundation.framework */,
 				BEF8F5AA169512FC002F241E /* CoreGraphics.framework */,
+				BE53DEBE169F8A3900D17B02 /* MediaPlayer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -141,9 +160,12 @@
 		BEF8F5AC169512FC002F241E /* Tubalr */ = {
 			isa = PBXGroup;
 			children = (
-				BE0BD651169E6D090023BBBD /* Application */,
+				BEF8F5B5169512FC002F241E /* AppDelegate.h */,
+				BEF8F5B6169512FC002F241E /* AppDelegate.m */,
 				BE0BD652169E6D170023BBBD /* Models */,
 				BE0BD653169E6D330023BBBD /* View Controllers */,
+				BE53DED1169F902600D17B02 /* Views */,
+				BE53DEDC169FB20C00D17B02 /* Vendor */,
 			);
 			path = Tubalr;
 			sourceTree = "<group>";
@@ -237,6 +259,8 @@
 				BE0BD64A169E6CC90023BBBD /* YouTubeQuery.m in Sources */,
 				BE0BD64D169E6CDF0023BBBD /* RedditQuery.m in Sources */,
 				BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */,
+				BE53DED4169F905300D17B02 /* NowPlayingCell.m in Sources */,
+				BE53DEDF169FB21D00D17B02 /* LBYouTubeExtractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
