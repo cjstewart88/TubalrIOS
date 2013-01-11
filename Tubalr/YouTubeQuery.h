@@ -10,7 +10,6 @@
 
 @interface YouTubeQuery : NSObject
 
-+ (void)searchWithArtist:(NSString *)artist songTitle:(NSString *)song completion:(void (^)(NSDictionary *))completion;
-+ (void)searchWithArtist:(NSString *)artist completion:(void (^)(NSDictionary *))completion;
++ (void)searchWithString:(NSString *)artist completion:(void (^)(NSDictionary *))completion;
 
 @end

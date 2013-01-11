@@ -17,12 +17,13 @@
 @property (nonatomic, strong) MPMoviePlayerController *player;
 @property (nonatomic, strong) UITableView *bottomTableView;
 
+@property (nonatomic, strong) NSArray *arrayOfData;
+
 @end
 
 @implementation NowPlayingViewController
 {
     @private
-    NSArray *_arrayOfData;
     NSString *_searchString;
     SearchType _searchType;
 }
@@ -74,24 +75,28 @@
 
 - (void)reload:(id)sender
 {
-    if(_searchType == justSearch)
-    {
-        [APIQuery justSearchWithString:_searchString completion:^(NSArray* array) {
-            _arrayOfData = [array shuffledArray];
-            [self.bottomTableView reloadData];
-            
-            //Do something with the video here
-        }];
-    }
-    else if(_searchType == similarSearch)
-    {
-        [APIQuery similarSearchWithString:_searchString completion:^(NSArray* array) {
-            _arrayOfData = [array shuffledArray];
-            [self.bottomTableView reloadData];
-            
-            //Do something with the video here
-        }];
-    }
+    if([APIQuery determineSpecialSearchWithString:_searchString completion:^(NSArray* array) {
+            [self setArrayOfData:array];      
+    }]) return;
+    
+   else if(_searchType == justSearch)
+   {
+       [APIQuery justSearchWithString:_searchString completion:^(NSArray* array) {
+           [self setArrayOfData:array];
+       }];
+   }
+   else if(_searchType == similarSearch)
+   {
+       [APIQuery similarSearchWithString:_searchString completion:^(NSArray* array) {
+           [self setArrayOfData:array];
+       }];
+   }
+}
+
+- (void)setArrayOfData:(NSArray *)arrayOfData
+{
+    _arrayOfData = arrayOfData;
+    [self.bottomTableView reloadData];
 }
 
 - (void)movieReadyToPlay:(NSNotification *)notification
@@ -132,14 +137,14 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft; //UIInterfaceOrientationMaskAllButUpsideDown;
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_arrayOfData count];
+    return [self.arrayOfData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,7 +155,7 @@
         cell = [[NowPlayingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.videoDictionary = [_arrayOfData objectAtIndex:indexPath.row];
+    cell.videoDictionary = [self.arrayOfData objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -159,7 +164,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[_arrayOfData objectAtIndex:indexPath.row] objectForKey:@"youtube-id"]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:indexPath.row] objectForKey:@"youtube-id"]]];
     LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityLarge];
     
     [extractor extractVideoURLWithCompletionBlock:^(NSURL *videoURL, NSError *error) {

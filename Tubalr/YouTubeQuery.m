@@ -14,18 +14,9 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
 
 #pragma mark Public
 
-+ (void)searchWithArtist:(NSString *)artist songTitle:(NSString *)song completion:(void (^)(NSDictionary *))completion
++ (void)searchWithString:(NSString *)artist completion:(void (^)(NSDictionary *))completion
 {
-    //Artist - Song
-    NSString *artistSong = [NSString stringWithFormat:@"%@ - %@", artist, song];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artistSong stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]]];
-    
-    [self searchWithUrl:url completion:completion];
-}
-
-+ (void)searchWithArtist:(NSString *)artist completion:(void (^)(NSDictionary *))completion
-{
-    //Arist
+    //Arist or Artist Song
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artist stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]]];
     
     [self searchWithUrl:url completion:completion];

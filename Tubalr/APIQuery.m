@@ -28,10 +28,8 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 
 #pragma mark Public
 
-+ (void)justSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
++ (BOOL)determineSpecialSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
-    dispatch_queue_t queue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
-
     if([GenreQuery checkWithString:&string])
     {
         NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -40,18 +38,20 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
             //We have successfully returned Echonest data, now perform YouTube searches for each artist
             for(int i = 0; i < [arrayOfArtistSong count]; i++)
             {
-                [YouTubeQuery searchWithArtist:[arrayOfArtistSong objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
+                [YouTubeQuery searchWithString:[arrayOfArtistSong objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
                     
-                    dispatch_sync(queue, ^{
+                    dispatch_sync([self sharedQueue], ^{
                         [array addObject:videoDictionary];
                         if([array count] == [arrayOfArtistSong count])//if([array count] % 10 == 0)
                         {
-                            [self callCompletionOnMainThread:completion result:[NSArray arrayWithArray:array]];
+                            [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
                         }
                     });
                 }];
             }
         }];
+        
+        return YES;
     }
     
     else if([RedditQuery checkWithString:string])
@@ -59,75 +59,72 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
         [RedditQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
             
         }];
+        
+        return YES;
     }
     
-    else
-    {
-        NSMutableArray *array = [[NSMutableArray alloc] init];
+    return NO;
+}
+
++ (void)justSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    [EchonestQuery artistSearch:string completion:^(NSArray *arrayOfSongs) {
         
-        [EchonestQuery artistSearch:string completion:^(NSArray *arrayOfSongs) {
-            
-            //We have successfully returned Echonest data, now perform YouTube searches for artist - song
-            for(int i = 0; i < [arrayOfSongs count]; i++)
-            {
-                [YouTubeQuery searchWithArtist:string songTitle:[arrayOfSongs objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
-                    
-                    dispatch_sync(queue, ^{
-                        [array addObject:videoDictionary];
-                        if([array count] == [arrayOfSongs count])//if([array count] % 10 == 0)
-                        {
-                             [self callCompletionOnMainThread:completion result:[NSArray arrayWithArray:array]];
-                        }
-                    });
-                }];
-            }
-        }];
-    }
+        //We have successfully returned Echonest data, now perform YouTube searches for artist - song
+        for(int i = 0; i < [arrayOfSongs count]; i++)
+        {
+            NSString *artistSongString = [NSString stringWithFormat:@"%@ %@", string, [arrayOfSongs objectAtIndex:i]];
+            [YouTubeQuery searchWithString:artistSongString completion:^(NSDictionary* videoDictionary) {
+                
+                dispatch_sync([self sharedQueue], ^{
+                    [array addObject:videoDictionary];
+                    if([array count] == [arrayOfSongs count])//if([array count] % 10 == 0)
+                    {
+                         [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
+                    }
+                });
+            }];
+        }
+    }];
 }
 
 + (void)similarSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
-    dispatch_queue_t queue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
+    NSMutableArray *array = [[NSMutableArray alloc] init];
     
-    if([GenreQuery checkWithString:&string])
-    {
-        [EchonestQuery genreSearch:string completion:^(NSArray *arrayOfSomething) {
-            
-        }];
-    }
-    
-    else if([RedditQuery checkWithString:string])
-    {
-        [RedditQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
-            
-        }];
-    }
-    
-    else
-    {
-        NSMutableArray *array = [[NSMutableArray alloc] init];
+    [EchonestQuery similarArtistSearch:string completion:^(NSArray *arrayOfArtists) {
         
-        [EchonestQuery similarArtistSearch:string completion:^(NSArray *arrayOfArtists) {
-            
-            //We have successfully returned Echonest data, now perform YouTube searches for each artist
-            for(int i = 0; i < [arrayOfArtists count]; i++)
-            {
-                [YouTubeQuery searchWithArtist:[arrayOfArtists objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
-                    
-                    dispatch_sync(queue, ^{
-                        [array addObject:videoDictionary];
-                        if([array count] == [arrayOfArtists count])//if([array count] % 10 == 0)
-                        {
-                            [self callCompletionOnMainThread:completion result:[NSArray arrayWithArray:array]];
-                        }
-                    });
-                }];
-            }
-        }];
-    }
+        //We have successfully returned Echonest data, now perform YouTube searches for each artist
+        for(int i = 0; i < [arrayOfArtists count]; i++)
+        {
+            [YouTubeQuery searchWithString:[arrayOfArtists objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
+                
+                dispatch_sync([self sharedQueue], ^{
+                    [array addObject:videoDictionary];
+                    if([array count] == [arrayOfArtists count])//if([array count] % 10 == 0)
+                    {
+                        [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
+                    }
+                });
+            }];
+        }
+    }];
 }
 
 #pragma mark Private
+
++(dispatch_queue_t)sharedQueue
+{
+    static dispatch_queue_t _sharedQueue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedQueue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
+    });
+    
+    return _sharedQueue;
+}
 
 +(void)callCompletionOnMainThread:(void (^)(id))completion result:(id)result
 {

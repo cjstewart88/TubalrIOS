@@ -8,6 +8,7 @@
 
 @interface APIQuery : NSObject
 
++ (BOOL)determineSpecialSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion;
 + (void)justSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion;
 + (void)similarSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion;
 
