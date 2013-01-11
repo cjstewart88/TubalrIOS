@@ -32,12 +32,16 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 {
     if([GenreQuery checkWithString:&string])
     {
-        [GenreQuery searchWithString:string];
+        [GenreQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
+            
+        }];
     }
     
     else if([RedditQuery checkWithString:string])
     {
-        [RedditQuery searchWithString:string];
+        [RedditQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
+            
+        }];
     }
     
     else
@@ -69,12 +73,16 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 {
     if([GenreQuery checkWithString:&string])
     {
-        [GenreQuery searchWithString:string];
+        [GenreQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
+            
+        }];
     }
     
     else if([RedditQuery checkWithString:string])
     {
-        [RedditQuery searchWithString:string];
+        [RedditQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
+            
+        }];
     }
     
     else

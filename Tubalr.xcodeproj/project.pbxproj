@@ -13,6 +13,7 @@
 		BE0BD64A169E6CC90023BBBD /* YouTubeQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD649169E6CC90023BBBD /* YouTubeQuery.m */; };
 		BE0BD64D169E6CDF0023BBBD /* RedditQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */; };
 		BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */; };
+		BE24377416A07B28001B214E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24377316A07B28001B214E /* Crashlytics.framework */; };
 		BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E501D16951A8800FFC7A1 /* libTestFlight.a */; };
 		BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E502116951B8F00FFC7A1 /* libz.dylib */; };
 		BE53DEBF169F8A3900D17B02 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE53DEBE169F8A3900D17B02 /* MediaPlayer.framework */; };
@@ -45,6 +46,7 @@
 		BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedditQuery.m; sourceTree = "<group>"; };
 		BE0BD64E169E6CEB0023BBBD /* GenreQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenreQuery.h; sourceTree = "<group>"; };
 		BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenreQuery.m; sourceTree = "<group>"; };
+		BE24377316A07B28001B214E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BE3E501D16951A8800FFC7A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Tubalr/libTestFlight.a; sourceTree = "<group>"; };
 		BE3E501E16951A8800FFC7A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BE3E502116951B8F00FFC7A1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -85,6 +87,7 @@
 				BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */,
 				BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */,
 				BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */,
+				BE24377416A07B28001B214E /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +165,7 @@
 		BEF8F5A5169512FC002F241E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE24377316A07B28001B214E /* Crashlytics.framework */,
 				BE3E502116951B8F00FFC7A1 /* libz.dylib */,
 				BE3E501D16951A8800FFC7A1 /* libTestFlight.a */,
 				BEF8F5A6169512FC002F241E /* UIKit.framework */,
@@ -211,6 +215,7 @@
 				BEF8F59E169512FC002F241E /* Sources */,
 				BEF8F59F169512FC002F241E /* Frameworks */,
 				BEF8F5A0169512FC002F241E /* Resources */,
+				BE24377116A07ABE001B214E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -260,6 +265,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BE24377116A07ABE001B214E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run e3e642bcbe351153ef65205ec65c9f9cc69d86f2";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BEF8F59E169512FC002F241E /* Sources */ = {
@@ -351,6 +372,10 @@
 		BEF8F5C1169512FC002F241E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tubalr/Tubalr-Prefix.pch";
 				INFOPLIST_FILE = "Tubalr/Tubalr-Info.plist";
@@ -367,6 +392,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cody Stewart (CVGKVD334E)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tubalr/Tubalr-Prefix.pch";
 				INFOPLIST_FILE = "Tubalr/Tubalr-Info.plist";

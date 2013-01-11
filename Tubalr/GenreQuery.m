@@ -33,7 +33,7 @@
     return YES;
 }
 
-+ (void)searchWithString:(NSString *)string
++ (void)searchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
 //    NSString *afterCallback = [NSString stringWithFormat:@"&type=genre-radio&results=%@", kEchonestNumberOfSongs];
 //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kEchonestVersionKey, @"playlist", @"basic", kEchonestApiKey, @"genre", string, afterCallback]];

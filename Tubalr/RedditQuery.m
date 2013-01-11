@@ -23,7 +23,7 @@ NSString *const kRedditQueryUrl             = @"http://www.reddit.com/r/%@/hot.j
     return YES;
 }
 
-+ (void)searchWithString:(NSString *)string
++ (void)searchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
     NSString *redditString = [string stringByReplacingOccurrencesOfString:@"/r/"
                                                                withString:@""];
