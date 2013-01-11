@@ -18,6 +18,9 @@
 		BE53DEBF169F8A3900D17B02 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE53DEBE169F8A3900D17B02 /* MediaPlayer.framework */; };
 		BE53DED4169F905300D17B02 /* NowPlayingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DED3169F905300D17B02 /* NowPlayingCell.m */; };
 		BE53DEDF169FB21D00D17B02 /* LBYouTubeExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */; };
+		BE53DEE6169FC4C300D17B02 /* NSArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DEE5169FC4C300D17B02 /* NSArray+Shuffle.m */; };
+		BE53DEE9169FC60800D17B02 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DEE8169FC60800D17B02 /* MainViewController.m */; };
+		BE53DF25169FE8A800D17B02 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE53DF24169FE8A800D17B02 /* NavigationController.m */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -50,6 +53,12 @@
 		BE53DED3169F905300D17B02 /* NowPlayingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingCell.m; sourceTree = "<group>"; };
 		BE53DEDD169FB21D00D17B02 /* LBYouTubeExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBYouTubeExtractor.h; sourceTree = "<group>"; };
 		BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBYouTubeExtractor.m; sourceTree = "<group>"; };
+		BE53DEE4169FC4C300D17B02 /* NSArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Shuffle.h"; sourceTree = "<group>"; };
+		BE53DEE5169FC4C300D17B02 /* NSArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Shuffle.m"; sourceTree = "<group>"; };
+		BE53DEE7169FC60800D17B02 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		BE53DEE8169FC60800D17B02 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		BE53DF23169FE8A800D17B02 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		BE53DF24169FE8A800D17B02 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,6 +111,10 @@
 		BE0BD653169E6D330023BBBD /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE53DF23169FE8A800D17B02 /* NavigationController.h */,
+				BE53DF24169FE8A800D17B02 /* NavigationController.m */,
+				BE53DEE7169FC60800D17B02 /* MainViewController.h */,
+				BE53DEE8169FC60800D17B02 /* MainViewController.m */,
 				BE0BD635169BC7CE0023BBBD /* NowPlayingViewController.h */,
 				BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */,
 			);
@@ -117,13 +130,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		BE53DEDC169FB20C00D17B02 /* Vendor */ = {
+		BE53DEDC169FB20C00D17B02 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				BE53DEE4169FC4C300D17B02 /* NSArray+Shuffle.h */,
+				BE53DEE5169FC4C300D17B02 /* NSArray+Shuffle.m */,
 				BE53DEDD169FB21D00D17B02 /* LBYouTubeExtractor.h */,
 				BE53DEDE169FB21D00D17B02 /* LBYouTubeExtractor.m */,
 			);
-			name = Vendor;
+			name = 3rdParty;
 			sourceTree = "<group>";
 		};
 		BEF8F597169512FC002F241E = {
@@ -165,7 +180,7 @@
 				BE0BD652169E6D170023BBBD /* Models */,
 				BE0BD653169E6D330023BBBD /* View Controllers */,
 				BE53DED1169F902600D17B02 /* Views */,
-				BE53DEDC169FB20C00D17B02 /* Vendor */,
+				BE53DEDC169FB20C00D17B02 /* 3rdParty */,
 			);
 			path = Tubalr;
 			sourceTree = "<group>";
@@ -261,6 +276,9 @@
 				BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */,
 				BE53DED4169F905300D17B02 /* NowPlayingCell.m in Sources */,
 				BE53DEDF169FB21D00D17B02 /* LBYouTubeExtractor.m in Sources */,
+				BE53DEE6169FC4C300D17B02 /* NSArray+Shuffle.m in Sources */,
+				BE53DEE9169FC60800D17B02 /* MainViewController.m in Sources */,
+				BE53DF25169FE8A800D17B02 /* NavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +366,7 @@
 		BEF8F5C2169512FC002F241E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cody Stewart";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cody Stewart (CVGKVD334E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tubalr/Tubalr-Prefix.pch";
 				INFOPLIST_FILE = "Tubalr/Tubalr-Info.plist";
@@ -357,7 +375,7 @@
 					"\"$(SRCROOT)/Tubalr\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "624AAD65-6EA6-4DFC-92C5-28223195E829";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F241DDD-FF1D-4AE5-9729-64341C74F583";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

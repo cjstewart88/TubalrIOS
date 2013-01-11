@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "NavigationController.h"
+#import "MainViewController.h"
 #import "NowPlayingViewController.h"
 
 @implementation AppDelegate
@@ -17,9 +19,12 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.viewController = [[NowPlayingViewController alloc] init];
+    NavigationController *navController = [[NavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+    navController.navigationBar.tintColor = [UIColor purpleColor];
     
-    self.window.rootViewController = self.viewController;
+//    self.viewController = [[NowPlayingViewController alloc] init];
+    
+    [self.window setRootViewController: navController];
     [self.window makeKeyAndVisible];
     return YES;
 }

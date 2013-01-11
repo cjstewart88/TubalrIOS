@@ -91,7 +91,7 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
                     
                     dispatch_sync(queue, ^{
                         [array addObject:videoDictionary];
-                        if([array count] % 10 == 0)
+                        if([array count] == [arrayOfArtists count])//if([array count] % 10 == 0)
                         {
                             [self callCompletionOnMainThread:completion result:[NSArray arrayWithArray:array]];
                         }

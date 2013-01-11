@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    justSearch,
+    similarSearch
+}SearchType;
+
 @interface NowPlayingViewController : UIViewController
+
+- (id)initWithSearchString:(NSString *)string searchType:(SearchType)searchType;
 
 @end

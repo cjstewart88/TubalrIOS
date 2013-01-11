@@ -23,6 +23,22 @@
 {
     @private
     NSArray *_arrayOfData;
+    NSString *_searchString;
+    SearchType _searchType;
+}
+
+- (id)initWithSearchString:(NSString *)string searchType:(SearchType)searchType
+{
+    self = [super init];
+    if(!self)
+    {
+        return nil;
+    }
+    
+    _searchString = string;
+    _searchType = searchType;
+    
+    return self;
 }
 
 - (void)loadView
@@ -58,12 +74,24 @@
 
 - (void)reload:(id)sender
 {
-    [APIQuery justSearchWithString:@"311" completion:^(NSArray* array) {
-        _arrayOfData = array;
-        [self.bottomTableView reloadData];
-        
-        //Do something with the video here
-    }];
+    if(_searchType == justSearch)
+    {
+        [APIQuery justSearchWithString:_searchString completion:^(NSArray* array) {
+            _arrayOfData = [array shuffledArray];
+            [self.bottomTableView reloadData];
+            
+            //Do something with the video here
+        }];
+    }
+    else if(_searchType == similarSearch)
+    {
+        [APIQuery similarSearchWithString:_searchString completion:^(NSArray* array) {
+            _arrayOfData = [array shuffledArray];
+            [self.bottomTableView reloadData];
+            
+            //Do something with the video here
+        }];
+    }
 }
 
 - (void)movieReadyToPlay:(NSNotification *)notification
@@ -97,9 +125,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }
 
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft; //UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark - UITableViewDataSource

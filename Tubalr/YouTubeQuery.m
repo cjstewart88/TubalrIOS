@@ -46,12 +46,12 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
         
         NSDictionary *entry = [entries objectAtIndex:0];
         
-        NSString *theUrl = (NSString *)[(NSDictionary *)[(NSArray *)[[entry objectForKey:@"media$group"] objectForKey:@"media$content"] objectAtIndex:0] objectForKey:@"url"];
-        NSString *theTitle = (NSString *)[[(NSString *)[[feed objectForKey:@"title"] objectForKey:@"$t"] componentsSeparatedByString:@": "] lastObject];
+//        NSString *theUrl = (NSString *)[(NSDictionary *)[(NSArray *)[[entry objectForKey:@"media$group"] objectForKey:@"media$content"] objectAtIndex:0] objectForKey:@"url"];
+        NSString *theTitle = [[entry objectForKey:@"title"] objectForKey:@"$t"];
         NSString *theYouTubeId = (NSString *)[[(NSString *)[[entry objectForKey:@"id"] objectForKey:@"$t"] componentsSeparatedByString:@":"] lastObject];
         
         results = [NSDictionary dictionaryWithObjectsAndKeys:
-                   theUrl, @"url",
+//                   theUrl, @"url",
                    theTitle, @"title",
                    theYouTubeId, @"youtube-id", nil];
         
