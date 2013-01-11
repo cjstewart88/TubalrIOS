@@ -25,18 +25,12 @@
 + (BOOL)checkWithString:(NSString **)string
 {
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ +]" options:NSRegularExpressionCaseInsensitive error:NULL];
-    NSString *modifiedString = [regex stringByReplacingMatchesInString:*string options:0 range:NSMakeRange(0, [*string length]) withTemplate:@""];
+    NSString *modifiedString = [[regex stringByReplacingMatchesInString:*string options:0 range:NSMakeRange(0, [*string length]) withTemplate:@""] lowercaseString];
     if([[self.class genres] indexOfObject:modifiedString] == NSNotFound)
         return NO;
     
-    *string = [*string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+    *string = [*string lowercaseString];
     return YES;
-}
-
-+ (void)searchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
-{
-//    NSString *afterCallback = [NSString stringWithFormat:@"&type=genre-radio&results=%@", kEchonestNumberOfSongs];
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kEchonestVersionKey, @"playlist", @"basic", kEchonestApiKey, @"genre", string, afterCallback]];
 }
 
 @end

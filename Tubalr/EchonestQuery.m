@@ -8,11 +8,14 @@
 
 #import "EchonestQuery.h"
 
-NSString *const kVersionKey         = @"v4";
-NSString *const kApiKey             = @"OYJRQNQMCGIOZLFIW";
-NSString *const kStart              = @"0";
-NSString *const kNumberOfSongs      = @"40";
-NSString *const kEchonestQueryURL           = @"http://developer.echonest.com/api/%@/%@/%@?api_key=%@&%@=%@&start=%@&results=%@";
+NSString *const kVersionKey                 = @"v4";
+NSString *const kApiKey                     = @"OYJRQNQMCGIOZLFIW";
+NSString *const kStart                      = @"start";
+NSString *const kType                       = @"type";
+NSString *const kGenreRadio                 = @"genre-radio";
+NSString *const kStartPos                   = @"0";
+NSString *const kResultCount              = @"40";
+NSString *const kEchonestQueryURL           = @"http://developer.echonest.com/api/%@/%@/%@?api_key=%@&%@=%@&%@=%@&results=%@";
 
 @implementation EchonestQuery
 
@@ -20,16 +23,23 @@ NSString *const kEchonestQueryURL           = @"http://developer.echonest.com/ap
 
 + (void)artistSearch:(NSString *)string completion:(void (^)(NSArray *))completion
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"artist", @"songs", kApiKey, @"name", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kStart, kNumberOfSongs]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"artist", @"songs", kApiKey, @"name", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kStart, kStartPos, kResultCount]];
     
     [self searchWithUrl:url stringArray:[NSArray arrayWithObjects:@"songs", @"title", nil] completion:completion];
 }
 
 + (void)similarArtistSearch:(NSString *)string completion:(void (^)(NSArray *))completion
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"artist", @"similar", kApiKey, @"name", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kStart, kNumberOfSongs]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"artist", @"similar", kApiKey, @"name", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kStart, kStartPos, kResultCount]];
     
     [self searchWithUrl:url stringArray:[NSArray arrayWithObjects:@"artists", @"name", nil] completion:completion];
+}
+
++ (void)genreSearch:(NSString *)string completion:(void (^)(NSArray *))completion
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kEchonestQueryURL, kVersionKey, @"playlist", @"basic", kApiKey, @"genre", [string stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], kType, kGenreRadio, kResultCount]];
+    
+    [self searchWithUrl:url stringArray:[NSArray arrayWithObjects:@"songs", @"artist_name", @"title", nil] completion:completion];
 }
 
 #pragma mark Private
@@ -50,7 +60,12 @@ NSString *const kEchonestQueryURL           = @"http://developer.echonest.com/ap
         
         NSMutableArray *mutableContainer = [[NSMutableArray alloc] init];
         for(NSDictionary *dictionary in [response objectForKey:[array objectAtIndex:0]])
-            [mutableContainer addObject:[dictionary objectForKey:[array objectAtIndex:1]]];
+        {
+            if([array count] == 2)
+                [mutableContainer addObject:[dictionary objectForKey:[array objectAtIndex:1]]];
+            else if ([array count] == 3)
+                [mutableContainer addObject: [NSString stringWithFormat:@"%@ %@", [dictionary objectForKey:[array objectAtIndex:1]], [dictionary objectForKey:[array objectAtIndex:2]]]];
+        }
         
         results = [NSArray arrayWithArray:mutableContainer];
         [self callCompletionOnMainThread:completion result:results];

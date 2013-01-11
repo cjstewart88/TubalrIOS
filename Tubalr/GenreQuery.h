@@ -12,6 +12,4 @@
 
 + (BOOL)checkWithString:(NSString **)string;
 
-+ (void)searchWithString:(NSString *)string completion:(void (^)(NSArray *))completion;
-
 @end

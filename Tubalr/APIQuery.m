@@ -30,10 +30,27 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 
 + (void)justSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
+    dispatch_queue_t queue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
+
     if([GenreQuery checkWithString:&string])
     {
-        [GenreQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
-            
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        
+        [EchonestQuery genreSearch:string completion:^(NSArray *arrayOfArtistSong) {
+            //We have successfully returned Echonest data, now perform YouTube searches for each artist
+            for(int i = 0; i < [arrayOfArtistSong count]; i++)
+            {
+                [YouTubeQuery searchWithArtist:[arrayOfArtistSong objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
+                    
+                    dispatch_sync(queue, ^{
+                        [array addObject:videoDictionary];
+                        if([array count] == [arrayOfArtistSong count])//if([array count] % 10 == 0)
+                        {
+                            [self callCompletionOnMainThread:completion result:[NSArray arrayWithArray:array]];
+                        }
+                    });
+                }];
+            }
         }];
     }
     
@@ -46,7 +63,6 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     
     else
     {
-        dispatch_queue_t queue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
         [EchonestQuery artistSearch:string completion:^(NSArray *arrayOfSongs) {
@@ -71,9 +87,11 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 
 + (void)similarSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
+    dispatch_queue_t queue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
+    
     if([GenreQuery checkWithString:&string])
     {
-        [GenreQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
+        [EchonestQuery genreSearch:string completion:^(NSArray *arrayOfSomething) {
             
         }];
     }
@@ -87,7 +105,6 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     
     else
     {
-        dispatch_queue_t queue = dispatch_queue_create("com.Tubalr.YouTubeQueue", NULL);
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
         [EchonestQuery similarArtistSearch:string completion:^(NSArray *arrayOfArtists) {
