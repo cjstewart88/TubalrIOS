@@ -20,10 +20,10 @@
 
 - (void)loadView
 {
-    UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [super loadView];
     
     CGFloat xCoord = 20, yCoord = 20;
-    self.searchField = [[UITextField alloc] initWithFrame:CGRectMake(xCoord, yCoord, view.bounds.size.width - (xCoord *2), 30)];
+    self.searchField = [[UITextField alloc] initWithFrame:CGRectMake(xCoord, yCoord, self.view.bounds.size.width - (xCoord *2), 30)];
     self.searchField.borderStyle = UITextBorderStyleRoundedRect;
     self.searchField.delegate = self;
     
@@ -33,17 +33,15 @@
     [self.typeOfSearchButton setTitle:@"Similar" forState:UIControlStateSelected];
     [self.typeOfSearchButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [view addSubview:self.searchField];
-    [view addSubview:self.typeOfSearchButton];
-    view.backgroundColor = [UIColor whiteColor];
-    
-    self.view = view;
+    [self.view addSubview:self.searchField];
+    [self.view addSubview:self.typeOfSearchButton];
+    self.view.backgroundColor = [UIColor whiteColor];    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Tubalr";
+    self.title = @"tubalr";
 }
 
 - (BOOL)shouldAutorotate

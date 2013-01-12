@@ -46,31 +46,32 @@
 
 - (void)loadView
 {
-    UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    [super loadView];
+    
     self.player = [[MPMoviePlayerController alloc] init];
-    [self.player.view setFrame:CGRectMake(0, 0, view.bounds.size.width, 180.0f)];
+    [self.player.view setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180.0f)];
         
-    self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.player.view.frame), view.bounds.size.width, view.bounds.size.height - self.player.view.bounds.size.height) style:UITableViewStylePlain];
+    self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.player.view.frame), self.view.bounds.size.width, self.view.bounds.size.height - self.player.view.bounds.size.height - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
     self.bottomTableView.delegate = self;
     self.bottomTableView.dataSource = self;
     
-    [view addSubview:self.player.view];
-    [view addSubview:self.bottomTableView];
+    [self.view addSubview:self.player.view];
+    [self.view addSubview:self.bottomTableView];
     
-    self.view = view;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.title = @"tubalr";
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieReadyToPlay:) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
     
     //set up left nav buttons, right nav buttons, title etc
     
-    self.bottomTableView.rowHeight = 88.0f;
+//    self.bottomTableView.rowHeight = 88.0f;
     
     [self reload:nil];
 }
@@ -167,6 +168,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.arrayOfData count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

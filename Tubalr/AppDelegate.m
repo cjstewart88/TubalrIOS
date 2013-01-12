@@ -35,6 +35,12 @@
     UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];
     
     [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setTitleVerticalPositionAdjustment:-5.0f forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
+                                           [UIFont boldFontOfSize:24.0f], UITextAttributeFont,
+                                           [UIColor blackColor], UITextAttributeTextShadowColor,
+                                           [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
+                                           [UIColor whiteColor], UITextAttributeTextColor, nil]];
     
     UIImage *backImage = [UIImage imageNamed:@"btn-back"];
     UIImage *image = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backImage.size.width, 0, 0)];

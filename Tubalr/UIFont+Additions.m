@@ -12,12 +12,12 @@
 
 + (UIFont *)regularFontOfSize:(CGFloat)size
 {
-    return [self fontWithName:@"PT_Sans-Web-Regular" size:size];
+    return [self fontWithName:@"PTSans-Regular" size:size];
 }
 
 + (UIFont *)boldFontOfSize:(CGFloat)size
 {
-    return [self fontWithName:@"PT_Sans-Web-Bold" size:size];
+    return [self fontWithName:@"PTSans-Bold" size:size];
 }
 
 @end
