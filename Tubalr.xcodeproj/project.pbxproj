@@ -49,6 +49,9 @@
 		BEA2F8AC16A1E45C005E7CC4 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8A716A1E45C005E7CC4 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEA2F8AD16A1E45C005E7CC4 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8A916A1E45C005E7CC4 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEA2F8AE16A1E45C005E7CC4 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8AB16A1E45C005E7CC4 /* NSString+XMLEntities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BEA2F8B016A1E79C005E7CC4 /* nav-bar-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F8AF16A1E79C005E7CC4 /* nav-bar-shadow@2x.png */; };
+		BEA2F8B216A1E929005E7CC4 /* nav-bar-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F8B116A1E929005E7CC4 /* nav-bar-shadow.png */; };
+		BEA2F8B516A1EAC5005E7CC4 /* MovieControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8B416A1EAC5005E7CC4 /* MovieControlView.m */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -122,6 +125,10 @@
 		BEA2F8A916A1E45C005E7CC4 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		BEA2F8AA16A1E45C005E7CC4 /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		BEA2F8AB16A1E45C005E7CC4 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
+		BEA2F8AF16A1E79C005E7CC4 /* nav-bar-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-shadow@2x.png"; sourceTree = "<group>"; };
+		BEA2F8B116A1E929005E7CC4 /* nav-bar-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar-shadow.png"; sourceTree = "<group>"; };
+		BEA2F8B316A1EAC5005E7CC4 /* MovieControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieControlView.h; sourceTree = "<group>"; };
+		BEA2F8B416A1EAC5005E7CC4 /* MovieControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieControlView.m; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -192,6 +199,8 @@
 			children = (
 				BE53DED2169F905300D17B02 /* NowPlayingCell.h */,
 				BE53DED3169F905300D17B02 /* NowPlayingCell.m */,
+				BEA2F8B316A1EAC5005E7CC4 /* MovieControlView.h */,
+				BEA2F8B416A1EAC5005E7CC4 /* MovieControlView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -218,22 +227,24 @@
 		BEA2F86D16A0E8B1005E7CC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BEA2F88016A0E978005E7CC4 /* bg-cell.png */,
-				BEA2F88116A0E978005E7CC4 /* btn-back.png */,
-				BEA2F88216A0E978005E7CC4 /* btn-search.png */,
-				BEA2F88316A0E978005E7CC4 /* btn-settings@2x.png */,
-				BEA2F88416A0E978005E7CC4 /* knob.png */,
-				BEA2F88516A0E978005E7CC4 /* nav-bar.png */,
-				BEA2F88616A0E978005E7CC4 /* scrubber-active.png */,
-				BEA2F88716A0E978005E7CC4 /* scrubber.png */,
 				BEA2F86E16A0E8F4005E7CC4 /* bg-cell-selected@2x.png */,
+				BEA2F88016A0E978005E7CC4 /* bg-cell.png */,
 				BEA2F86F16A0E8F4005E7CC4 /* bg-cell@2x.png */,
+				BEA2F88116A0E978005E7CC4 /* btn-back.png */,
 				BEA2F87016A0E8F4005E7CC4 /* btn-back@2x.png */,
+				BEA2F88216A0E978005E7CC4 /* btn-search.png */,
 				BEA2F87116A0E8F4005E7CC4 /* btn-search@2x.png */,
 				BEA2F87216A0E8F4005E7CC4 /* btn-settings.png */,
+				BEA2F88316A0E978005E7CC4 /* btn-settings@2x.png */,
+				BEA2F88416A0E978005E7CC4 /* knob.png */,
 				BEA2F87316A0E8F4005E7CC4 /* knob@2x.png */,
+				BEA2F8B116A1E929005E7CC4 /* nav-bar-shadow.png */,
+				BEA2F8AF16A1E79C005E7CC4 /* nav-bar-shadow@2x.png */,
+				BEA2F88516A0E978005E7CC4 /* nav-bar.png */,
 				BEA2F87416A0E8F4005E7CC4 /* nav-bar@2x.png */,
+				BEA2F88616A0E978005E7CC4 /* scrubber-active.png */,
 				BEA2F87516A0E8F4005E7CC4 /* scrubber-active@2x.png */,
+				BEA2F88716A0E978005E7CC4 /* scrubber.png */,
 				BEA2F87616A0E8F4005E7CC4 /* scrubber@2x.png */,
 			);
 			name = Resources;
@@ -400,6 +411,8 @@
 				BEA2F89416A0FD3A005E7CC4 /* FontAwesome.ttf in Resources */,
 				BEA2F89716A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf in Resources */,
 				BEA2F89816A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf in Resources */,
+				BEA2F8B016A1E79C005E7CC4 /* nav-bar-shadow@2x.png in Resources */,
+				BEA2F8B216A1E929005E7CC4 /* nav-bar-shadow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +459,7 @@
 				BEA2F8AC16A1E45C005E7CC4 /* GTMNSString+HTML.m in Sources */,
 				BEA2F8AD16A1E45C005E7CC4 /* NSString+HTML.m in Sources */,
 				BEA2F8AE16A1E45C005E7CC4 /* NSString+XMLEntities.m in Sources */,
+				BEA2F8B516A1EAC5005E7CC4 /* MovieControlView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

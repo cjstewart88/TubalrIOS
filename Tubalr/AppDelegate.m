@@ -41,6 +41,7 @@
                                            [UIColor blackColor], UITextAttributeTextShadowColor,
                                            [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
                                            [UIColor whiteColor], UITextAttributeTextColor, nil]];
+    [navigationBar setShadowImage:[UIImage imageNamed:@"nav-bar-shadow"]];
     
     UIImage *backImage = [UIImage imageNamed:@"btn-back"];
     UIImage *image = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backImage.size.width, 0, 0)];

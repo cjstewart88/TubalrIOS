@@ -9,12 +9,14 @@
 #import "NowPlayingViewController.h"
 #import "APIQuery.h"
 #import "NowPlayingCell.h"
+#import "MovieControlView.h"
 #import "LBYouTubeExtractor.h"
 
 @interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate>
 - (void)reload:(id)sender;
 
 @property (nonatomic, strong) MPMoviePlayerController *player;
+@property (nonatomic, strong) MovieControlView *movieControlView;
 @property (nonatomic, strong) UITableView *bottomTableView;
 
 @property (nonatomic, strong) NSArray *arrayOfData;
@@ -50,15 +52,20 @@
     
     self.player = [[MPMoviePlayerController alloc] init];
     [self.player.view setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180.0f)];
-        
-    self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.player.view.frame), self.view.bounds.size.width, self.view.bounds.size.height - self.player.view.bounds.size.height - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
+    
+    self.movieControlView = [[MovieControlView alloc] initWithPosition:CGPointMake(0, CGRectGetMaxY(self.player.view.frame))];
+//    self.movieControlView.backgroundColor = [UIColor colorWithRed:0.161 green:0.161 blue:0.161 alpha:1];
+    
+    self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.movieControlView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.movieControlView.frame) - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
     self.bottomTableView.separatorColor = [UIColor blackColor];
     self.bottomTableView.backgroundColor = [UIColor blackColor];// [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell"]];
     self.bottomTableView.delegate = self;
     self.bottomTableView.dataSource = self;
+    self.bottomTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //    self.bottomTableView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:self.player.view];
+    [self.view addSubview:self.movieControlView];
     [self.view addSubview:self.bottomTableView];
     
 }
