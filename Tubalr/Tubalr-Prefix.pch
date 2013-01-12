@@ -16,4 +16,6 @@
     #import "TestFlight.h"
     #import "NSArray+Shuffle.h"
     #import "NSDictionary+objectForKeyList.h"
+    #import "NSString+FontAwesome.h"
+    #import "UIFont+Additions.h"
 #endif

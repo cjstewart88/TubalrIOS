@@ -18,16 +18,27 @@
     [TestFlight takeOff:@"eab2d4a84191015273c8368e21e964fe_MTcxMjcxMjAxMy0wMS0wMiAyMDo0NTowOS4yNTczMjI"];
     [Crashlytics startWithAPIKey:@"e3e642bcbe351153ef65205ec65c9f9cc69d86f2"];
     
+    [self applyStyleSheet];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     NavigationController *navController = [[NavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-    navController.navigationBar.tintColor = [UIColor purpleColor];
-    
-//    self.viewController = [[NowPlayingViewController alloc] init];
     
     [self.window setRootViewController: navController];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)applyStyleSheet
+{
+    UINavigationBar *navigationBar = [UINavigationBar appearance];
+    UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];
+    
+    [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
+    
+    UIImage *backImage = [UIImage imageNamed:@"btn-back"];
+    UIImage *image = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backImage.size.width, 0, 0)];
+    [barButtonItem setBackButtonBackgroundImage:image forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

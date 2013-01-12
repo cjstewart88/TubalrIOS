@@ -72,11 +72,8 @@
         SearchType searchType = [self.typeOfSearchButton.titleLabel.text isEqualToString:@"Just"] ? justSearch : similarSearch;
         NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:textField.text searchType:searchType];
         
-        self.navigationItem.backBarButtonItem =
-        [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                          style:UIBarButtonItemStyleBordered
-                                         target:nil
-                                         action:nil];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+
         [self.navigationController pushViewController:nowPlayingVC animated:YES];
     }
     
