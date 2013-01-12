@@ -26,6 +26,7 @@
     @private
     NSString *_searchString;
     SearchType _searchType;
+    NSInteger _tappedCellIndex;
 }
 
 - (id)initWithSearchString:(NSString *)string searchType:(SearchType)searchType
@@ -38,6 +39,7 @@
     
     _searchString = string;
     _searchType = searchType;
+    _tappedCellIndex = 0;
     
     return self;
 }
@@ -97,6 +99,7 @@
 {
     _arrayOfData = arrayOfData;
     [self.bottomTableView reloadData];
+    [self selectMoveAndPlay];
 }
 
 - (void)movieReadyToPlay:(NSNotification *)notification
@@ -104,24 +107,43 @@
     [self.player play];
 }
 
+- (void)selectMoveAndPlay
+{
+    [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_tappedCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_tappedCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_tappedCellIndex inSection:0]];
+}
+
 - (void)moviePlaybackFinished:(NSNotification *)notification
 {
     int reason = [[[notification userInfo] valueForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
-    if (reason == MPMovieFinishReasonPlaybackError)
+    
+    if(reason == MPMovieFinishReasonPlaybackEnded)
     {
-        NSArray *log = self.player.errorLog.events;
-        for(MPMovieErrorLogEvent *event in log)
-        {
-            NSLog(@"%@", event.date);
-            NSLog(@"%@", event.serverAddress);
-            NSLog(@"%@", event.playbackSessionID);
-            NSLog(@"%d", event.errorStatusCode);
-            NSLog(@"%@", event.date);
-            NSLog(@"%@", event.errorComment);
-
-        }
-        //movie finished playin
+        //The song finished; move onto the next one
+        _tappedCellIndex++;
+        if(_tappedCellIndex == [self.arrayOfData count])
+            _tappedCellIndex = 0;
+        
+        [self selectMoveAndPlay];
+        
     }
+    
+//    if (reason == MPMovieFinishReasonPlaybackError)
+//    {
+//        NSArray *log = self.player.errorLog.events;
+//        for(MPMovieErrorLogEvent *event in log)
+//        {
+//            NSLog(@"%@", event.date);
+//            NSLog(@"%@", event.serverAddress);
+//            NSLog(@"%@", event.playbackSessionID);
+//            NSLog(@"%d", event.errorStatusCode);
+//            NSLog(@"%@", event.date);
+//            NSLog(@"%@", event.errorComment);
+//
+//        }
+//        //movie finished playin
+//    }
 }
 
 - (void)dealloc
@@ -164,7 +186,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:indexPath.row] objectForKey:@"youtube-id"]]];
+    _tappedCellIndex = indexPath.row;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:_tappedCellIndex] objectForKey:@"youtube-id"]]];
     LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityLarge];
     
     [extractor extractVideoURLWithCompletionBlock:^(NSURL *videoURL, NSError *error) {

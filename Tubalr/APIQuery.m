@@ -56,8 +56,9 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     
     else if([RedditQuery checkWithString:string])
     {
-        [RedditQuery searchWithString:string completion:^(NSArray *arrayOfSomething) {
-            
+        [RedditQuery searchWithString:string completion:^(NSArray *arrayOfIDs) {
+            if(arrayOfIDs != nil)
+                [self callCompletionOnMainThread:completion result:arrayOfIDs];
         }];
         
         return YES;
