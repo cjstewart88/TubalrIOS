@@ -46,6 +46,9 @@
 		BEA2F89716A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F89516A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf */; };
 		BEA2F89816A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F89616A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf */; };
 		BEA2F89C16A0FEEF005E7CC4 /* UIFont+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F89B16A0FEEF005E7CC4 /* UIFont+Additions.m */; };
+		BEA2F8AC16A1E45C005E7CC4 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8A716A1E45C005E7CC4 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BEA2F8AD16A1E45C005E7CC4 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8A916A1E45C005E7CC4 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BEA2F8AE16A1E45C005E7CC4 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8AB16A1E45C005E7CC4 /* NSString+XMLEntities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -113,6 +116,12 @@
 		BEA2F89616A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
 		BEA2F89A16A0FEEF005E7CC4 /* UIFont+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Additions.h"; sourceTree = "<group>"; };
 		BEA2F89B16A0FEEF005E7CC4 /* UIFont+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Additions.m"; sourceTree = "<group>"; };
+		BEA2F8A616A1E45C005E7CC4 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		BEA2F8A716A1E45C005E7CC4 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		BEA2F8A816A1E45C005E7CC4 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		BEA2F8A916A1E45C005E7CC4 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		BEA2F8AA16A1E45C005E7CC4 /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
+		BEA2F8AB16A1E45C005E7CC4 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,6 +199,7 @@
 		BE53DEDC169FB20C00D17B02 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				BEA2F8A516A1E405005E7CC4 /* MWFeedParser */,
 				BEA2F89016A0FD14005E7CC4 /* NSString+FontAwesome.h */,
 				BEA2F89116A0FD14005E7CC4 /* NSString+FontAwesome.m */,
 				BE53DEE4169FC4C300D17B02 /* NSArray+Shuffle.h */,
@@ -236,6 +246,19 @@
 				BEA2F89B16A0FEEF005E7CC4 /* UIFont+Additions.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		BEA2F8A516A1E405005E7CC4 /* MWFeedParser */ = {
+			isa = PBXGroup;
+			children = (
+				BEA2F8A616A1E45C005E7CC4 /* GTMNSString+HTML.h */,
+				BEA2F8A716A1E45C005E7CC4 /* GTMNSString+HTML.m */,
+				BEA2F8A816A1E45C005E7CC4 /* NSString+HTML.h */,
+				BEA2F8A916A1E45C005E7CC4 /* NSString+HTML.m */,
+				BEA2F8AA16A1E45C005E7CC4 /* NSString+XMLEntities.h */,
+				BEA2F8AB16A1E45C005E7CC4 /* NSString+XMLEntities.m */,
+			);
+			name = MWFeedParser;
 			sourceTree = "<group>";
 		};
 		BEF8F597169512FC002F241E = {
@@ -420,6 +443,9 @@
 				BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */,
 				BEA2F89216A0FD14005E7CC4 /* NSString+FontAwesome.m in Sources */,
 				BEA2F89C16A0FEEF005E7CC4 /* UIFont+Additions.m in Sources */,
+				BEA2F8AC16A1E45C005E7CC4 /* GTMNSString+HTML.m in Sources */,
+				BEA2F8AD16A1E45C005E7CC4 /* NSString+HTML.m in Sources */,
+				BEA2F8AE16A1E45C005E7CC4 /* NSString+XMLEntities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

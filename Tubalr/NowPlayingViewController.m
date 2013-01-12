@@ -1,4 +1,4 @@
-//
+
 //  NowPlayingViewController.m
 //  Tubalr
 //
@@ -52,8 +52,11 @@
     [self.player.view setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180.0f)];
         
     self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.player.view.frame), self.view.bounds.size.width, self.view.bounds.size.height - self.player.view.bounds.size.height - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
+    self.bottomTableView.separatorColor = [UIColor blackColor];
+    self.bottomTableView.backgroundColor = [UIColor blackColor];// [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell"]];
     self.bottomTableView.delegate = self;
     self.bottomTableView.dataSource = self;
+//    self.bottomTableView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:self.player.view];
     [self.view addSubview:self.bottomTableView];
@@ -70,9 +73,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
     
     //set up left nav buttons, right nav buttons, title etc
-    
-//    self.bottomTableView.rowHeight = 88.0f;
-    
     [self reload:nil];
 }
 
@@ -172,7 +172,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.0f;
+    return 45.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -194,7 +194,7 @@
 {
     _tappedCellIndex = indexPath.row;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:_tappedCellIndex] objectForKey:@"youtube-id"]]];
-    LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityLarge];
+    LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityMedium];
     
     [extractor extractVideoURLWithCompletionBlock:^(NSURL *videoURL, NSError *error) {
         if(!error)
