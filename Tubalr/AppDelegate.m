@@ -19,6 +19,10 @@
     [Crashlytics startWithAPIKey:@"e3e642bcbe351153ef65205ec65c9f9cc69d86f2"];
     
     [self applyStyleSheet];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    UInt32 doSetProperty = 0;
+//    AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof(doSetProperty), &doSetProperty);
+//    [[AVAudioSession sharedInstance] setActive:YES error:nil];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -41,7 +45,7 @@
                                            [UIColor blackColor], UITextAttributeTextShadowColor,
                                            [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
                                            [UIColor whiteColor], UITextAttributeTextColor, nil]];
-    [navigationBar setShadowImage:[UIImage imageNamed:@"nav-bar-shadow"]];
+    [navigationBar setShadowImage:[UIImage imageNamed:@"nav-bar-shadow"]]; //iOS6
     
     UIImage *backImage = [UIImage imageNamed:@"btn-back"];
     UIImage *image = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backImage.size.width, 0, 0)];

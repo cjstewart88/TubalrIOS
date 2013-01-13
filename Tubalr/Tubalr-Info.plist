@@ -30,6 +30,10 @@
 		<string>PT_Sans-Web-Bold.ttf</string>
 		<string>PT_Sans-Web-Regular.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

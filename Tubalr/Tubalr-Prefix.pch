@@ -13,6 +13,7 @@
     #import <Foundation/Foundation.h>
     #import <MediaPlayer/MediaPlayer.h>
     #import <Crashlytics/Crashlytics.h>
+    #import <AVFoundation/AVFoundation.h>
     #import "TestFlight.h"
     #import "NSArray+Shuffle.h"
     #import "NSDictionary+objectForKeyList.h"

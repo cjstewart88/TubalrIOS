@@ -12,8 +12,8 @@
 #import "MovieControlView.h"
 #import "LBYouTubeExtractor.h"
 
-@interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate>
-- (void)reload:(id)sender;
+@interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate, MovieControlViewDelegate>
+- (void)beginSearch:(id)sender;
 
 @property (nonatomic, strong) MPMoviePlayerController *player;
 @property (nonatomic, strong) MovieControlView *movieControlView;
@@ -52,9 +52,15 @@
     
     self.player = [[MPMoviePlayerController alloc] init];
     [self.player.view setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180.0f)];
+    [self.player setMovieSourceType:MPMovieSourceTypeFile];
     
     self.movieControlView = [[MovieControlView alloc] initWithPosition:CGPointMake(0, CGRectGetMaxY(self.player.view.frame))];
-//    self.movieControlView.backgroundColor = [UIColor colorWithRed:0.161 green:0.161 blue:0.161 alpha:1];
+    self.movieControlView.delegate = self;
+    [self.movieControlView.shuffleButton addTarget:self action:@selector(shufflePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.movieControlView.backButton addTarget:self action:@selector(backPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.movieControlView.playPauseButton addTarget:self action:@selector(playPausePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.movieControlView.nextButton addTarget:self action:@selector(nextPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.movieControlView.playlistButton addTarget:self action:@selector(playlistPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.movieControlView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.movieControlView.frame) - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
     self.bottomTableView.separatorColor = [UIColor blackColor];
@@ -62,12 +68,10 @@
     self.bottomTableView.delegate = self;
     self.bottomTableView.dataSource = self;
     self.bottomTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.bottomTableView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:self.player.view];
     [self.view addSubview:self.movieControlView];
     [self.view addSubview:self.bottomTableView];
-    
 }
 
 - (void)viewDidLoad
@@ -80,10 +84,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
     
     //set up left nav buttons, right nav buttons, title etc
-    [self reload:nil];
+    [self beginSearch:nil];
 }
 
-- (void)reload:(id)sender
+- (void)beginSearch:(id)sender
 {
     if([APIQuery determineSpecialSearchWithString:_searchString completion:^(NSArray* array) {
             [self setArrayOfData:array];      
@@ -154,13 +158,23 @@
 //    }
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self reloadState];
+}
+
+- (void)reloadState
+{
+    
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }
 
-- (BOOL)shouldAutorotate
+- (BOOL)shouldAutorotate //iOS6
 {
     return YES;
 }
@@ -168,6 +182,38 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
+- (void)shufflePressed:(id)sender
+{
+    
+}
+
+- (void)backPressed:(id)sender
+{
+    
+}
+
+- (void)playPausePressed:(id)sender
+{
+    
+}
+
+- (void)nextPressed:(id)sender
+{
+    
+}
+
+- (void)playlistPressed:(id)sender
+{
+    
+}
+
+#pragma mark - MoviePlayViewDelegate
+
+- (void)sliderScrubbedToPosition:(CGFloat)position
+{
+    NSLog(@"%f", position);
 }
 
 #pragma mark - UITableViewDataSource

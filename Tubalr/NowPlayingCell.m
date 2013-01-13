@@ -35,13 +35,6 @@
     self.textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.iconTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.iconTextLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:13.0f];
-    self.iconTextLabel.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-play"];
-    self.iconTextLabel.textColor = [UIColor whiteColor];
-    self.iconTextLabel.backgroundColor = [UIColor clearColor];
-    self.iconTextLabel.shadowColor = [UIColor blackColor];
-    self.iconTextLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     [self.contentView addSubview:self.iconTextLabel];
     
     return self;
@@ -75,6 +68,22 @@
     }
 
     // Configure the view for the selected state
+}
+
+- (UILabel *)iconTextLabel
+{
+    if(_iconTextLabel == nil)
+    {
+        _iconTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _iconTextLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:13.0f];
+        _iconTextLabel.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-play"];
+        _iconTextLabel.textColor = [UIColor whiteColor];
+        _iconTextLabel.backgroundColor = [UIColor clearColor];
+        _iconTextLabel.shadowColor = [UIColor blackColor];
+        _iconTextLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    }
+    
+    return _iconTextLabel;
 }
 
 #pragma mark - UIView
