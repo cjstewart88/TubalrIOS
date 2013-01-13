@@ -30,5 +30,6 @@
 @protocol MovieControlViewDelegate <NSObject>
 
 - (void)sliderScrubbedToPosition:(CGFloat)position;
+- (void)sliderFinishedScrubbing;
 
 @end

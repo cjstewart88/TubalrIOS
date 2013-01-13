@@ -18,6 +18,13 @@
         return nil;
     }
     
+    [self.playPauseButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+    [self.slider addTarget:self action:@selector(sliderEnd:) forControlEvents:UIControlEventTouchUpInside];
+    [self.slider addObserver:self forKeyPath:@"value" options:0 context:0];
+    [self.slider addObserver:self forKeyPath:@"maximumValue" options:0 context:0];
+    
     [self addSubview:self.shuffleButton];
     [self addSubview:self.backButton];
     [self addSubview:self.playPauseButton];
@@ -28,6 +35,12 @@
     [self addSubview:self.trackTotalLabel];
     
     return self;
+}
+
+- (void)dealloc
+{
+    [self.slider removeObserver:self forKeyPath:@"value"];
+    [self.slider removeObserver:self forKeyPath:@"maximumValue"];
 }
 
 - (void)layoutSubviews
@@ -67,6 +80,28 @@
 
 }
 
+-(NSString *)prettyPrintTime:(NSTimeInterval)time
+{
+    int minutes = time / 60;
+    time -= minutes * 60;
+    int seconds = time;
+    
+    return [NSString stringWithFormat:@"%i:%.2i", minutes, seconds];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"value"])
+    {
+        [self.trackTimeLabel setText:[self prettyPrintTime:self.slider.value]];
+    }
+    
+    if([keyPath isEqualToString:@"maximumValue"])
+    {
+        [self.trackTotalLabel setText:[self prettyPrintTime:self.slider.maximumValue]];
+    }
+}
+
 - (void)buttonPressed:(id)sender
 {
     if(sender == self.playPauseButton)
@@ -77,8 +112,19 @@
 
 - (void)sliderAction:(id)sender
 {
+    [self.trackTimeLabel setText:[self prettyPrintTime:self.slider.value]];
+
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderScrubbedToPosition:)])
         [self.delegate sliderScrubbedToPosition:[(UISlider *)sender value]];
+}
+
+- (void)sliderEnd:(id)sender
+{
+    //When I'm done scrubbing, there's a bug with MPMoviePlayerController, where it gets stuck in the 'paused' state even though it's playing.
+    //Use this function to figure out when you let up
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderFinishedScrubbing)])
+        [self.delegate sliderFinishedScrubbing];
 }
 
 - (UIButton *)shuffleButton
@@ -137,7 +183,6 @@
         UIImage *image = [UIImage imageNamed:@"icon-play"];
         _playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_playPauseButton setImage:image forState:UIControlStateNormal];
-        [_playPauseButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _playPauseButton;
@@ -149,14 +194,12 @@
     {
         _slider = [[Slider alloc] init];
         _slider.backgroundColor = [UIColor clearColor];
+        _slider.continuous = YES;
         UIImage *stetchLeftTrack = [[UIImage imageNamed:@"scrubber-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
         UIImage *stetchRightTrack = [[UIImage imageNamed:@"scrubber"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
         [_slider setThumbImage: [UIImage imageNamed:@"knob.png"] forState:UIControlStateNormal];
         [_slider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
         [_slider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
-        [_slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
-        
-        _slider.maximumValue = 260.0;
     }
     
     return _slider;
@@ -173,7 +216,7 @@
         _trackTimeLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
         _trackTotalLabel.textAlignment = NSTextAlignmentCenter; //iOS6
         [_trackTimeLabel setBackgroundColor:[UIColor clearColor]];
-        _trackTimeLabel.text = @"2:10";
+        _trackTimeLabel.text = [self prettyPrintTime:0];
     }
     
     return _trackTimeLabel;
@@ -191,7 +234,7 @@
         _trackTotalLabel.textAlignment = NSTextAlignmentCenter;
         [_trackTotalLabel setBackgroundColor:[UIColor clearColor]];
         
-        _trackTotalLabel.text = @"4:20";
+        _trackTotalLabel.text = [self prettyPrintTime:0];
     }
     
     return _trackTotalLabel;

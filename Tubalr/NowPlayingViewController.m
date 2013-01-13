@@ -11,6 +11,7 @@
 #import "NowPlayingCell.h"
 #import "MovieControlView.h"
 #import "LBYouTubeExtractor.h"
+#import "Slider.h"
 
 @interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate, MovieControlViewDelegate>
 - (void)beginSearch:(id)sender;
@@ -28,7 +29,9 @@
     @private
     NSString *_searchString;
     SearchType _searchType;
-    NSInteger _tappedCellIndex;
+    NSInteger _selectedCellIndex;
+    NSInteger _nextCellIndex;
+    NSTimer *_updateProgressTimer;
 }
 
 - (id)initWithSearchString:(NSString *)string searchType:(SearchType)searchType
@@ -41,7 +44,10 @@
     
     _searchString = string;
     _searchType = searchType;
-    _tappedCellIndex = 0;
+    _selectedCellIndex = -1;
+    
+    _updateProgressTimer = [NSTimer timerWithTimeInterval:0.2 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_updateProgressTimer forMode:NSRunLoopCommonModes];
     
     return self;
 }
@@ -52,7 +58,7 @@
     
     self.player = [[MPMoviePlayerController alloc] init];
     [self.player.view setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180.0f)];
-    [self.player setMovieSourceType:MPMovieSourceTypeFile];
+//    [self.player setMovieSourceType:MPMovieSourceTypeFile];
     
     self.movieControlView = [[MovieControlView alloc] initWithPosition:CGPointMake(0, CGRectGetMaxY(self.player.view.frame))];
     self.movieControlView.delegate = self;
@@ -64,7 +70,7 @@
     
     self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.movieControlView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.movieControlView.frame) - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
     self.bottomTableView.separatorColor = [UIColor blackColor];
-    self.bottomTableView.backgroundColor = [UIColor blackColor];// [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell"]];
+    self.bottomTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell"]];
     self.bottomTableView.delegate = self;
     self.bottomTableView.dataSource = self;
     self.bottomTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -82,9 +88,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieReadyToPlay:) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(durationAvailable:) name:MPMovieDurationAvailableNotification object:nil];
     
     //set up left nav buttons, right nav buttons, title etc
     [self beginSearch:nil];
+}
+
+- (void)dealloc
+{
+    [_updateProgressTimer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMovieDurationAvailableNotification object:nil];
+
 }
 
 - (void)beginSearch:(id)sender
@@ -114,16 +130,23 @@
     [self selectMoveAndPlay];
 }
 
+- (void)updateProgress:(id)sender
+{    
+    if(self.player.playbackState == MPMoviePlaybackStatePlaying)
+    {
+        NSLog(@"%f", self.player.duration);
+        self.movieControlView.slider.value = self.player.currentPlaybackTime;
+    }
+}
+
+- (void)durationAvailable:(NSNotification *)notification
+{
+    self.movieControlView.slider.maximumValue = self.player.duration;
+}
+
 - (void)movieReadyToPlay:(NSNotification *)notification
 {
     [self.player play];
-}
-
-- (void)selectMoveAndPlay
-{
-    [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_tappedCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_tappedCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    [self tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_tappedCellIndex inSection:0]];
 }
 
 - (void)moviePlaybackFinished:(NSNotification *)notification
@@ -133,9 +156,9 @@
     if(reason == MPMovieFinishReasonPlaybackEnded)
     {
         //The song finished; move onto the next one
-        _tappedCellIndex++;
-        if(_tappedCellIndex == [self.arrayOfData count])
-            _tappedCellIndex = 0;
+        _nextCellIndex = _selectedCellIndex + 1;
+        if(_nextCellIndex == [self.arrayOfData count])
+            _nextCellIndex = 0;
         
         [self selectMoveAndPlay];
         
@@ -158,20 +181,11 @@
 //    }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)selectMoveAndPlay
 {
-    [self reloadState];
-}
-
-- (void)reloadState
-{
-    
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.bottomTableView.delegate tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0]];
 }
 
 - (BOOL)shouldAutorotate //iOS6
@@ -212,8 +226,13 @@
 #pragma mark - MoviePlayViewDelegate
 
 - (void)sliderScrubbedToPosition:(CGFloat)position
+{    
+    [self.player setCurrentPlaybackTime:position];
+}
+
+- (void)sliderFinishedScrubbing
 {
-    NSLog(@"%f", position);
+    [self.player play];
 }
 
 #pragma mark - UITableViewDataSource
@@ -245,8 +264,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _tappedCellIndex = indexPath.row;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:_tappedCellIndex] objectForKey:@"youtube-id"]]];
+    if(_selectedCellIndex == indexPath.row) return;
+    _selectedCellIndex = indexPath.row;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:_selectedCellIndex] objectForKey:@"youtube-id"]]];
     LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityMedium];
     
     [extractor extractVideoURLWithCompletionBlock:^(NSURL *videoURL, NSError *error) {
@@ -258,9 +278,6 @@
             NSLog(@"Failed extracting video URL using block due to error:%@", error);
         }
     }];
-    
-//    NSURL *url = [NSURL URLWithString:[(NSDictionary *)[_arrayOfData objectAtIndex:indexPath.row] objectForKey:@"url"]];
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES]; //Good way to turn off any highlighting when selected
 }
 
 @end

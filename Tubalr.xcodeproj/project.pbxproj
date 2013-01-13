@@ -368,14 +368,14 @@
 		BEF8F5AC169512FC002F241E /* Tubalr */ = {
 			isa = PBXGroup;
 			children = (
+				BE53DEDC169FB20C00D17B02 /* 3rdParty */,
 				BEF8F5B5169512FC002F241E /* AppDelegate.h */,
 				BEF8F5B6169512FC002F241E /* AppDelegate.m */,
-				BE0BD652169E6D170023BBBD /* Models */,
 				BEA2F89916A0FE54005E7CC4 /* Categories */,
+				BE0BD652169E6D170023BBBD /* Models */,
+				BEA2F86D16A0E8B1005E7CC4 /* Resources */,
 				BE0BD653169E6D330023BBBD /* View Controllers */,
 				BE53DED1169F902600D17B02 /* Views */,
-				BE53DEDC169FB20C00D17B02 /* 3rdParty */,
-				BEA2F86D16A0E8B1005E7CC4 /* Resources */,
 			);
 			path = Tubalr;
 			sourceTree = "<group>";
