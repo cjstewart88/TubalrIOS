@@ -123,8 +123,8 @@
     //When I'm done scrubbing, there's a bug with MPMoviePlayerController, where it gets stuck in the 'paused' state even though it's playing.
     //Use this function to figure out when you let up
     
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderFinishedScrubbing)])
-        [self.delegate sliderFinishedScrubbing];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderFinishedScrubbingWithPosition:)])
+        [self.delegate sliderFinishedScrubbingWithPosition:self.slider.value];
 }
 
 - (UIButton *)shuffleButton
