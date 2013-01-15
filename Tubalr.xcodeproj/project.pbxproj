@@ -73,6 +73,8 @@
 		BEA2F8DB16A3138D005E7CC4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA2F8DA16A3138D005E7CC4 /* AVFoundation.framework */; };
 		BEA2F8DD16A3166E005E7CC4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA2F8DC16A3166D005E7CC4 /* AudioToolbox.framework */; };
 		BEA2F8F016A325FA005E7CC4 /* Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8EF16A325FA005E7CC4 /* Slider.m */; };
+		BEF8461116A5225000C659DB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8461016A5225000C659DB /* Icon.png */; };
+		BEF8461416A5225400C659DB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8461316A5225400C659DB /* Icon@2x.png */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
 		BEF8F5A9169512FC002F241E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A8169512FC002F241E /* Foundation.framework */; };
 		BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5AA169512FC002F241E /* CoreGraphics.framework */; };
@@ -173,6 +175,8 @@
 		BEA2F8DC16A3166D005E7CC4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BEA2F8EE16A325FA005E7CC4 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slider.h; sourceTree = "<group>"; };
 		BEA2F8EF16A325FA005E7CC4 /* Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slider.m; sourceTree = "<group>"; };
+		BEF8461016A5225000C659DB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		BEF8461316A5225400C659DB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF8F5A6169512FC002F241E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BEF8F5A8169512FC002F241E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -392,6 +396,8 @@
 		BEF8F5AD169512FC002F241E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEF8461316A5225400C659DB /* Icon@2x.png */,
+				BEF8461016A5225000C659DB /* Icon.png */,
 				BE3E501E16951A8800FFC7A1 /* TestFlight.h */,
 				BEF8F5AE169512FC002F241E /* Tubalr-Info.plist */,
 				BEF8F5AF169512FC002F241E /* InfoPlist.strings */,
@@ -499,6 +505,8 @@
 				BEA2F8D316A22A7E005E7CC4 /* icon-plus.png in Resources */,
 				BEA2F8D416A22A7E005E7CC4 /* icon-previous.png in Resources */,
 				BEA2F8D516A22A7E005E7CC4 /* icon-shuffle.png in Resources */,
+				BEF8461116A5225000C659DB /* Icon.png in Resources */,
+				BEF8461416A5225400C659DB /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,7 +647,7 @@
 		BEF8F5C2169512FC002F241E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cody Stewart (CVGKVD334E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cody Stewart";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -652,7 +660,7 @@
 					"\"$(SRCROOT)/Tubalr\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F241DDD-FF1D-4AE5-9729-64341C74F583";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64961B67-99F1-4C5B-9B77-8A6E6D974458";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

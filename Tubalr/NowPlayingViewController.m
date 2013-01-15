@@ -49,6 +49,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     SearchType _searchType;
     NSInteger _selectedCellIndex;
     NSInteger _nextCellIndex;
+    float mRestoreAfterScrubbingRate;
     id _timeObserver;
 }
 
@@ -97,32 +98,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     
     self.title = @"tubalr";
     
-    /* Observe the AVPlayer "currentItem" property to find out when any
-     AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did
-     occur.*/
-//    [self.playerView.player addObserver:self
-//                  forKeyPath:kCurrentItemKey
-//                     options:0
-//                     context:0];
-//    
-//    /* Observe the AVPlayer "rate" property to update the scrubber control. */
-//    [self.playerView.player addObserver:self
-//                  forKeyPath:kRateKey
-//                     options:0
-//                     context:0];
-    
-//    [self.playerView.player addObserver:self
-//                             forKeyPath:kStatusKey
-//                                options:0
-//                                context:0];
-    
-    __weak NowPlayingViewController *vc = self;
-    _timeObserver = [self.playerView.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.2f, NSEC_PER_SEC)
-                                                           queue:NULL /* If you pass NULL, the main queue is used. */
-                                                      usingBlock:^(CMTime time)
-                      {
-                          [vc syncScrubber];
-                      }];
+    [self addPlayerTimeObserver];
     
 //    [self initScrubberTimer];
 	
@@ -135,9 +111,8 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)dealloc
 {
-//    [self.playerView.player removeObserver:self forKeyPath:kCurrentItemKey];
-//    [self.playerView.player removeObserver:self forKeyPath:kRateKey];
-//    [self.playerView.player removeObserver:self forKeyPath:kStatusKey];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [self.playerItem removeObserver:self forKeyPath:kStatusKey];
 }
 
 - (void)observeValueForKeyPath:(NSString*) path
@@ -340,15 +315,41 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     
 }
 
-#pragma mark - MoviePlayViewDelegate
-
-- (void)sliderScrubbedToPosition:(CGFloat)position
-{    
+- (void)addPlayerTimeObserver
+{
+    __weak NowPlayingViewController *vc = self;
+    _timeObserver = [self.playerView.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.2f, NSEC_PER_SEC)
+                                                                         queue:NULL /* If you pass NULL, the main queue is used. */
+                                                                    usingBlock:^(CMTime time)
+                     {
+                         [vc syncScrubber];
+                     }];
 }
 
-- (void)sliderFinishedScrubbingWithPosition:(CGFloat)position
+- (void)removePlayerTimeObserver
 {
-    [self.playerView.player seekToTime:CMTimeMakeWithSeconds(position, NSEC_PER_SEC)];
+	if (_timeObserver)
+	{
+		[self.playerView.player removeTimeObserver:_timeObserver];
+		_timeObserver = nil;
+	}
+}
+
+#pragma mark - MoviePlayViewDelegate
+
+- (void)sliderBeganScrubbing
+{
+    [self removePlayerTimeObserver];
+}
+
+- (void)sliderScrubbedToPosition:(CGFloat)position
+{
+}
+
+- (void)sliderFinishedScrubbing
+{
+    [self.playerView.player seekToTime:CMTimeMakeWithSeconds(self.movieControlView.slider.value, NSEC_PER_SEC)];
+    [self addPlayerTimeObserver];
 }
 
 #pragma mark - UITableViewDataSource
@@ -416,7 +417,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 		AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
 		if (keyStatus == AVKeyValueStatusFailed)
 		{
-			[self assetFailedToPrepareForPlayback:error];
+			[self showAlertWithError:error];
 			return;
 		}
 	}
@@ -431,7 +432,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 								   localizedFailureReason, NSLocalizedFailureReasonErrorKey,
 								   nil];
 		NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"StitchedStreamPlayer" code:0 userInfo:errorDict];
-        [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];  
+        [self showAlertWithError:assetCannotBePlayedError];  
         return;
     }
     
@@ -446,7 +447,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 		
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                      object:self.playerItem];
+                                                      object:nil];
     }
 	
     /* Create a new instance of AVPlayerItem from the now successfully loaded AVAsset. */
@@ -478,7 +479,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     [self.playerView.player play];
 }
 
--(void)assetFailedToPrepareForPlayback:(NSError *)error
+-(void)showAlertWithError:(NSError *)error
 {    
     /* Display the error. */
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
