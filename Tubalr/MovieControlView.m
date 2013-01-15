@@ -20,6 +20,7 @@
     
     [self.playPauseButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
+    [self.slider addTarget:self action:@selector(sliderBegin:) forControlEvents:UIControlEventTouchDown];
     [self.slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
     [self.slider addTarget:self action:@selector(sliderEnd:) forControlEvents:UIControlEventTouchUpInside];
     [self.slider addObserver:self forKeyPath:@"value" options:0 context:0];
@@ -110,6 +111,12 @@
     }
 }
 
+- (void)sliderBegin:(id)sender
+{
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderBeganScrubbing)])
+        [self.delegate sliderBeganScrubbing];
+}
+
 - (void)sliderAction:(id)sender
 {
     [self.trackTimeLabel setText:[self prettyPrintTime:self.slider.value]];
@@ -120,9 +127,6 @@
 
 - (void)sliderEnd:(id)sender
 {
-    //When I'm done scrubbing, there's a bug with MPMoviePlayerController, where it gets stuck in the 'paused' state even though it's playing.
-    //Use this function to figure out when you let up
-    
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderFinishedScrubbing)])
         [self.delegate sliderFinishedScrubbing];
 }
