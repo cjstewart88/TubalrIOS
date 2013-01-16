@@ -33,7 +33,6 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 - (void)beginSearch:(id)sender;
 
 @property (nonatomic, strong) AVView *playerView;
-@property (nonatomic, strong) AVURLAsset *asset;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) MovieControlView *movieControlView;
 @property (nonatomic, strong) UITableView *bottomTableView;
@@ -389,17 +388,17 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     [extractor extractVideoURLWithCompletionBlock:^(NSURL *videoURL, NSError *error) {
         if(!error)
         {
-            self.asset = [AVURLAsset URLAssetWithURL:videoURL options:nil];
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:nil];
             
             NSArray *requestedKeys = [NSArray arrayWithObjects:kTracksKey, kPlayableKey, nil];
             
             /* Tells the asset to load the values of any of the specified keys that are not already loaded. */
-            [self.asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
+            [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
              ^{
                  dispatch_async( dispatch_get_main_queue(),
                                 ^{
                                     /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
-                                    [self prepareToPlayAsset:self.asset withKeys:requestedKeys];
+                                    [self prepareToPlayAsset:asset withKeys:requestedKeys];
                                 });
              }];
         } else {

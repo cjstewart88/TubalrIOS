@@ -252,42 +252,42 @@
 	UIRectFill(rect);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 0.5);
+    CGContextSetLineWidth(context, 1.0);
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     
     //Gray Vertical Lines
     CGContextSaveGState(context); {
-        CGFloat componentsGrayVert[] = {0.224, 0.224, 0.224, 1.0};
+        CGFloat componentsGrayVert[] = {0.247, 0.247, 0.247, 1.0};
         CGColorRef colorGrayVert = CGColorCreate(colorspace, componentsGrayVert);
         CGContextSetStrokeColorWithColor(context, colorGrayVert);
-        CGContextMoveToPoint(context, 50.25, 0);
-        CGContextAddLineToPoint(context, 50.25, 49);
-        CGContextMoveToPoint(context, 269.75, 0);
-        CGContextAddLineToPoint(context, 269.75, 49);
+        CGContextMoveToPoint(context, 50, 0);
+        CGContextAddLineToPoint(context, 50, 49);
+        CGContextMoveToPoint(context, 270.5, 0);
+        CGContextAddLineToPoint(context, 270.5, 49);
         CGColorRelease(colorGrayVert);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);
     
-    //Black Vertical Lines
+//    //Black Vertical Lines
     CGContextSaveGState(context); {
         CGFloat componentsBlackVert[] = {0.0, 0.0, 0.0, 1.0};
         CGColorRef colorBlackVert = CGColorCreate(colorspace, componentsBlackVert);
         CGContextSetStrokeColorWithColor(context, colorBlackVert);
-        CGContextMoveToPoint(context, 50.75, 0);
-        CGContextAddLineToPoint(context, 50.75, 49);
-        CGContextMoveToPoint(context, 269.25, 0);
-        CGContextAddLineToPoint(context, 269.25, 49);
+        CGContextMoveToPoint(context, 51.0, 0);
+        CGContextAddLineToPoint(context, 51.0, 49);
+        CGContextMoveToPoint(context, 269.5, 0);
+        CGContextAddLineToPoint(context, 269.5, 49);
         CGColorRelease(colorBlackVert);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);
-    
+
     //Gray Horizontal Top Line
     CGContextSaveGState(context); {
         CGFloat componentsGrayTop[] = {0.220, 0.220, 0.220, 1.0};
         CGColorRef colorGrayTop = CGColorCreate(colorspace, componentsGrayTop);
         CGContextSetStrokeColorWithColor(context, colorGrayTop);
-        CGContextMoveToPoint(context, 0, .25);
-        CGContextAddLineToPoint(context, 320, .25);
+        CGContextMoveToPoint(context, 0, .5);
+        CGContextAddLineToPoint(context, 320, .5);
         CGColorRelease(colorGrayTop);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);
@@ -297,8 +297,8 @@
         CGFloat componentsBlackBottom[] = {0.043, 0.043, 0.043, 1.0};
         CGColorRef colorBlackBottom = CGColorCreate(colorspace, componentsBlackBottom);
         CGContextSetStrokeColorWithColor(context, colorBlackBottom);
-        CGContextMoveToPoint(context, 0, 48.75);
-        CGContextAddLineToPoint(context, 320, 48.75);
+        CGContextMoveToPoint(context, 0, 49.0);
+        CGContextAddLineToPoint(context, 320, 49.0);
         CGColorRelease(colorBlackBottom);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);
@@ -308,8 +308,8 @@
         CGFloat componentsGrayBottom[] = {0.263, 0.263, 0.263, 1.0};
         CGColorRef colorGrayBottom = CGColorCreate(colorspace, componentsGrayBottom);
         CGContextSetStrokeColorWithColor(context, colorGrayBottom);
-        CGContextMoveToPoint(context, 0, 49.25);
-        CGContextAddLineToPoint(context, 320, 49.25);
+        CGContextMoveToPoint(context, 0, 50.0);
+        CGContextAddLineToPoint(context, 320, 50.0);
         CGColorRelease(colorGrayBottom);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);
