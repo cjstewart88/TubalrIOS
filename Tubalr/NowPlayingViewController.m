@@ -102,10 +102,14 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
                   forKeyPath:kRateKey
                      options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                      context:nil];
+    
+    [self.playerView.player addObserver:self
+                  forKeyPath:kCurrentItemKey
+                     options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                     context:nil];
 	
 	[self syncPlayPauseButtons];
     
-    //set up left nav buttons, right nav buttons, title etc
     [self beginSearch:nil];
 }
 
@@ -113,6 +117,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self.playerView.player removeObserver:self forKeyPath:kRateKey];
+    [self.playerView.player removeObserver:self forKeyPath:kCurrentItemKey];
     [self.playerItem removeObserver:self forKeyPath:kStatusKey];
 }
 
@@ -130,84 +135,10 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     {
         [self syncPlayPauseButtons];
     }
-//	/* AVPlayerItem "status" property value observer. */
-//	if (context == AVPlayerDemoPlaybackViewControllerStatusObservationContext)
-//	{
-//		[self syncPlayPauseButtons];
-//        
-//        AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
-//        switch (status)
-//        {
-//                /* Indicates that the status of the player is not yet known because
-//                 it has not tried to load new media resources for playback */
-//            case AVPlayerStatusUnknown:
-//            {
-////                [self removePlayerTimeObserver];
-////                [self syncScrubber];
-////                
-////                [self disableScrubber];
-////                [self disablePlayerButtons];
-//            }
-//                break;
-//                
-//            case AVPlayerStatusReadyToPlay:
-//            {
-//                /* Once the AVPlayerItem becomes ready to play, i.e.
-//                 [playerItem status] == AVPlayerItemStatusReadyToPlay,
-//                 its duration can be fetched from the item. */
-//                
-////                [self initScrubberTimer];
-////                
-////                [self enableScrubber];
-////                [self enablePlayerButtons];
-//                NSLog(@"should get here");
-//            }
-//                break;
-//                
-//            case AVPlayerStatusFailed:
-//            {
-//                AVPlayerItem *playerItem = (AVPlayerItem *)object;
-//                [self assetFailedToPrepareForPlayback:playerItem.error];
-//            }
-//                break;
-//        }
-//	}
-//	/* AVPlayer "rate" property value observer. */
-//	else if (context == AVPlayerDemoPlaybackViewControllerRateObservationContext)
-//	{
-//        [self syncPlayPauseButtons];
-//	}
-//	/* AVPlayer "currentItem" property observer.
-//     Called when the AVPlayer replaceCurrentItemWithPlayerItem:
-//     replacement will/did occur. */
-//	else if (context == AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext)
-//	{
-//        AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
-//        
-//        /* Is the new player item null? */
-//        if (newPlayerItem == (id)[NSNull null])
-//        {
-////            [self disablePlayerButtons];
-////            [self disableScrubber];
-//        }
-//        else /* Replacement of player currentItem has occurred */
-//        {
-//            /* Set the AVPlayer for which the player layer displays visual output. */
-////            [mPlaybackView setPlayer:mPlayer];
-////            
-////            [self setViewDisplayName];
-////            
-////            /* Specifies that the player should preserve the video’s aspect ratio and
-////             fit the video within the layer’s bounds. */
-////            [mPlaybackView setVideoFillMode:AVLayerVideoGravityResizeAspect];
-//            
-//            [self syncPlayPauseButtons];
-//        }
-//	}
-//	else
-//	{
-//		[super observeValueForKeyPath:path ofObject:object change:change context:context];
-//	}
+    else if([path isEqualToString:kCurrentItemKey])
+    {
+        [self syncPlayPauseButtons];
+    }
 }
 
 /* If the media is playing, show the stop button; otherwise, show the play button. */
@@ -257,7 +188,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)syncScrubber
 {
-    if(self.playerView.player.rate != 0.0f)
+    if(self.playerView.player.rate != 0.0f) //normal updates while playing
     {
         self.movieControlView.slider.value = CMTimeGetSeconds(self.playerView.player.currentTime);
     }
@@ -327,13 +258,12 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 {
     if(CMTimeGetSeconds(self.playerView.player.currentTime) < 5)
     {
-        NSLog(@"Previous");
         [self previousItem];
     }
     else
     {
-        NSLog(@"Same");
         [self.playerView.player seekToTime:CMTimeMakeWithSeconds(0.0f, NSEC_PER_SEC)];
+        self.movieControlView.slider.value = 0;
     }
 }
 
@@ -427,6 +357,11 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 {
     if(_selectedCellIndex == indexPath.row) return;
     _selectedCellIndex = indexPath.row;
+    
+    [self.playerView.player pause];
+    [self.playerView.player replaceCurrentItemWithPlayerItem:nil];
+    [self removePlayerItemObservations];
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:_selectedCellIndex] objectForKey:@"youtube-id"]]];
     LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityMedium];
     
@@ -483,16 +418,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     /* At this point we're ready to set up for playback of the asset. */
     
     /* Stop observing our prior AVPlayerItem, if we have one. */
-    if (self.playerItem)
-    {
-        /* Remove existing player item key value observers and notifications. */
-        
-        [self.playerItem removeObserver:self forKeyPath:kStatusKey];
-		
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:AVPlayerItemDidPlayToEndTimeNotification
-                                                      object:nil];
-    }
+    [self removePlayerItemObservations];
 	
     /* Create a new instance of AVPlayerItem from the now successfully loaded AVAsset. */
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
@@ -522,6 +448,20 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 //    [self.playerView.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithAsset:asset]];
     [self.playerView.player play];
 }
+     
+- (void)removePlayerItemObservations
+ {
+     if (self.playerItem && self.playerView.player.currentItem == self.playerItem)
+     {
+         /* Remove existing player item key value observers and notifications. */
+         
+         [self.playerItem removeObserver:self forKeyPath:kStatusKey];
+         
+         [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                         name:AVPlayerItemDidPlayToEndTimeNotification
+                                                       object:nil];
+     }
+ }
 
 -(void)showAlertWithError:(NSError *)error
 {    
