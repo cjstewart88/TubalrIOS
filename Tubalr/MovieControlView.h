@@ -23,6 +23,9 @@
 @property (nonatomic, strong) UILabel *trackTimeLabel;
 @property (nonatomic, strong) UILabel *trackTotalLabel;
 
+- (void)showPauseButton;
+- (void)showPlayButton;
+
 @property (nonatomic, weak) id delegate;
 
 @end

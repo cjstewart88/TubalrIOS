@@ -18,8 +18,6 @@
         return nil;
     }
     
-    [self.playPauseButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
     [self.slider addTarget:self action:@selector(sliderBegin:) forControlEvents:UIControlEventTouchDown];
     [self.slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
     [self.slider addTarget:self action:@selector(sliderEnd:) forControlEvents:UIControlEventTouchUpInside];
@@ -103,14 +101,6 @@
     }
 }
 
-- (void)buttonPressed:(id)sender
-{
-    if(sender == self.playPauseButton)
-    {
-        NSLog(@"Here");
-    }
-}
-
 - (void)sliderBegin:(id)sender
 {
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(sliderBeganScrubbing)])
@@ -190,6 +180,18 @@
     }
     
     return _playPauseButton;
+}
+
+- (void)showPauseButton
+{
+    UIImage *image = [UIImage imageNamed:@"icon-pause"];
+    [self.playPauseButton setImage:image forState:UIControlStateNormal];
+}
+
+- (void)showPlayButton
+{
+    UIImage *image = [UIImage imageNamed:@"icon-play"];
+    [self.playPauseButton setImage:image forState:UIControlStateNormal];
 }
 
 - (Slider *)slider

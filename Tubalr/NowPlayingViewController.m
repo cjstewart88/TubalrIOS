@@ -98,11 +98,12 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     self.title = @"tubalr";
     
     [self addPlayerTimeObserver];
-    
-//    [self initScrubberTimer];
+    [self.playerView.player addObserver:self
+                  forKeyPath:kRateKey
+                     options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                     context:nil];
 	
-//	[self syncPlayPauseButtons];
-//	[self syncScrubber];
+	[self syncPlayPauseButtons];
     
     //set up left nav buttons, right nav buttons, title etc
     [self beginSearch:nil];
@@ -111,6 +112,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [self.playerView.player removeObserver:self forKeyPath:kRateKey];
     [self.playerItem removeObserver:self forKeyPath:kStatusKey];
 }
 
@@ -121,7 +123,12 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 {
     if([path isEqualToString:kStatusKey])
     {
+        [self syncPlayPauseButtons];
         self.movieControlView.slider.maximumValue = CMTimeGetSeconds([self playerItemDuration]);
+    }
+    else if ([path isEqualToString:kRateKey])
+    {
+        [self syncPlayPauseButtons];
     }
 //	/* AVPlayerItem "status" property value observer. */
 //	if (context == AVPlayerDemoPlaybackViewControllerStatusObservationContext)
@@ -206,14 +213,19 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 /* If the media is playing, show the stop button; otherwise, show the play button. */
 - (void)syncPlayPauseButtons
 {
-//	if ([self isPlaying])
-//	{
-//        [self showStopButton];
-//	}
-//	else
-//	{
-//        [self showPlayButton];
-//	}
+	if ([self isPlaying])
+	{
+        [self.movieControlView showPauseButton];
+	}
+	else
+	{
+        [self.movieControlView showPlayButton];
+	}
+}
+
+- (BOOL)isPlaying
+{
+    return self.playerView.player.rate != 0.0f;
 }
 
 - (void)beginSearch:(id)sender
@@ -264,12 +276,29 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification
 {
-        //The song finished; move onto the next one
-        _nextCellIndex = _selectedCellIndex + 1;
-        if(_nextCellIndex == [self.arrayOfData count])
-            _nextCellIndex = 0;
-        
-        [self selectMoveAndPlay];
+    [self nextItem];
+}
+
+- (void)nextItem
+{
+    [self syncPlayPauseButtons];
+    
+    _nextCellIndex = _selectedCellIndex + 1;
+    if(_nextCellIndex == [self.arrayOfData count])
+        _nextCellIndex = 0;
+    
+    [self selectMoveAndPlay];
+}
+
+- (void)previousItem
+{
+    [self syncPlayPauseButtons];
+    
+    _nextCellIndex = _selectedCellIndex - 1;
+    if(_nextCellIndex < 0)
+        _nextCellIndex = [self.arrayOfData count] - 1;
+    
+    [self selectMoveAndPlay];
 }
 
 - (void)selectMoveAndPlay
@@ -296,17 +325,33 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)backPressed:(id)sender
 {
-    
+    if(CMTimeGetSeconds(self.playerView.player.currentTime) < 5)
+    {
+        NSLog(@"Previous");
+        [self previousItem];
+    }
+    else
+    {
+        NSLog(@"Same");
+        [self.playerView.player seekToTime:CMTimeMakeWithSeconds(0.0f, NSEC_PER_SEC)];
+    }
 }
 
 - (void)playPausePressed:(id)sender
 {
-    
+    if ([self isPlaying])
+	{
+        [self.playerView.player pause];
+	}
+	else
+	{
+        [self.playerView.player play];
+	}
 }
 
 - (void)nextPressed:(id)sender
 {
-    
+    [self nextItem];
 }
 
 - (void)playlistPressed:(id)sender
