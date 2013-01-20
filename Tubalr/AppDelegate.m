@@ -37,6 +37,7 @@
 {
     UINavigationBar *navigationBar = [UINavigationBar appearance];
     UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];
+    UISearchBar *searchBar = [UISearchBar appearance];
     
     [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
     [navigationBar setTitleVerticalPositionAdjustment:-5.0f forBarMetrics:UIBarMetricsDefault];
@@ -50,6 +51,16 @@
     UIImage *backImage = [UIImage imageNamed:@"btn-back"];
     UIImage *image = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backImage.size.width, 0, 0)];
     [barButtonItem setBackButtonBackgroundImage:image forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [searchBar setBackgroundImage:[UIImage imageNamed:@"bg-search"]];
+    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"bg-search-input"] forState:UIControlStateNormal];
+    [searchBar setImage:[UIImage imageNamed:@"icon-search"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    [searchBar setScopeBarButtonTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
+                                                     [UIFont regularFontOfSize:15.0f], UITextAttributeFont,
+                                                     [UIColor blackColor], UITextAttributeTextShadowColor,
+                                                     [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
+                                                     [UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Search" attributes:@{NSFontAttributeName : [UIFont regularFontOfSize:15.0f], NSForegroundColorAttributeName: [UIColor whiteColor]}]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

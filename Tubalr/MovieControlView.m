@@ -250,7 +250,7 @@
 {
     [super drawRect:rect];
     
-    [[UIColor colorWithRed:0.161 green:0.161 blue:0.161 alpha:1] set];
+    [[UIColor cellColor] set];
 	UIRectFill(rect);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -301,6 +301,8 @@
         CGContextSetStrokeColorWithColor(context, colorBlackBottom);
         CGContextMoveToPoint(context, 0, 49.0);
         CGContextAddLineToPoint(context, 320, 49.0);
+        CGContextMoveToPoint(context, 0, 78.5);
+        CGContextAddLineToPoint(context, 320, 78.5);
         CGColorRelease(colorBlackBottom);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);

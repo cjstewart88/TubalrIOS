@@ -24,7 +24,7 @@
     }
     
     UIView *backgroundView = [[UIView alloc] initWithFrame:self.frame];
-    [backgroundView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell"]]];
+    [backgroundView setBackgroundColor:[UIColor cellHighlightColor]];
     [self setBackgroundView:backgroundView];
     
     [self.textLabel setBackgroundColor:[UIColor clearColor]];

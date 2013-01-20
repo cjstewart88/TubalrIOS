@@ -80,8 +80,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     [self.movieControlView.playlistButton addTarget:self action:@selector(playlistPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.bottomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.movieControlView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.movieControlView.frame) - self.navigationController.navigationBar.bounds.size.height) style:UITableViewStylePlain];
-    self.bottomTableView.separatorColor = [UIColor blackColor];
-    self.bottomTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell"]];
+    self.bottomTableView.backgroundColor = [UIColor cellColor];
     self.bottomTableView.delegate = self;
     self.bottomTableView.dataSource = self;
     self.bottomTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -339,11 +338,11 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *NowPlayingCellIdentifier = @"NowPlayingCellIdentifier";
     
-    NowPlayingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NowPlayingCell *cell = [tableView dequeueReusableCellWithIdentifier:NowPlayingCellIdentifier];
     if (!cell) {
-        cell = [[NowPlayingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[NowPlayingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NowPlayingCellIdentifier];
     }
     
     cell.videoDictionary = [self.arrayOfData objectAtIndex:indexPath.row];
