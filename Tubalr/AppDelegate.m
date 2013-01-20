@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "NavigationController.h"
 #import "MainViewController.h"
-#import "NowPlayingViewController.h"
+#import "ProfileViewController.h"
 
 @implementation AppDelegate
 
@@ -26,9 +26,13 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    NavigationController *navController = [[NavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-    
+    ProfileViewController *profileVC = [[ProfileViewController alloc] init];
+    MainViewController *mainVC = [[MainViewController alloc] init];
+    NavigationController *navController = [[NavigationController alloc] initWithRootViewController:profileVC];
     [self.window setRootViewController: navController];
+    
+    profileVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    [navController pushViewController:mainVC animated:NO];
     [self.window makeKeyAndVisible];
     return YES;
 }

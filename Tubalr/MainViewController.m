@@ -78,7 +78,7 @@
 
 - (void)profilePressed:(id)sender
 {
-    NSLog(@"Yay");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (SearchCell *)searchCell

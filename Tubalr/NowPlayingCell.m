@@ -42,20 +42,18 @@
     [super setSelected:selected animated:animated];
     if(selected)
     {
-        [self.contentView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-cell-selected"]]];
         self.textLabel.shadowColor = nil;
         self.iconTextLabel.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-pause"];
         self.iconTextLabel.shadowColor = nil;
     }
     else
     {
-        [self.contentView setBackgroundColor:nil];
         self.textLabel.shadowColor = [UIColor blackColor];
         self.iconTextLabel.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-play"];
         self.iconTextLabel.shadowColor = [UIColor blackColor];
     }
-
-    // Configure the view for the selected state
+    
+    [self setNeedsDisplay];
 }
 
 - (UILabel *)iconTextLabel

@@ -32,7 +32,8 @@
 {
     [super drawRect:rect];
     
-    [[UIColor cellColor] set];
+    UIColor *color = [self isSelected] ? [UIColor cellHighlightColor] : [UIColor cellColor];
+    [color set];
 	UIRectFill(rect);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
