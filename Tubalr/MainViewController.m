@@ -46,12 +46,24 @@
     [super viewDidLoad];
     self.title = @"tubalr";
     
+    UIImage *profileImage = [UIImage imageNamed:@"btn-profile"];
+    UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
+    
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:image]];
+    [self.navigationItem setLeftBarButtonItem:menuItem];
+    
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self.searchResultsViewController;
     self.searchController.searchResultsDelegate = self.searchResultsViewController;
     self.searchCell.delegate = self;
     self.searchResultsViewController.delegate = self;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.searchController setActive:NO];
 }
 
 - (BOOL)shouldAutorotate
@@ -127,46 +139,34 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GenreCellIdentifier];
     
-    switch(indexPath.section)
-    {
-        case 0:
-        {
+    switch(indexPath.section){
+        case 0:{
             NSString *cellTitle = nil;
             UIImage *cellImage = nil;
             
-            if(indexPath.row == 0)
-            {
+            if(indexPath.row == 0){
                 if (!cell)
-                {
                     cell = self.searchCell;
-                }
             }
-            else
-            {
+            else{
                 if (!cell)
                     cell = [[GenreCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PlaylistCellIdentifier];
             }
-            
-            switch(indexPath.row)
-            {
-                case 0:
-                {
+            switch(indexPath.row){
+                case 0:{
                     break;
                 }
-                case 1:
-                {
+                case 1:{
                     cellTitle = @"Top Genres";
                     cellImage = [UIImage imageNamed:@"icon-top"];
                     break;
                 }
-                case 2:
-                {
+                case 2:{
                     cellTitle = @"All Genres";
                     cellImage = [UIImage imageNamed:@"icon-all"];
                     break;
                 }
-                case 3:
-                {
+                case 3:{
                     cellTitle = @"Reddit Playlists";
                     cellImage = [UIImage imageNamed:@"icon-reddit"];
                     break;
@@ -174,21 +174,17 @@
             }
             
             if(indexPath.row != 0)
-            {
                 [(GenreCell *)cell setImage:cellImage titleLabel:cellTitle];
-            }
             break;
         }
         
-        case 1:
-        {
+        case 1:{
             if (!cell)
                 cell = [[PlaylistCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PlaylistCellIdentifier];
             
             cell.textLabel.text = @"Some Playlist";
             break;
         }
-            
     }
     
     return cell;
@@ -198,7 +194,6 @@
 
 - (void)searchButtonPressedWithString:(NSString *)string
 {
-    [self.searchController setActive:NO];
     SearchType searchType = [self.justSimilarView isJustSearch] ? justSearch : similarSearch;
     NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:string searchType:searchType];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -209,7 +204,6 @@
 
 - (void)selectedCell:(UITableViewCell *)cell
 {
-    [self.searchController setActive:NO];
     SearchType searchType = [self.justSimilarView isJustSearch] ? justSearch : similarSearch;
     NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:cell.textLabel.text searchType:searchType];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -233,38 +227,26 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
 {
-    
+
 }
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
-{
-    NSLog(@"Search Did Begin");
+{    
     [self.view addSubview:self.justSimilarView];
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
-    NSLog(@"Search Will End");
     [self.justSimilarView removeFromSuperview];
     [self.tableView reloadData]; //The search bar background was getting messed up unless I did this.
-}
-
- - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
-    
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView
 {
     CGRect tableFrame = tableView.frame;
     tableFrame.origin.y += self.justSimilarView.bounds.size.height;
+    tableFrame.size.height -= self.justSimilarView.bounds.size.height;
     [tableView setFrame:tableFrame];
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView
-{
-    NSLog(@"Search Will Hide Table");
-
 }
 
 @end

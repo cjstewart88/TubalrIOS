@@ -53,24 +53,18 @@
     UIImage *backImage = [UIImage imageNamed:@"btn-back"];
     UIImage *image = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backImage.size.width, 0, 0)];
     [barButtonItem setBackButtonBackgroundImage:image forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [barButtonItem setTitlePositionAdjustment:UIOffsetMake(0.0f, 1.0f) forBarMetrics:UIBarMetricsDefault];
     
     [searchBar setBackgroundImage:[UIImage imageNamed:@"bg-search"]];
-    [searchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"bg-search"]];
-    [searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"scrubber"] forState:UIControlStateNormal];
-    [searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"scrubber-active"] forState:UIControlStateHighlighted];
     [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"bg-search-input"] forState:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search-x"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
-    [searchBar setScopeBarButtonTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                     [UIFont regularFontOfSize:15.0f], UITextAttributeFont,
-                                                     [UIColor blackColor], UITextAttributeTextShadowColor,
-                                                     [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
-                                                     [UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
     [searchBarTextField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Search" attributes:@{NSFontAttributeName : [UIFont regularFontOfSize:15.0f], NSForegroundColorAttributeName: [UIColor whiteColor]}]];
-    [searchBarButtonItem setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [searchBarButtonItem setBackgroundImage:[UIImage imageNamed:@"bg-search"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [searchBarButtonItem setTitle:@"CANCEL"];
+    [searchBarButtonItem setBackgroundImage:[UIImage imageNamed:@"btn-cancel"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [searchBarButtonItem setBackgroundImage:[UIImage imageNamed:@"bg-cancel"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [searchBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                 [UIFont regularFontOfSize:15.0f], UITextAttributeFont,
+                                                 [UIFont boldFontOfSize:11.0f], UITextAttributeFont,
                                                  [UIColor blackColor], UITextAttributeTextShadowColor,
                                                  [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
                                                  [UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];

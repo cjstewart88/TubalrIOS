@@ -16,12 +16,12 @@
     if(!button)
         return nil;
     
-    button.titleLabel.font = [UIFont boldFontOfSize:15.0f];
+    button.titleLabel.font = [UIFont boldFontOfSize:11.0f];
     button.titleLabel.textColor = [UIColor whiteColor];
     button.titleLabel.shadowColor = [UIColor blackColor];
     button.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     button.adjustsImageWhenHighlighted = NO;
-    [button setBackgroundImage:[[UIImage imageNamed:@"bg-search"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[[UIImage imageNamed:@"btn-search"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateNormal];
     [button setBackgroundImage:[[UIImage imageNamed:@"btn-search-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateSelected];
     [button setBackgroundImage:[[UIImage imageNamed:@"btn-search-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateSelected | UIControlStateHighlighted];
     
