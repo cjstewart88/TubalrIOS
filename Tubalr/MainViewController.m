@@ -49,7 +49,12 @@
     UIImage *profileImage = [UIImage imageNamed:@"btn-profile"];
     UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
     
-    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:image]];
+    UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuButton.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    [menuButton addSubview:[[UIImageView alloc] initWithImage:image]];
+    [menuButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuItem];
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
@@ -69,6 +74,11 @@
 - (BOOL)shouldAutorotate
 {
     return NO;
+}
+
+- (void)profilePressed:(id)sender
+{
+    NSLog(@"Yay");
 }
 
 - (SearchCell *)searchCell

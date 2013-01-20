@@ -23,6 +23,12 @@
 		BE3514E516AC6E5B00683505 /* btn-cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514E316AC6E5B00683505 /* btn-cancel@2x.png */; };
 		BE3514E816AC838400683505 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3514E716AC838400683505 /* QuartzCore.framework */; };
 		BE3514EA16AC84C500683505 /* bg-cell-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514E916AC84C400683505 /* bg-cell-selected@2x.png */; };
+		BE3514EE16AC8C2100683505 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE3514EB16AC8C2100683505 /* FontAwesome.ttf */; };
+		BE3514EF16AC8C2100683505 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3514ED16AC8C2100683505 /* NSString+FontAwesome.m */; };
+		BE3514F416AC8D5C00683505 /* bg-cell-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514F016AC8D5600683505 /* bg-cell-selected.png */; };
+		BE3514F516AC8D5C00683505 /* bg-search.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514F116AC8D5700683505 /* bg-search.png */; };
+		BE3514F616AC8D5C00683505 /* btn-search-active.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514F216AC8D5800683505 /* btn-search-active.png */; };
+		BE3514F716AC8D5C00683505 /* btn-search.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514F316AC8D5A00683505 /* btn-search.png */; };
 		BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E501D16951A8800FFC7A1 /* libTestFlight.a */; };
 		BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E502116951B8F00FFC7A1 /* libz.dylib */; };
 		BE50BA8016A376FF00672442 /* AVView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE50BA7F16A376FF00672442 /* AVView.m */; };
@@ -73,8 +79,6 @@
 		BEA2F88D16A0E978005E7CC4 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F88516A0E978005E7CC4 /* nav-bar.png */; };
 		BEA2F88E16A0E978005E7CC4 /* scrubber-active.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F88616A0E978005E7CC4 /* scrubber-active.png */; };
 		BEA2F88F16A0E978005E7CC4 /* scrubber.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F88716A0E978005E7CC4 /* scrubber.png */; };
-		BEA2F89216A0FD14005E7CC4 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F89116A0FD14005E7CC4 /* NSString+FontAwesome.m */; };
-		BEA2F89416A0FD3A005E7CC4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F89316A0FD3A005E7CC4 /* FontAwesome.ttf */; };
 		BEA2F89716A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F89516A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf */; };
 		BEA2F89816A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F89616A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf */; };
 		BEA2F89C16A0FEEF005E7CC4 /* UIFont+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F89B16A0FEEF005E7CC4 /* UIFont+Additions.m */; };
@@ -141,6 +145,13 @@
 		BE3514E316AC6E5B00683505 /* btn-cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-cancel@2x.png"; sourceTree = "<group>"; };
 		BE3514E716AC838400683505 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE3514E916AC84C400683505 /* bg-cell-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-cell-selected@2x.png"; sourceTree = "<group>"; };
+		BE3514EB16AC8C2100683505 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		BE3514EC16AC8C2100683505 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		BE3514ED16AC8C2100683505 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		BE3514F016AC8D5600683505 /* bg-cell-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-cell-selected.png"; sourceTree = "<group>"; };
+		BE3514F116AC8D5700683505 /* bg-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-search.png"; sourceTree = "<group>"; };
+		BE3514F216AC8D5800683505 /* btn-search-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-search-active.png"; sourceTree = "<group>"; };
+		BE3514F316AC8D5A00683505 /* btn-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-search.png"; sourceTree = "<group>"; };
 		BE3E501D16951A8800FFC7A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Tubalr/libTestFlight.a; sourceTree = "<group>"; };
 		BE3E501E16951A8800FFC7A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BE3E502116951B8F00FFC7A1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -208,9 +219,6 @@
 		BEA2F88516A0E978005E7CC4 /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar.png"; sourceTree = "<group>"; };
 		BEA2F88616A0E978005E7CC4 /* scrubber-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrubber-active.png"; sourceTree = "<group>"; };
 		BEA2F88716A0E978005E7CC4 /* scrubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scrubber.png; sourceTree = "<group>"; };
-		BEA2F89016A0FD14005E7CC4 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
-		BEA2F89116A0FD14005E7CC4 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
-		BEA2F89316A0FD3A005E7CC4 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		BEA2F89516A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Bold.ttf"; sourceTree = "<group>"; };
 		BEA2F89616A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
 		BEA2F89A16A0FEEF005E7CC4 /* UIFont+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Additions.h"; sourceTree = "<group>"; };
@@ -350,9 +358,10 @@
 		BE53DEDC169FB20C00D17B02 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				BE3514EB16AC8C2100683505 /* FontAwesome.ttf */,
+				BE3514EC16AC8C2100683505 /* NSString+FontAwesome.h */,
+				BE3514ED16AC8C2100683505 /* NSString+FontAwesome.m */,
 				BEA2F8A516A1E405005E7CC4 /* MWFeedParser */,
-				BEA2F89016A0FD14005E7CC4 /* NSString+FontAwesome.h */,
-				BEA2F89116A0FD14005E7CC4 /* NSString+FontAwesome.m */,
 				BE53DEE4169FC4C300D17B02 /* NSArray+Shuffle.h */,
 				BE53DEE5169FC4C300D17B02 /* NSArray+Shuffle.m */,
 				BE53DEDD169FB21D00D17B02 /* LBYouTubeExtractor.h */,
@@ -361,7 +370,6 @@
 				BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */,
 				BEA2F89516A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf */,
 				BEA2F89616A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf */,
-				BEA2F89316A0FD3A005E7CC4 /* FontAwesome.ttf */,
 			);
 			name = 3rdParty;
 			sourceTree = "<group>";
@@ -369,11 +377,13 @@
 		BEA2F86D16A0E8B1005E7CC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BE3514F016AC8D5600683505 /* bg-cell-selected.png */,
 				BE3514E916AC84C400683505 /* bg-cell-selected@2x.png */,
 				BE63499E16AB5AC900BE4396 /* bg-noise.png */,
 				BE63499F16AB5AC900BE4396 /* bg-noise@2x.png */,
 				BE6349AA16AB698800BE4396 /* bg-search-input.png */,
 				BE6349A416AB5C4000BE4396 /* bg-search-input@2x.png */,
+				BE3514F116AC8D5700683505 /* bg-search.png */,
 				BE6349A216AB5BFE00BE4396 /* bg-search@2x.png */,
 				BEA2F88116A0E978005E7CC4 /* btn-back.png */,
 				BEA2F87016A0E8F4005E7CC4 /* btn-back@2x.png */,
@@ -381,7 +391,9 @@
 				BE3514E316AC6E5B00683505 /* btn-cancel@2x.png */,
 				BE0C088D16AC6D190061535D /* btn-profile.png */,
 				BE0C088A16AC6CED0061535D /* btn-profile@2x.png */,
+				BE3514F216AC8D5800683505 /* btn-search-active.png */,
 				BE0C087916ABBA850061535D /* btn-search-active@2x.png */,
+				BE3514F316AC8D5A00683505 /* btn-search.png */,
 				BEA2F87116A0E8F4005E7CC4 /* btn-search@2x.png */,
 				BEA2F87216A0E8F4005E7CC4 /* btn-settings.png */,
 				BEA2F88316A0E978005E7CC4 /* btn-settings@2x.png */,
@@ -591,7 +603,6 @@
 				BEA2F88D16A0E978005E7CC4 /* nav-bar.png in Resources */,
 				BEA2F88E16A0E978005E7CC4 /* scrubber-active.png in Resources */,
 				BEA2F88F16A0E978005E7CC4 /* scrubber.png in Resources */,
-				BEA2F89416A0FD3A005E7CC4 /* FontAwesome.ttf in Resources */,
 				BEA2F89716A0FDB4005E7CC4 /* PT_Sans-Web-Bold.ttf in Resources */,
 				BEA2F89816A0FDB4005E7CC4 /* PT_Sans-Web-Regular.ttf in Resources */,
 				BEA2F8B016A1E79C005E7CC4 /* nav-bar-shadow@2x.png in Resources */,
@@ -637,6 +648,11 @@
 				BE3514E416AC6E5B00683505 /* btn-cancel.png in Resources */,
 				BE3514E516AC6E5B00683505 /* btn-cancel@2x.png in Resources */,
 				BE3514EA16AC84C500683505 /* bg-cell-selected@2x.png in Resources */,
+				BE3514EE16AC8C2100683505 /* FontAwesome.ttf in Resources */,
+				BE3514F416AC8D5C00683505 /* bg-cell-selected.png in Resources */,
+				BE3514F516AC8D5C00683505 /* bg-search.png in Resources */,
+				BE3514F616AC8D5C00683505 /* btn-search-active.png in Resources */,
+				BE3514F716AC8D5C00683505 /* btn-search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,7 +694,6 @@
 				BE53DF25169FE8A800D17B02 /* NavigationController.m in Sources */,
 				BEA2F86816A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m in Sources */,
 				BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */,
-				BEA2F89216A0FD14005E7CC4 /* NSString+FontAwesome.m in Sources */,
 				BEA2F89C16A0FEEF005E7CC4 /* UIFont+Additions.m in Sources */,
 				BEA2F8AC16A1E45C005E7CC4 /* GTMNSString+HTML.m in Sources */,
 				BEA2F8AD16A1E45C005E7CC4 /* NSString+HTML.m in Sources */,
@@ -696,6 +711,7 @@
 				BE6349E116AB8CEF00BE4396 /* JustSimilarView.m in Sources */,
 				BE0C087E16ABD0790061535D /* SearchBarButton.m in Sources */,
 				BE0C088116ABD43F0061535D /* UIImage+Additions.m in Sources */,
+				BE3514EF16AC8C2100683505 /* NSString+FontAwesome.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
