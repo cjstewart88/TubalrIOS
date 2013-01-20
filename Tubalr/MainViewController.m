@@ -12,11 +12,15 @@
 #import "PlaylistCell.h"
 #import "SearchCell.h"
 #import "TableSectionView.h"
+#import "SearchResultsViewController.h"
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate> //<UITextFieldDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 
-//@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UISearchDisplayController *searchController;
+@property (nonatomic, strong) SearchResultsViewController *searchResultsViewController;
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) SearchCell *searchCell;
 
 @end
 
@@ -40,6 +44,13 @@
 {
     [super viewDidLoad];
     self.title = @"tubalr";
+    
+    UISearchDisplayController *searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
+    searchDisplayController.delegate = self;
+    searchDisplayController.searchResultsDataSource = self.searchResultsViewController;
+    searchDisplayController.searchResultsDelegate = self.searchResultsViewController;
+    
+    self.searchController = searchDisplayController;
 }
 
 - (BOOL)shouldAutorotate
@@ -92,7 +103,9 @@
             if(indexPath.row == 0)
             {
                 if (!cell)
-                    cell = [[SearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PlaylistCellIdentifier];
+                {
+                    cell = self.searchCell;
+                }
             }
             else
             {
@@ -147,6 +160,28 @@
     return cell;
 }
 
+- (SearchCell *)searchCell
+{
+    static NSString *SearchCellIdentifier = @"SearchCell";
+    
+    if(_searchCell == nil)
+    {
+        _searchCell = [[SearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SearchCellIdentifier];
+    }
+    
+    return _searchCell;
+}
+
+- (SearchResultsViewController *)searchResultsViewController
+{
+    if (_searchResultsViewController == nil)
+    {
+        _searchResultsViewController = [[SearchResultsViewController alloc] initWithStyle:UITableViewStylePlain];
+    }
+    
+    return _searchResultsViewController;
+}
+
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -157,69 +192,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"still");
-//    if(_selectedCellIndex == indexPath.row) return;
-//    _selectedCellIndex = indexPath.row;
-//    
-//    [self.playerView.player pause];
-//    [self.playerView.player replaceCurrentItemWithPlayerItem:nil];
-//    [self removePlayerItemObservations];
-//    
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [(NSDictionary *)[self.arrayOfData objectAtIndex:_selectedCellIndex] objectForKey:@"youtube-id"]]];
-//    LBYouTubeExtractor *extractor = [[LBYouTubeExtractor alloc] initWithURL:url quality:LBYouTubeVideoQualityMedium];
-//    
-//    [extractor extractVideoURLWithCompletionBlock:^(NSURL *videoURL, NSError *error) {
-//        if(!error)
-//        {
-//            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:videoURL options:nil];
-//            
-//            NSArray *requestedKeys = [NSArray arrayWithObjects:kTracksKey, kPlayableKey, nil];
-//            
-//            /* Tells the asset to load the values of any of the specified keys that are not already loaded. */
-//            [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
-//             ^{
-//                 dispatch_async( dispatch_get_main_queue(),
-//                                ^{
-//                                    /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
-//                                    [self prepareToPlayAsset:asset withKeys:requestedKeys];
-//                                });
-//             }];
-//        } else {
-//            NSLog(@"Failed extracting video URL using block due to error:%@", error);
-//        }
-//    }];
+    
 }
 
+#pragma mark - UISearchDisplayDelegate
 
-//- (void)buttonPressed:(id)sender
-//{
-//    if([sender isSelected])
-//    {
-//        [sender setSelected:NO];
-//    }
-//    else
-//    {
-//        [sender setSelected:YES];
-//    }
-//}
-//
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    [textField resignFirstResponder];
-//    
-//    if(![textField.text isEqualToString:@""])
-//    {
-//        SearchType searchType = [self.typeOfSearchButton.titleLabel.text isEqualToString:@"Just"] ? justSearch : similarSearch;
-//        NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:textField.text searchType:searchType];
-//        
-//        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-//
-//        [self.navigationController pushViewController:nowPlayingVC animated:YES];
-//    }
-//    
-//    
-//    
-//    return YES;
-//}
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
+{
+    [self.tableView reloadData]; //The search bar background was getting messed up unless I did this.
+}
 
 @end

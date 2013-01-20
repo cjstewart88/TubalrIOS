@@ -8,9 +8,7 @@
 
 #import "SearchCell.h"
 
-@interface SearchCell () //<UISearchBarDelegate>
-
-@property (nonatomic, strong) UISearchBar *searchBar;
+@interface SearchCell () <UISearchBarDelegate>
 
 @end
 
@@ -30,24 +28,17 @@
     return self;
 }
 
-//- setSearch
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (UISearchBar *)searchBar
 {
     if(_searchBar == nil)
     {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
-//        _searchBar.delegate = self;
+        _searchBar.delegate = self;
         UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
         searchField.font = [UIFont regularFontOfSize:15.0f];
         searchField.textColor = [UIColor whiteColor];
+        
+        _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Just", @"Similar", nil];
     }
     
     return _searchBar;
@@ -56,15 +47,15 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
     [self.searchBar setFrame:self.contentView.frame];
-//    [self.searchBar setFrame:CGRectMake(0, 0, self.contentView.bounds.size.width, self.contentView.bounds.size.height)];
 }
 
 # pragma mark - UISearchBarDelegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    searchBar.text = @"";
+    searchBar.showsScopeBar = YES;
     return YES;
 }
 

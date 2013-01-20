@@ -63,7 +63,7 @@
     
     //Gray Horizontal Top Line
     CGContextSaveGState(context); {
-        CGFloat componentsGrayTop[] = {0.247, 0.247, 0.247, 1.0};
+        CGFloat componentsGrayTop[] = {0.137, 0.137, 0.137, 1.0};
         CGColorRef colorGrayTop = CGColorCreate(colorspace, componentsGrayTop);
         CGContextSetStrokeColorWithColor(context, colorGrayTop);
         CGContextMoveToPoint(context, 0, .5);

@@ -49,6 +49,7 @@
 		BE6349B216AB698800BE4396 /* icon-search-x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE6349AD16AB698800BE4396 /* icon-search-x.png */; };
 		BE6349B316AB698800BE4396 /* icon-search-x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE6349AE16AB698800BE4396 /* icon-search-x@2x.png */; };
 		BE6349B616AB6A0600BE4396 /* TableSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6349B516AB6A0600BE4396 /* TableSectionView.m */; };
+		BE6349D616AB7C8100BE4396 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6349D516AB7C8000BE4396 /* SearchResultsViewController.m */; };
 		BEA2F86816A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */; };
 		BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86B16A0BBD1005E7CC4 /* PlaylistManager.m */; };
 		BEA2F87916A0E8F4005E7CC4 /* btn-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F87016A0E8F4005E7CC4 /* btn-back@2x.png */; };
@@ -170,6 +171,8 @@
 		BE6349AE16AB698800BE4396 /* icon-search-x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-search-x@2x.png"; sourceTree = "<group>"; };
 		BE6349B416AB6A0600BE4396 /* TableSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSectionView.h; sourceTree = "<group>"; };
 		BE6349B516AB6A0600BE4396 /* TableSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSectionView.m; sourceTree = "<group>"; };
+		BE6349D416AB7C8000BE4396 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
+		BE6349D516AB7C8000BE4396 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		BEA2F86616A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+objectForKeyList.h"; sourceTree = "<group>"; };
 		BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+objectForKeyList.m"; sourceTree = "<group>"; };
 		BEA2F86A16A0BBD1005E7CC4 /* PlaylistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistManager.h; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				BE53DEE8169FC60800D17B02 /* MainViewController.m */,
 				BE0BD635169BC7CE0023BBBD /* NowPlayingViewController.h */,
 				BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */,
+				BE6349D416AB7C8000BE4396 /* SearchResultsViewController.h */,
+				BE6349D516AB7C8000BE4396 /* SearchResultsViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -656,6 +661,7 @@
 				BE63498316AB4E7A00BE4396 /* UIColor+Additions.m in Sources */,
 				BE63499D16AB57C100BE4396 /* CustomCell.m in Sources */,
 				BE6349B616AB6A0600BE4396 /* TableSectionView.m in Sources */,
+				BE6349D616AB7C8100BE4396 /* SearchResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

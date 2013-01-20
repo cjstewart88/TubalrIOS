@@ -1,5 +1,5 @@
 //
-//  SearchCell.h
+//  SearchResultsViewController.h
 //  Tubalr
 //
 //  Created by Chad Zeluff on 1/19/13.
@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomCell.h"
 
-@interface SearchCell : CustomCell
-
-@property (nonatomic, strong) UISearchBar *searchBar;
+@interface SearchResultsViewController : UITableViewController
 
 @end

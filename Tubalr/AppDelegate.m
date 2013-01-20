@@ -55,6 +55,7 @@
     [searchBar setBackgroundImage:[UIImage imageNamed:@"bg-search"]];
     [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"bg-search-input"] forState:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    [searchBar setImage:[UIImage imageNamed:@"icon-search-x"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
     [searchBar setScopeBarButtonTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
                                                      [UIFont regularFontOfSize:15.0f], UITextAttributeFont,
                                                      [UIColor blackColor], UITextAttributeTextShadowColor,
