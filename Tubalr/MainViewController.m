@@ -13,14 +13,15 @@
 #import "SearchCell.h"
 #import "TableSectionView.h"
 #import "SearchResultsViewController.h"
+#import "JustSimilarView.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 @property (nonatomic, strong) SearchResultsViewController *searchResultsViewController;
 @property (nonatomic, strong) UITableView *tableView;
-
 @property (nonatomic, strong) SearchCell *searchCell;
+@property (nonatomic, strong) JustSimilarView *justSimilarView;
 
 @end
 
@@ -45,12 +46,10 @@
     [super viewDidLoad];
     self.title = @"tubalr";
     
-    UISearchDisplayController *searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
-    searchDisplayController.delegate = self;
-    searchDisplayController.searchResultsDataSource = self.searchResultsViewController;
-    searchDisplayController.searchResultsDelegate = self.searchResultsViewController;
-    
-    self.searchController = searchDisplayController;
+    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
+    self.searchController.delegate = self;
+    self.searchController.searchResultsDataSource = self.searchResultsViewController;
+    self.searchController.searchResultsDelegate = self.searchResultsViewController;
 }
 
 - (BOOL)shouldAutorotate
@@ -176,10 +175,20 @@
 {
     if (_searchResultsViewController == nil)
     {
-        _searchResultsViewController = [[SearchResultsViewController alloc] initWithStyle:UITableViewStylePlain];
+        _searchResultsViewController = [[SearchResultsViewController alloc] init];
     }
     
     return _searchResultsViewController;
+}
+
+- (JustSimilarView *)justSimilarView
+{
+    if(_justSimilarView == nil)
+    {
+        _justSimilarView = [[JustSimilarView alloc] initWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, 44.0f)];
+    }
+    
+    return _justSimilarView;
 }
 
 #pragma mark - UITableViewDelegate
@@ -197,9 +206,28 @@
 
 #pragma mark - UISearchDisplayDelegate
 
+- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    [self.view addSubview:self.justSimilarView];
+}
+
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
+    [self.justSimilarView removeFromSuperview];
     [self.tableView reloadData]; //The search bar background was getting messed up unless I did this.
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView
+{
+    CGRect tableFrame = tableView.frame;
+    tableFrame.origin.y += self.justSimilarView.bounds.size.height;
+    tableFrame.size.height = 180.0f;
+    [tableView setFrame:tableFrame];
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView
+{
+    
 }
 
 @end

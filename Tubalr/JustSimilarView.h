@@ -1,5 +1,5 @@
 //
-//  SearchResultsViewController.h
+//  JustSimilarView.h
 //  Tubalr
 //
 //  Created by Chad Zeluff on 1/19/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchResultsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface JustSimilarView : UIView
+
+- (void)setJustSelected:(BOOL)selected;
 
 @end

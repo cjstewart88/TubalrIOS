@@ -53,6 +53,9 @@
     [barButtonItem setBackButtonBackgroundImage:image forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     [searchBar setBackgroundImage:[UIImage imageNamed:@"bg-search"]];
+    [searchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"bg-search"]];
+    [searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"scrubber"] forState:UIControlStateNormal];
+    [searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"scrubber-active"] forState:UIControlStateHighlighted];
     [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"bg-search-input"] forState:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search-x"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
