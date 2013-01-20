@@ -34,12 +34,9 @@
     {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
         _searchBar.delegate = self;
-        _searchBar.showsCancelButton = NO;
         UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
         searchField.font = [UIFont regularFontOfSize:15.0f];
         searchField.textColor = [UIColor whiteColor];
-        
-//        _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Just", @"Similar", nil];
     }
     
     return _searchBar;
@@ -49,20 +46,29 @@
 {
     [super layoutSubviews];
     
-    [self.searchBar setFrame:self.contentView.frame];
+    CGRect frame = self.contentView.frame;
+    frame.origin.x += 5;
+    frame.size.width = 310;
+    [self.searchBar setFrame:frame];
 }
 
 # pragma mark - UISearchBarDelegate
 
-//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-//{
-//    return YES;
-//}
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    CGRect frame = searchBar.frame;
+    frame.origin.x -= 5;
+    [searchBar setFrame:frame];
+    return YES;
+}
 
-//- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
-//{
-//    [searchBar resignFirstResponder];
-//    return YES;
-//}
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    CGRect frame = searchBar.frame;
+    frame.origin.x += 5;
+    [searchBar setFrame:frame];
+    [searchBar resignFirstResponder];
+    return YES;
+}
 
 @end

@@ -185,7 +185,7 @@
 {
     if(_justSimilarView == nil)
     {
-        _justSimilarView = [[JustSimilarView alloc] initWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, 44.0f)];
+        _justSimilarView = [[JustSimilarView alloc] initWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, 30.0f)];
     }
     
     return _justSimilarView;
@@ -206,6 +206,11 @@
 
 #pragma mark - UISearchDisplayDelegate
 
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
+{
+    
+}
+
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
     [self.view addSubview:self.justSimilarView];
@@ -217,11 +222,15 @@
     [self.tableView reloadData]; //The search bar background was getting messed up unless I did this.
 }
 
+ - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    
+}
+
 - (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView
 {
     CGRect tableFrame = tableView.frame;
     tableFrame.origin.y += self.justSimilarView.bounds.size.height;
-    tableFrame.size.height = 180.0f;
     [tableView setFrame:tableFrame];
 }
 

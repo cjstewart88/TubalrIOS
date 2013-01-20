@@ -38,10 +38,12 @@
     UINavigationBar *navigationBar = [UINavigationBar appearance];
     UIBarButtonItem *barButtonItem = [UIBarButtonItem appearance];
     UISearchBar *searchBar = [UISearchBar appearance];
+    UITextField *searchBarTextField = [UITextField appearanceWhenContainedIn:[UISearchBar class], nil];
+    UIBarButtonItem *searchBarButtonItem = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     
     [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
     [navigationBar setTitleVerticalPositionAdjustment:-5.0f forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
+    [navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                            [UIFont boldFontOfSize:24.0f], UITextAttributeFont,
                                            [UIColor blackColor], UITextAttributeTextShadowColor,
                                            [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
@@ -59,12 +61,19 @@
     [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"bg-search-input"] forState:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     [searchBar setImage:[UIImage imageNamed:@"icon-search-x"] forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
-    [searchBar setScopeBarButtonTitleTextAttributes:[[NSDictionary alloc] initWithObjectsAndKeys:
+    [searchBar setScopeBarButtonTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                      [UIFont regularFontOfSize:15.0f], UITextAttributeFont,
                                                      [UIColor blackColor], UITextAttributeTextShadowColor,
                                                      [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
                                                      [UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Search" attributes:@{NSFontAttributeName : [UIFont regularFontOfSize:15.0f], NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [searchBarTextField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Search" attributes:@{NSFontAttributeName : [UIFont regularFontOfSize:15.0f], NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+    [searchBarButtonItem setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [searchBarButtonItem setBackgroundImage:[UIImage imageNamed:@"bg-search"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [searchBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [UIFont regularFontOfSize:15.0f], UITextAttributeFont,
+                                                 [UIColor blackColor], UITextAttributeTextShadowColor,
+                                                 [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
+                                                 [UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
