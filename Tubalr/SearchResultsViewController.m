@@ -7,6 +7,7 @@
 //
 
 #import "SearchResultsViewController.h"
+#import "NowPlayingViewController.h"
 
 @interface SearchResultsViewController ()
 
@@ -55,7 +56,7 @@
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    cell.textLabel.text = @"Some text";
+    cell.textLabel.text = @"/r/dubstep";
     
     return cell;
 }
@@ -64,13 +65,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(selectedCell:)])
+    {
+        [self.delegate selectedCell:cell];
+    }
 }
 
 @end

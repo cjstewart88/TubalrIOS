@@ -15,7 +15,7 @@
 #import "SearchResultsViewController.h"
 #import "JustSimilarView.h"
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, SearchResultsViewControllerDelegate>
 
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 @property (nonatomic, strong) SearchResultsViewController *searchResultsViewController;
@@ -51,12 +51,46 @@
     self.searchController.searchResultsDataSource = self.searchResultsViewController;
     self.searchController.searchResultsDelegate = self.searchResultsViewController;
     self.searchCell.delegate = self;
+    self.searchResultsViewController.delegate = self;
 }
 
 - (BOOL)shouldAutorotate
 {
     return NO;
 }
+
+- (SearchCell *)searchCell
+{
+    static NSString *SearchCellIdentifier = @"SearchCell";
+    
+    if(_searchCell == nil)
+    {
+        _searchCell = [[SearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SearchCellIdentifier];
+    }
+    
+    return _searchCell;
+}
+
+- (SearchResultsViewController *)searchResultsViewController
+{
+    if (_searchResultsViewController == nil)
+    {
+        _searchResultsViewController = [[SearchResultsViewController alloc] init];
+    }
+    
+    return _searchResultsViewController;
+}
+
+- (JustSimilarView *)justSimilarView
+{
+    if(_justSimilarView == nil)
+    {
+        _justSimilarView = [[JustSimilarView alloc] initWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, 30.0f)];
+    }
+    
+    return _justSimilarView;
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -160,44 +194,25 @@
     return cell;
 }
 
-- (SearchCell *)searchCell
-{
-    static NSString *SearchCellIdentifier = @"SearchCell";
-    
-    if(_searchCell == nil)
-    {
-        _searchCell = [[SearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SearchCellIdentifier];
-    }
-    
-    return _searchCell;
-}
-
-- (SearchResultsViewController *)searchResultsViewController
-{
-    if (_searchResultsViewController == nil)
-    {
-        _searchResultsViewController = [[SearchResultsViewController alloc] init];
-    }
-    
-    return _searchResultsViewController;
-}
-
-- (JustSimilarView *)justSimilarView
-{
-    if(_justSimilarView == nil)
-    {
-        _justSimilarView = [[JustSimilarView alloc] initWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, 30.0f)];
-    }
-    
-    return _justSimilarView;
-}
-
 #pragma mark - SearchCellDelegate
 
 - (void)searchButtonPressedWithString:(NSString *)string
 {
+    [self.searchController setActive:NO];
     SearchType searchType = [self.justSimilarView isJustSearch] ? justSearch : similarSearch;
     NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:string searchType:searchType];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationController pushViewController:nowPlayingVC animated:YES];
+}
+
+#pragma mark - SearchResultsViewControllerDelegate
+
+- (void)selectedCell:(UITableViewCell *)cell
+{
+    [self.searchController setActive:NO];
+    SearchType searchType = [self.justSimilarView isJustSearch] ? justSearch : similarSearch;
+    NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:cell.textLabel.text searchType:searchType];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationController pushViewController:nowPlayingVC animated:YES];
 }
 
@@ -223,11 +238,13 @@
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
+    NSLog(@"Search Did Begin");
     [self.view addSubview:self.justSimilarView];
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
+    NSLog(@"Search Will End");
     [self.justSimilarView removeFromSuperview];
     [self.tableView reloadData]; //The search bar background was getting messed up unless I did this.
 }
@@ -246,7 +263,8 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView
 {
-    
+    NSLog(@"Search Will Hide Table");
+
 }
 
 @end
