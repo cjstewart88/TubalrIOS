@@ -7,11 +7,12 @@
 //
 
 #import "JustSimilarView.h"
+#import "SearchBarButton.h"
 
 @interface JustSimilarView()
 
-@property (nonatomic, strong) UIButton *justButton;
-@property (nonatomic, strong) UIButton *similarButton;
+@property (nonatomic, strong) SearchBarButton *justButton;
+@property (nonatomic, strong) SearchBarButton *similarButton;
 
 @end
 
@@ -45,44 +46,33 @@
     [self.similarButton setSelected:!selected];
 }
 
-- (UIButton *)justButton
+- (SearchBarButton *)justButton
 {
     if(_justButton == nil)
     {
-        _justButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _justButton = [SearchBarButton buttonWithType:UIButtonTypeCustom];
         [_justButton setTitle:@"ONLY" forState:UIControlStateNormal];
-        _justButton.titleLabel.font = [UIFont boldFontOfSize:15.0f];
-        _justButton.titleLabel.textColor = [UIColor whiteColor];
-        _justButton.titleLabel.shadowColor = [UIColor blackColor];
-        _justButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-        _justButton.adjustsImageWhenHighlighted = NO;
-        [_justButton setBackgroundImage:[[UIImage imageNamed:@"btn-search"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateNormal];
-        [_justButton setBackgroundImage:[[UIImage imageNamed:@"btn-search-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateSelected];
-        [_justButton setBackgroundImage:[[UIImage imageNamed:@"btn-search-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateSelected | UIControlStateHighlighted];
         [_justButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _justButton;
 }
 
-- (UIButton *)similarButton
+- (SearchBarButton *)similarButton
 {
     if(_similarButton == nil)
     {
-        _similarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _similarButton = [SearchBarButton buttonWithType:UIButtonTypeCustom];
         [_similarButton setTitle:@"SIMILAR" forState:UIControlStateNormal];
-        _similarButton.titleLabel.font = [UIFont boldFontOfSize:15.0f];
-        _similarButton.titleLabel.textColor = [UIColor whiteColor];
-        _similarButton.titleLabel.shadowColor = [UIColor blackColor];
-        _similarButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-        _similarButton.adjustsImageWhenHighlighted = NO;
-        [_similarButton setBackgroundImage:[[UIImage imageNamed:@"btn-search"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateNormal];
-        [_similarButton setBackgroundImage:[[UIImage imageNamed:@"btn-search-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateSelected];
-        [_similarButton setBackgroundImage:[[UIImage imageNamed:@"btn-search-active"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)] forState:UIControlStateSelected | UIControlStateHighlighted];
         [_similarButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _similarButton;
+}
+
+- (BOOL)isJustSearch
+{
+    return [self.justButton isSelected];
 }
 
 - (void)buttonPressed:(id)sender
@@ -97,42 +87,6 @@
         [self.similarButton setSelected:YES];
         [self.justButton setSelected:NO];
     }
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    
-    [[UIColor cellColor] set];
-	UIRectFill(rect);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 1.0);
-    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    
-    //Gray Horizontal Top Line
-    CGContextSaveGState(context); {
-        CGFloat componentsGrayTop[] = {0.247, 0.247, 0.247, 1.0};
-        CGColorRef colorGrayTop = CGColorCreate(colorspace, componentsGrayTop);
-        CGContextSetStrokeColorWithColor(context, colorGrayTop);
-        CGContextMoveToPoint(context, 0, .5);
-        CGContextAddLineToPoint(context, 320, .5);
-        CGColorRelease(colorGrayTop);
-        CGContextStrokePath(context);
-    } CGContextRestoreGState(context);
-    
-    //Black Horizontal Bottom Line
-    CGContextSaveGState(context); {
-        CGFloat componentsBlackBottom[] = {0.0, 0.0, 0.0, 1.0};
-        CGColorRef colorBlackBottom = CGColorCreate(colorspace, componentsBlackBottom);
-        CGContextSetStrokeColorWithColor(context, colorBlackBottom);
-        CGContextMoveToPoint(context, 0, CGRectGetMaxY(rect) - .5);
-        CGContextAddLineToPoint(context, 320, CGRectGetMaxY(rect) - .5);
-        CGColorRelease(colorBlackBottom);
-        CGContextStrokePath(context);
-    } CGContextRestoreGState(context);
-    
-    CGColorSpaceRelease(colorspace);
 }
 
 @end

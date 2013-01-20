@@ -46,28 +46,59 @@
 {
     [super layoutSubviews];
     
-    CGRect frame = self.contentView.frame;
-    frame.origin.x += 5;
-    frame.size.width = 310;
-    [self.searchBar setFrame:frame];
+//    CGRect frame = self.contentView.frame;
+////    frame.origin.x += 5;
+//    frame.size.width = 310;
+    [self.searchBar setFrame:self.contentView.frame];
+}
+
+- (void)drawRect:(CGRect)rect
+{    
+    [[UIColor cellColor] set];
+    UIRectFill(rect);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1.0);
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    
+    //Black Horizontal Bottom Line
+    CGContextSaveGState(context); {
+        CGFloat componentsBlackBottom[] = {0.0, 0.0, 0.0, 1.0};
+        CGColorRef colorBlackBottom = CGColorCreate(colorspace, componentsBlackBottom);
+        CGContextSetStrokeColorWithColor(context, colorBlackBottom);
+        CGContextMoveToPoint(context, 0, CGRectGetMaxY(rect) - .5);
+        CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect) - .5);
+        CGColorRelease(colorBlackBottom);
+        CGContextStrokePath(context);
+    } CGContextRestoreGState(context);
+    
+    CGColorSpaceRelease(colorspace);
 }
 
 # pragma mark - UISearchBarDelegate
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(searchButtonPressedWithString:)])
+        [self.delegate searchButtonPressedWithString:searchBar.text];
+}
+
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    CGRect frame = searchBar.frame;
-    frame.origin.x -= 5;
-    [searchBar setFrame:frame];
+//    CGRect frame = searchBar.frame;
+//    frame.origin.x -= 5;
+//    [searchBar setFrame:frame];
+    [self setNeedsDisplay];
     return YES;
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
-    CGRect frame = searchBar.frame;
-    frame.origin.x += 5;
-    [searchBar setFrame:frame];
+//    CGRect frame = searchBar.frame;
+//    frame.origin.x += 5;
+//    [searchBar setFrame:frame];
     [searchBar resignFirstResponder];
+    [self setNeedsDisplay];
     return YES;
 }
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomCell.h"
 
-@interface NowPlayingCell : UITableViewCell
+@interface NowPlayingCell : CustomCell
 
 @property (nonatomic, strong) NSDictionary *videoDictionary;
 

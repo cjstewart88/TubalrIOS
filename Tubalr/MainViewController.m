@@ -50,6 +50,7 @@
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self.searchResultsViewController;
     self.searchController.searchResultsDelegate = self.searchResultsViewController;
+    self.searchCell.delegate = self;
 }
 
 - (BOOL)shouldAutorotate
@@ -189,6 +190,15 @@
     }
     
     return _justSimilarView;
+}
+
+#pragma mark - SearchCellDelegate
+
+- (void)searchButtonPressedWithString:(NSString *)string
+{
+    SearchType searchType = [self.justSimilarView isJustSearch] ? justSearch : similarSearch;
+    NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:string searchType:searchType];
+    [self.navigationController pushViewController:nowPlayingVC animated:YES];
 }
 
 #pragma mark - UITableViewDelegate

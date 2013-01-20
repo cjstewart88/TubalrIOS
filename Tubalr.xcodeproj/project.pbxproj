@@ -14,6 +14,8 @@
 		BE0BD64D169E6CDF0023BBBD /* RedditQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64C169E6CDF0023BBBD /* RedditQuery.m */; };
 		BE0BD650169E6CEB0023BBBD /* GenreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */; };
 		BE0C087A16ABBA850061535D /* btn-search-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0C087916ABBA850061535D /* btn-search-active@2x.png */; };
+		BE0C087E16ABD0790061535D /* SearchBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0C087D16ABD0790061535D /* SearchBarButton.m */; };
+		BE0C088116ABD43F0061535D /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0C088016ABD43F0061535D /* UIImage+Additions.m */; };
 		BE24377416A07B28001B214E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24377316A07B28001B214E /* Crashlytics.framework */; };
 		BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E501D16951A8800FFC7A1 /* libTestFlight.a */; };
 		BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3E502116951B8F00FFC7A1 /* libz.dylib */; };
@@ -122,6 +124,10 @@
 		BE0BD64E169E6CEB0023BBBD /* GenreQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenreQuery.h; sourceTree = "<group>"; };
 		BE0BD64F169E6CEB0023BBBD /* GenreQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenreQuery.m; sourceTree = "<group>"; };
 		BE0C087916ABBA850061535D /* btn-search-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-search-active@2x.png"; sourceTree = "<group>"; };
+		BE0C087C16ABD0790061535D /* SearchBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBarButton.h; sourceTree = "<group>"; };
+		BE0C087D16ABD0790061535D /* SearchBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarButton.m; sourceTree = "<group>"; };
+		BE0C087F16ABD43F0061535D /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
+		BE0C088016ABD43F0061535D /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		BE24377316A07B28001B214E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BE3E501D16951A8800FFC7A1 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Tubalr/libTestFlight.a; sourceTree = "<group>"; };
 		BE3E501E16951A8800FFC7A1 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
@@ -322,6 +328,8 @@
 				BE6349B516AB6A0600BE4396 /* TableSectionView.m */,
 				BE6349DF16AB8CEF00BE4396 /* JustSimilarView.h */,
 				BE6349E016AB8CEF00BE4396 /* JustSimilarView.m */,
+				BE0C087C16ABD0790061535D /* SearchBarButton.h */,
+				BE0C087D16ABD0790061535D /* SearchBarButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -348,7 +356,6 @@
 		BEA2F86D16A0E8B1005E7CC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BE0C087916ABBA850061535D /* btn-search-active@2x.png */,
 				BE63499E16AB5AC900BE4396 /* bg-noise.png */,
 				BE63499F16AB5AC900BE4396 /* bg-noise@2x.png */,
 				BE6349AA16AB698800BE4396 /* bg-search-input.png */,
@@ -356,6 +363,7 @@
 				BE6349A216AB5BFE00BE4396 /* bg-search@2x.png */,
 				BEA2F88116A0E978005E7CC4 /* btn-back.png */,
 				BEA2F87016A0E8F4005E7CC4 /* btn-back@2x.png */,
+				BE0C087916ABBA850061535D /* btn-search-active@2x.png */,
 				BEA2F87116A0E8F4005E7CC4 /* btn-search@2x.png */,
 				BEA2F87216A0E8F4005E7CC4 /* btn-settings.png */,
 				BEA2F88316A0E978005E7CC4 /* btn-settings@2x.png */,
@@ -408,6 +416,8 @@
 				BEA2F89B16A0FEEF005E7CC4 /* UIFont+Additions.m */,
 				BE63498116AB4E7A00BE4396 /* UIColor+Additions.h */,
 				BE63498216AB4E7A00BE4396 /* UIColor+Additions.m */,
+				BE0C087F16ABD43F0061535D /* UIImage+Additions.h */,
+				BE0C088016ABD43F0061535D /* UIImage+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -660,6 +670,8 @@
 				BE6349B616AB6A0600BE4396 /* TableSectionView.m in Sources */,
 				BE6349D616AB7C8100BE4396 /* SearchResultsViewController.m in Sources */,
 				BE6349E116AB8CEF00BE4396 /* JustSimilarView.m in Sources */,
+				BE0C087E16ABD0790061535D /* SearchBarButton.m in Sources */,
+				BE0C088116ABD43F0061535D /* UIImage+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

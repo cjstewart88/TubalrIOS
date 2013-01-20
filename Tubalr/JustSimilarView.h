@@ -11,5 +11,6 @@
 @interface JustSimilarView : UIView
 
 - (void)setJustSelected:(BOOL)selected;
+- (BOOL)isJustSearch;
 
 @end

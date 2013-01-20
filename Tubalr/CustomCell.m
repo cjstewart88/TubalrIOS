@@ -45,7 +45,7 @@
         CGColorRef colorGrayTop = CGColorCreate(colorspace, componentsGrayTop);
         CGContextSetStrokeColorWithColor(context, colorGrayTop);
         CGContextMoveToPoint(context, 0, .5);
-        CGContextAddLineToPoint(context, 320, .5);
+        CGContextAddLineToPoint(context, CGRectGetMaxX(rect), .5);
         CGColorRelease(colorGrayTop);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);
@@ -56,7 +56,7 @@
         CGColorRef colorBlackBottom = CGColorCreate(colorspace, componentsBlackBottom);
         CGContextSetStrokeColorWithColor(context, colorBlackBottom);
         CGContextMoveToPoint(context, 0, CGRectGetMaxY(rect) - .5);
-        CGContextAddLineToPoint(context, 320, CGRectGetMaxY(rect) - .5);
+        CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect) - .5);
         CGColorRelease(colorBlackBottom);
         CGContextStrokePath(context);
     } CGContextRestoreGState(context);

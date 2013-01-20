@@ -24,4 +24,5 @@
     #import "NSString+HTML.h"
     #import "NSString+XMLEntities.h"
     #import "UIColor+Additions.h"
+    #import "UIImage+Additions.h"
 #endif

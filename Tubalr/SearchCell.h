@@ -13,4 +13,12 @@
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 
+@property (nonatomic, weak) id delegate;
+
+@end
+
+@protocol SearchCellDelegate <NSObject>
+
+- (void)searchButtonPressedWithString:(NSString*)string;
+
 @end
