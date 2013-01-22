@@ -16,6 +16,9 @@
     #import <AVFoundation/AVFoundation.h>
     #import <CoreMedia/CoreMedia.h>
     #import <QuartzCore/QuartzCore.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+    #import "AFNetworking/AFNetworking.h"
     #import "TestFlight.h"
     #import "NSArray+Shuffle.h"
     #import "NSDictionary+objectForKeyList.h"

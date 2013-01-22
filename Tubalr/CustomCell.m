@@ -32,9 +32,24 @@
 {
     [super drawRect:rect];
     
-    UIColor *color = [self isSelected] ? [UIColor cellHighlightColor] : [UIColor cellColor];
+    BOOL isSelected = [self isSelected];
+    UIColor *color = isSelected ? [UIColor cellHighlightColor] : [UIColor cellColor];
     [color set];
 	UIRectFill(rect);
+    
+    CGFloat r,g,b;
+    if(isSelected)
+    {
+        r = 0.345;
+        g = 0.573;
+        b = 0.949;
+    }
+    else
+    {
+        r = 0.247;
+        g = 0.247;
+        b = 0.247;
+    }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0);
@@ -42,7 +57,7 @@
     
     //Gray Horizontal Top Line
     CGContextSaveGState(context); {
-        CGFloat componentsGrayTop[] = {0.247, 0.247, 0.247, 1.0};
+        CGFloat componentsGrayTop[] = {r, g, b, 1.0};
         CGColorRef colorGrayTop = CGColorCreate(colorspace, componentsGrayTop);
         CGContextSetStrokeColorWithColor(context, colorGrayTop);
         CGContextMoveToPoint(context, 0, .5);

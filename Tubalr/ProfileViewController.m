@@ -39,7 +39,7 @@
     self.title = @"profile";
 //    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
     
-    UIImage *profileImage = [UIImage imageNamed:@"btn-profile"];
+    UIImage *profileImage = [UIImage imageNamed:@"btn-close"];
     UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
