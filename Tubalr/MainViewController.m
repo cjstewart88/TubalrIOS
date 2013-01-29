@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 #import "NowPlayingViewController.h"
+#import "SettingsViewController.h"
+#import "NavigationController.h"
 #import "GenreCell.h"
 #import "PlaylistCell.h"
 #import "SearchCell.h"
@@ -52,7 +54,7 @@
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     menuButton.frame = CGRectMake(0, 0, image.size.width, image.size.height);
     [menuButton addSubview:[[UIImageView alloc] initWithImage:image]];
-    [menuButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton addTarget:self action:@selector(settingsPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuItem];
@@ -76,9 +78,11 @@
     return NO;
 }
 
-- (void)profilePressed:(id)sender
+- (void)settingsPressed:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    SettingsViewController *settingsVC = [[SettingsViewController alloc] init];
+    NavigationController *navVC = [[NavigationController alloc] initWithRootViewController:settingsVC];
+    [self presentViewController:navVC animated:YES completion:nil];
 }
 
 - (SearchCell *)searchCell

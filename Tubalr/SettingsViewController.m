@@ -12,8 +12,20 @@
 #import "SettingsCell.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
+{
+    CGFloat cellHeight;
+    NSInteger cellCount;
+    CGFloat headingSize;
+    NSInteger headingCount;
+    BOOL loggedIn;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UILabel *tubalrLabel;
+@property (nonatomic, strong) UILabel *versionLabel;
+
+@property (nonatomic, strong) UIButton *createButton;
+@property (nonatomic, strong) UIButton *existingLoginButton;
 
 @end
 
@@ -25,18 +37,32 @@
     if(!self)
         return nil;
     
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
-    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:@"macman1", @"password", @"czeluff", @"email_or_username", nil];
-//    AFJSONRequestOperation *jsonOp;
+    cellHeight = 45.0f;
+    headingSize = 20.0f;
+    loggedIn = NO;
+    if(loggedIn)
+    {
+        cellCount = 7;
+        headingCount = 1;
+    }
     
-    [client postPath:@"api/sessions.json" parameters:test success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
-        NSLog(@"yay");
-         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSLog(@"nay");
-    }];
+    else
+    {
+        cellCount = 6;
+        headingCount = 0;
+    }
+    
+//    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
+//    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:@"macman1", @"password", @"czeluff", @"email_or_username", nil];
+//    
+//    [client postPath:@"api/sessions.json" parameters:test success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
+//        NSLog(@"yay");
+//         
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+//        NSLog(@"nay");
+//    }];
     
     return self;
 }
@@ -45,14 +71,32 @@
 {
     [super loadView];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-noise"]];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, cellCount*cellHeight + headingCount*headingSize) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-noise"]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     [self.view addSubview:self.tableView];
-    self.view.backgroundColor = [UIColor blackColor];
+    
+    [self.view addSubview:self.versionLabel];
+    [self.view addSubview:self.tubalrLabel];
+    CGPoint newPosition = CGPointMake(self.view.center.x, 475.0f);
+    self.versionLabel.center = newPosition;
+    newPosition = CGPointMake(self.view.center.x, CGRectGetMinY(self.versionLabel.frame) - 16.0f);
+    self.tubalrLabel.center = newPosition;
+    
+    if(!loggedIn)
+    {
+        CGFloat xPos = 21.0f;
+        self.createButton.frame = CGRectMake(xPos, CGRectGetMaxY(self.tableView.frame) + 15.0f, self.view.bounds.size.width - 2*xPos, 44.0f);
+        [self.view addSubview:self.createButton];
+        
+        self.existingLoginButton.frame = CGRectMake(xPos, CGRectGetMaxY(self.createButton.frame) + 7.0f, self.view.bounds.size.width - 2*xPos, 44.0f);
+        [self.view addSubview:self.existingLoginButton];
+    }
 }
 
 - (void)viewDidLoad
@@ -67,7 +111,7 @@
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     menuButton.frame = CGRectMake(0, 0, image.size.width, image.size.height);
     [menuButton addSubview:[[UIImageView alloc] initWithImage:image]];
-    [menuButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton addTarget:self action:@selector(donePressed:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setLeftBarButtonItem:menuItem];
@@ -83,82 +127,166 @@
     return NO;
 }
 
-- (void)profilePressed:(id)sender
+- (void)donePressed:(id)sender
 {
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-    [self.navigationController pushViewController:mainVC animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (UILabel *)tubalrLabel
+{
+    if(_tubalrLabel == nil)
+    {
+        _tubalrLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _tubalrLabel.backgroundColor = [UIColor clearColor];
+        _tubalrLabel.font = [UIFont boldFontOfSize:24.0f];
+        _tubalrLabel.textColor = [UIColor whiteColor];
+        [_tubalrLabel setText:@"tubalr"];
+        [_tubalrLabel sizeToFit];
+    }
+    
+    return _tubalrLabel;
+}
+
+- (UILabel *)versionLabel
+{
+    if(_versionLabel == nil)
+    {
+        _versionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _versionLabel.backgroundColor = [UIColor clearColor];
+        _versionLabel.font = [UIFont regularFontOfSize:10.0f];
+        _versionLabel.textColor = [UIColor whiteColor];
+        [_versionLabel setText:[NSString stringWithFormat:@"VERSION %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+        [_versionLabel sizeToFit];
+    }
+    
+    return _versionLabel;
+}
+
+- (UIButton *)createButton
+{
+    if(_createButton == nil)
+    {
+        _createButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_createButton setBackgroundImage:[[UIImage imageNamed:@"btn-blue"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)] forState:UIControlStateNormal];
+        [_createButton setTitle:@"JOIN TUBALR FOR FREE" forState:UIControlStateNormal];
+        _createButton.titleLabel.font = [UIFont boldFontOfSize:15.0f];
+        _createButton.titleLabel.textColor = [UIColor whiteColor];
+        _createButton.titleLabel.shadowColor = [UIColor blackColor];
+        _createButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    }
+    
+    return _createButton;
+}
+
+- (UIButton *)existingLoginButton
+{
+    if(_existingLoginButton == nil)
+    {
+        _existingLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_existingLoginButton setTitle:@"ALREADY HAVE AN ACCOUNT? LOGIN HERE" forState:UIControlStateNormal];
+        _existingLoginButton.titleLabel.font = [UIFont regularFontOfSize:11.0f];
+        _existingLoginButton.titleLabel.textColor = [UIColor whiteColor];
+        _existingLoginButton.titleLabel.shadowColor = [UIColor blackColor];
+        _existingLoginButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    }
+    
+    return _existingLoginButton;
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    if(!loggedIn)
+    {
+        return 1;
+    }
+    else
+    {
+        return 2;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 0)
-        return 1;
+        return 6;
     else if (section == 1)
-        return 3;
-    else if (section == 2)
-        return 2;
-    else if (section == 3)
         return 1;
-    else
-        return 0;
+    
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20.0f;
+    if(!loggedIn)
+    {
+        return 0;
+    }
+    
+    if(section == 0)
+        return 0;
+   return headingSize; 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 45.0f;
+    return cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *SettingsCellIdentifier = @"SettingsCell";
+    static NSString *ProfileCellIdentifier = @"ProfileCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingsCellIdentifier];
+    UITableViewCell *cell; 
     
-    switch(indexPath.section){
-        case 0:{
-            if (!cell)
-                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
-            
-            cell.textLabel.text = @"Some Setting";
-            break;
+    if(indexPath.section == 0)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:SettingsCellIdentifier];
+        if(!cell)
+            cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
+        
+        if(indexPath.row == 0)
+        {
+            cell.textLabel.text = @"www.tubalr.com";
+            cell.imageView.image = [UIImage imageNamed:@"icon-settings-computer"];
         }
-            
-        case 1:{
-            if (!cell)
-                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
-            
-            cell.textLabel.text = @"Some Setting";
-            break;
+        else if (indexPath.row == 1)
+        {
+            cell.textLabel.text = @"www.twitter.com/tubalr";
+            cell.imageView.image = [UIImage imageNamed:@"icon-settings-twitter"];
         }
-            
-        case 2:{
-            if (!cell)
-                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
-            
-            cell.textLabel.text = @"Some Setting";
-            break;
+        else if (indexPath.row == 2)
+        {
+            cell.textLabel.text = @"www.facebook.com/tubalr";
+            cell.imageView.image = [UIImage imageNamed:@"icon-settings-facebook"];
         }
-            
-        case 3:{
-            if (!cell)
-                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
-            
-            cell.textLabel.text = @"Some Setting";
-            break;
+        else if (indexPath.row == 3)
+        {
+            cell.textLabel.text = @"support@tubalr.com";
+            cell.imageView.image = [UIImage imageNamed:@"icon-settings-mail"];
         }
+        else if (indexPath.row == 4)
+        {
+            cell.textLabel.text = @"Rate on App Store";
+            cell.imageView.image = [UIImage imageNamed:@"icon-settings-star"];
+        }
+        else if (indexPath.row == 5)
+        {
+            cell.textLabel.text = @"Tubalr Team";
+            cell.imageView.image = [UIImage imageNamed:@"icon-settings-tubalr"];
+        }
+    }
+    
+    else if(indexPath.section == 1)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:ProfileCellIdentifier];
+        
+        if(!cell)
+            cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"Cell #%d", indexPath.row];
     }
     
     return cell;
@@ -168,13 +296,14 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    TableSectionView *sectionView = [[TableSectionView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section]) title:@"Heading Goes Here"];
+    //No real logic here right now while we only have one heading anyway
+    TableSectionView *sectionView = [[TableSectionView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section]) title:@"Your Account"];
     return sectionView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSLog(@"Break");
 }
 
 @end

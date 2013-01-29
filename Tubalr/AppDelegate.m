@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "NavigationController.h"
 #import "MainViewController.h"
-#import "SettingsViewController.h"
 
 @implementation AppDelegate
 
@@ -26,13 +25,10 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    SettingsViewController *profileVC = [[SettingsViewController alloc] init];
     MainViewController *mainVC = [[MainViewController alloc] init];
-    NavigationController *navController = [[NavigationController alloc] initWithRootViewController:profileVC];
+    NavigationController *navController = [[NavigationController alloc] initWithRootViewController:mainVC];
     [self.window setRootViewController: navController];
     
-    profileVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-    [navController pushViewController:mainVC animated:NO];
     [self.window makeKeyAndVisible];
     return YES;
 }
