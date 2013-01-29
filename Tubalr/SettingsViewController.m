@@ -1,23 +1,45 @@
 //
-//  ProfileViewController.m
+//  SettingsViewController.m
 //  Tubalr
 //
 //  Created by Chad Zeluff on 1/20/13.
 //  Copyright (c) 2013 Chad Zeluff. All rights reserved.
 //
 
-#import "ProfileViewController.h"
+#import "SettingsViewController.h"
 #import "MainViewController.h"
 #import "TableSectionView.h"
-#import "ProfileCell.h"
+#import "SettingsCell.h"
 
-@interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation ProfileViewController
+@implementation SettingsViewController
+
+- (id)init
+{
+    self = [super init];
+    if(!self)
+        return nil;
+    
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
+    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:@"macman1", @"password", @"czeluff", @"email_or_username", nil];
+//    AFJSONRequestOperation *jsonOp;
+    
+    [client postPath:@"api/sessions.json" parameters:test success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
+        NSLog(@"yay");
+         
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"nay");
+    }];
+    
+    return self;
+}
 
 - (void)loadView
 {
@@ -36,10 +58,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"profile";
+    self.title = @"settings";
 //    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
     
-    UIImage *profileImage = [UIImage imageNamed:@"btn-close"];
+    UIImage *profileImage = [UIImage imageNamed:@"btn-close-left"];
     UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -48,7 +70,7 @@
     [menuButton addTarget:self action:@selector(profilePressed:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    [self.navigationItem setRightBarButtonItem:menuItem];
+    [self.navigationItem setLeftBarButtonItem:menuItem];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -101,23 +123,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *ProfileCellIdentifier = @"ProfileCell";
+    static NSString *SettingsCellIdentifier = @"SettingsCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ProfileCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingsCellIdentifier];
     
     switch(indexPath.section){
         case 0:{
             if (!cell)
-                cell = [[ProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ProfileCellIdentifier];
+                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
             
             cell.textLabel.text = @"Some Setting";
-            break;
             break;
         }
             
         case 1:{
             if (!cell)
-                cell = [[ProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ProfileCellIdentifier];
+                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
             
             cell.textLabel.text = @"Some Setting";
             break;
@@ -125,7 +146,7 @@
             
         case 2:{
             if (!cell)
-                cell = [[ProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ProfileCellIdentifier];
+                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
             
             cell.textLabel.text = @"Some Setting";
             break;
@@ -133,7 +154,7 @@
             
         case 3:{
             if (!cell)
-                cell = [[ProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ProfileCellIdentifier];
+                cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
             
             cell.textLabel.text = @"Some Setting";
             break;

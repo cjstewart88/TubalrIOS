@@ -46,7 +46,7 @@
     [super viewDidLoad];
     self.title = @"tubalr";
     
-    UIImage *profileImage = [UIImage imageNamed:@"btn-profile"];
+    UIImage *profileImage = [UIImage imageNamed:@"btn-settings"];
     UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
     
     UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];

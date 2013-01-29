@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.h
+//  SettingsCell.h
 //  Tubalr
 //
 //  Created by Chad Zeluff on 1/20/13.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomCell.h"
 
-@interface ProfileViewController : UIViewController
+@interface SettingsCell : CustomCell
 
 @end

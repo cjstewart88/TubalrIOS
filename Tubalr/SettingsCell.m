@@ -1,14 +1,14 @@
 //
-//  ProfileCell.m
+//  SettingsCell.m
 //  Tubalr
 //
 //  Created by Chad Zeluff on 1/20/13.
 //  Copyright (c) 2013 Chad Zeluff. All rights reserved.
 //
 
-#import "ProfileCell.h"
+#import "SettingsCell.h"
 
-@implementation ProfileCell
+@implementation SettingsCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

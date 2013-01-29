@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "NavigationController.h"
 #import "MainViewController.h"
-#import "ProfileViewController.h"
+#import "SettingsViewController.h"
 
 @implementation AppDelegate
 
@@ -26,7 +26,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    ProfileViewController *profileVC = [[ProfileViewController alloc] init];
+    SettingsViewController *profileVC = [[SettingsViewController alloc] init];
     MainViewController *mainVC = [[MainViewController alloc] init];
     NavigationController *navController = [[NavigationController alloc] initWithRootViewController:profileVC];
     [self.window setRootViewController: navController];
