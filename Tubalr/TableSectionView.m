@@ -35,7 +35,7 @@
     {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.font = [UIFont regularFontOfSize:13.0f];
+        _titleLabel.font = [UIFont regularFontOfSize:11.0f];
         _titleLabel.textColor = [UIColor colorWithRed:0.502 green:0.502 blue:0.502 alpha:1];
     }
     

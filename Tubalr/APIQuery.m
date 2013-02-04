@@ -114,6 +114,64 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     }];
 }
 
++ (void)createAccountWithUsername:(NSString *)username email:(NSString *)email password:(NSString *)password block:(void (^)(NSError *))block
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
+    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:password, @"password", username, @"username", email, @"email", nil];
+    
+    [client postPath:@"api/registrations.json" parameters:test success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
+        if(block)
+        {
+            block(nil);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        [APIQuery logout];
+        if(block)
+        {
+            block(error);
+        }
+    }];
+}
+
++ (void)validateAccountWithUsername:(NSString *)username password:(NSString *)password block:(void (^)(NSError *))block
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
+    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:password, @"password", username, @"email_or_username", nil];
+
+    [client postPath:@"api/sessions.json" parameters:test success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
+        [defaults setObject:[dictionary objectForKey:@"token"] forKey:@"token"];
+        [defaults setObject:[dictionary objectForKey:@"id"] forKey:@"id"];
+        if([dictionary objectForKey:@"username"] != nil)
+            [defaults setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        else
+            [defaults setObject:[dictionary objectForKey:@"email"] forKey:@"username"];
+        if(block)
+        {
+            block(nil);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        [APIQuery logout];
+        if(block)
+        {
+            block(error);
+        }
+    }];
+}
+
++ (void)logout
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:nil forKey:@"token"];
+    [defaults setObject:nil forKey:@"id"];
+    [defaults setObject:nil forKey:@"username"];
+}
+
 #pragma mark Private
 
 +(dispatch_queue_t)sharedQueue

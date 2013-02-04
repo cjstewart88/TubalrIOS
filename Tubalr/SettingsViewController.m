@@ -8,8 +8,12 @@
 
 #import "SettingsViewController.h"
 #import "MainViewController.h"
+#import "LoginViewController.h"
+#import "CreateAccountViewController.h"
 #import "TableSectionView.h"
 #import "SettingsCell.h"
+#import "LoggedInUserCell.h"
+#import "APIQuery.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -39,32 +43,42 @@
     
     cellHeight = 45.0f;
     headingSize = 20.0f;
-    loggedIn = NO;
-    if(loggedIn)
-    {
-        cellCount = 7;
-        headingCount = 1;
-    }
     
-    else
-    {
-        cellCount = 6;
-        headingCount = 0;
-    }
-    
-//    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
-//    NSDictionary *test = [NSDictionary dictionaryWithObjectsAndKeys:@"macman1", @"password", @"czeluff", @"email_or_username", nil];
-//    
-//    [client postPath:@"api/sessions.json" parameters:test success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
-//        NSLog(@"yay");
-//         
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-//        NSLog(@"nay");
-//    }];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"token" options:NSKeyValueObservingOptionInitial context:nil];
     
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"token"])
+    {
+        loggedIn = ([[NSUserDefaults standardUserDefaults] objectForKey:@"token"] != nil);
+        
+        if(loggedIn)
+        {
+            cellCount = 7;
+            headingCount = 1;
+        }
+        else
+        {
+            cellCount = 6;
+            headingCount = 0;
+        }
+        
+        if(self.tableView != nil)
+        {
+            [self.tableView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, cellCount*cellHeight + headingCount*headingSize)];
+            [self.tableView reloadData];
+        }
+        
+        [self fixExtraButtons];
+    }
+}
+
+- (void)dealloc
+{
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"token"];
 }
 
 - (void)loadView
@@ -87,8 +101,11 @@
     self.versionLabel.center = newPosition;
     newPosition = CGPointMake(self.view.center.x, CGRectGetMinY(self.versionLabel.frame) - 16.0f);
     self.tubalrLabel.center = newPosition;
-    
-    if(!loggedIn)
+}
+
+- (void)fixExtraButtons
+{
+    if(self.view != nil && !loggedIn)
     {
         CGFloat xPos = 21.0f;
         self.createButton.frame = CGRectMake(xPos, CGRectGetMaxY(self.tableView.frame) + 15.0f, self.view.bounds.size.width - 2*xPos, 44.0f);
@@ -96,6 +113,11 @@
         
         self.existingLoginButton.frame = CGRectMake(xPos, CGRectGetMaxY(self.createButton.frame) + 7.0f, self.view.bounds.size.width - 2*xPos, 44.0f);
         [self.view addSubview:self.existingLoginButton];
+    }
+    else if(loggedIn)
+    {
+        [self.createButton removeFromSuperview];
+        [self.existingLoginButton removeFromSuperview];
     }
 }
 
@@ -130,6 +152,20 @@
 - (void)donePressed:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)loginPressed:(id)sender
+{
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+- (void)joinPressed:(id)sender
+{
+    CreateAccountViewController *createVC = [[CreateAccountViewController alloc] init];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationController pushViewController:createVC animated:YES];
 }
 
 - (UILabel *)tubalrLabel
@@ -173,6 +209,7 @@
         _createButton.titleLabel.textColor = [UIColor whiteColor];
         _createButton.titleLabel.shadowColor = [UIColor blackColor];
         _createButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        [_createButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _createButton;
@@ -188,6 +225,7 @@
         _existingLoginButton.titleLabel.textColor = [UIColor whiteColor];
         _existingLoginButton.titleLabel.shadowColor = [UIColor blackColor];
         _existingLoginButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        [_existingLoginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _existingLoginButton;
@@ -237,7 +275,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *SettingsCellIdentifier = @"SettingsCell";
-    static NSString *ProfileCellIdentifier = @"ProfileCell";
+    static NSString *LoggedInUserCellIdentifier = @"LoggedInUserCell";
     
     UITableViewCell *cell; 
     
@@ -281,12 +319,15 @@
     
     else if(indexPath.section == 1)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:ProfileCellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:LoggedInUserCellIdentifier];
         
         if(!cell)
-            cell = [[SettingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingsCellIdentifier];
+            cell = [[LoggedInUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:LoggedInUserCellIdentifier];
         
-        cell.textLabel.text = [NSString stringWithFormat:@"Cell #%d", indexPath.row];
+        LoggedInUserCell *theCell = (LoggedInUserCell *)cell;
+        
+        theCell.textLabel.text = [NSString stringWithFormat:@"Cell #%d", indexPath.row];
+        [theCell.logoutButton addTarget:[APIQuery class] action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;

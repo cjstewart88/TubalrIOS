@@ -136,6 +136,9 @@
 		BEA2F8DB16A3138D005E7CC4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA2F8DA16A3138D005E7CC4 /* AVFoundation.framework */; };
 		BEA2F8DD16A3166E005E7CC4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA2F8DC16A3166D005E7CC4 /* AudioToolbox.framework */; };
 		BEA2F8F016A325FA005E7CC4 /* Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F8EF16A325FA005E7CC4 /* Slider.m */; };
+		BEF72EE616BEDF23006E04A4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF72EE516BEDF23006E04A4 /* LoginViewController.m */; };
+		BEF72EE916BF1188006E04A4 /* LoggedInUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF72EE816BF1188006E04A4 /* LoggedInUserCell.m */; };
+		BEF72EEC16BF752A006E04A4 /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF72EEB16BF752A006E04A4 /* CreateAccountViewController.m */; };
 		BEF8461116A5225000C659DB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8461016A5225000C659DB /* Icon.png */; };
 		BEF8461416A5225400C659DB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8461316A5225400C659DB /* Icon@2x.png */; };
 		BEF8F5A7169512FC002F241E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEF8F5A6169512FC002F241E /* UIKit.framework */; };
@@ -323,6 +326,12 @@
 		BEA2F8DC16A3166D005E7CC4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BEA2F8EE16A325FA005E7CC4 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slider.h; sourceTree = "<group>"; };
 		BEA2F8EF16A325FA005E7CC4 /* Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slider.m; sourceTree = "<group>"; };
+		BEF72EE416BEDF23006E04A4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		BEF72EE516BEDF23006E04A4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		BEF72EE716BF1188006E04A4 /* LoggedInUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggedInUserCell.h; sourceTree = "<group>"; };
+		BEF72EE816BF1188006E04A4 /* LoggedInUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggedInUserCell.m; sourceTree = "<group>"; };
+		BEF72EEA16BF752A006E04A4 /* CreateAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountViewController.h; sourceTree = "<group>"; };
+		BEF72EEB16BF752A006E04A4 /* CreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountViewController.m; sourceTree = "<group>"; };
 		BEF8461016A5225000C659DB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		BEF8461316A5225400C659DB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		BEF8F5A2169512FC002F241E /* Tubalr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tubalr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,6 +405,10 @@
 				BE6349D516AB7C8000BE4396 /* SearchResultsViewController.m */,
 				BE3514F816AC9A1400683505 /* SettingsViewController.h */,
 				BE3514F916AC9A1400683505 /* SettingsViewController.m */,
+				BEF72EE416BEDF23006E04A4 /* LoginViewController.h */,
+				BEF72EE516BEDF23006E04A4 /* LoginViewController.m */,
+				BEF72EEA16BF752A006E04A4 /* CreateAccountViewController.h */,
+				BEF72EEB16BF752A006E04A4 /* CreateAccountViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -405,28 +418,30 @@
 			children = (
 				BE50BA7E16A376FF00672442 /* AVView.h */,
 				BE50BA7F16A376FF00672442 /* AVView.m */,
-				BEA2F8B316A1EAC5005E7CC4 /* MovieControlView.h */,
-				BEA2F8B416A1EAC5005E7CC4 /* MovieControlView.m */,
-				BEA2F8EE16A325FA005E7CC4 /* Slider.h */,
-				BEA2F8EF16A325FA005E7CC4 /* Slider.m */,
-				BE53DED2169F905300D17B02 /* NowPlayingCell.h */,
-				BE53DED3169F905300D17B02 /* NowPlayingCell.m */,
-				BE63493A16AB24AB00BE4396 /* GenreCell.h */,
-				BE63493B16AB24AB00BE4396 /* GenreCell.m */,
-				BE63495716AB2F1A00BE4396 /* PlaylistCell.h */,
-				BE63495816AB2F1A00BE4396 /* PlaylistCell.m */,
-				BE63495A16AB310A00BE4396 /* SearchCell.h */,
-				BE63495B16AB310A00BE4396 /* SearchCell.m */,
 				BE63499B16AB57C100BE4396 /* CustomCell.h */,
 				BE63499C16AB57C100BE4396 /* CustomCell.m */,
-				BE6349B416AB6A0600BE4396 /* TableSectionView.h */,
-				BE6349B516AB6A0600BE4396 /* TableSectionView.m */,
+				BE63493A16AB24AB00BE4396 /* GenreCell.h */,
+				BE63493B16AB24AB00BE4396 /* GenreCell.m */,
 				BE6349DF16AB8CEF00BE4396 /* JustSimilarView.h */,
 				BE6349E016AB8CEF00BE4396 /* JustSimilarView.m */,
+				BEA2F8B316A1EAC5005E7CC4 /* MovieControlView.h */,
+				BEA2F8B416A1EAC5005E7CC4 /* MovieControlView.m */,
+				BE53DED2169F905300D17B02 /* NowPlayingCell.h */,
+				BE53DED3169F905300D17B02 /* NowPlayingCell.m */,
+				BE63495716AB2F1A00BE4396 /* PlaylistCell.h */,
+				BE63495816AB2F1A00BE4396 /* PlaylistCell.m */,
 				BE0C087C16ABD0790061535D /* SearchBarButton.h */,
 				BE0C087D16ABD0790061535D /* SearchBarButton.m */,
+				BE63495A16AB310A00BE4396 /* SearchCell.h */,
+				BE63495B16AB310A00BE4396 /* SearchCell.m */,
 				BE3514FB16AC9D6700683505 /* SettingsCell.h */,
 				BE3514FC16AC9D6700683505 /* SettingsCell.m */,
+				BEA2F8EE16A325FA005E7CC4 /* Slider.h */,
+				BEA2F8EF16A325FA005E7CC4 /* Slider.m */,
+				BE6349B416AB6A0600BE4396 /* TableSectionView.h */,
+				BE6349B516AB6A0600BE4396 /* TableSectionView.m */,
+				BEF72EE716BF1188006E04A4 /* LoggedInUserCell.h */,
+				BEF72EE816BF1188006E04A4 /* LoggedInUserCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -860,6 +875,9 @@
 				BE5C0F4216AE443B009389C3 /* AFURLConnectionOperation.m in Sources */,
 				BE5C0F4316AE443B009389C3 /* AFXMLRequestOperation.m in Sources */,
 				BE5C0F4416AE443B009389C3 /* UIImageView+AFNetworking.m in Sources */,
+				BEF72EE616BEDF23006E04A4 /* LoginViewController.m in Sources */,
+				BEF72EE916BF1188006E04A4 /* LoggedInUserCell.m in Sources */,
+				BEF72EEC16BF752A006E04A4 /* CreateAccountViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
