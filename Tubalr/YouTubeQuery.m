@@ -69,6 +69,7 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
 
 + (BOOL)isMusic:(NSDictionary *)dictionary
 {
+//    return [[dictionary objectForKeyList:@"media$group.media$category.0.$t"] isEqualToString:@"Music"];
     return ([[[[[dictionary objectForKey:@"media$group"] objectForKey:@"media$category"] objectAtIndex:0] objectForKey:@"$t"] isEqualToString:@"Music"]);
 }
 
