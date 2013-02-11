@@ -183,8 +183,32 @@
         [nextTextField becomeFirstResponder];
     }
     else if(textField == self.confirmPasswordField)
-    {
-        //Do all of the verifications: 2 passwords match, 2 passwords have required character counts, unique username, unique email. Maybe this'll happen server-side?
+    {        
+        NSString *message;
+        if([self.usernameField.text isEqualToString:@""] || [self.emailField.text isEqualToString:@""] || [self.passwordField.text isEqualToString:@""] || [self.confirmPasswordField.text isEqualToString:@""])
+            message = @"You must fill in all required fields.";
+        
+        if(![self.passwordField.text isEqualToString:self.confirmPasswordField.text])
+            message = @"Password fields do not match.";
+        
+        if([self.passwordField.text length] < 6)
+            message = @"Password must be at least 6 characters.";
+        
+        NSString *usernameRegEx = @"[A-Z0-9a-z]+";
+        NSPredicate *usernameTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", usernameRegEx];
+        if(![usernameTest evaluateWithObject:self.usernameField.text])
+            message = @"Username does not appear to be valid. Use alphabetic and numerical characters only.";
+        
+        NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+        if(![emailTest evaluateWithObject:self.emailField.text])
+            message = @"Email address does not appear to be valid.";
+        
+        if(message != nil)
+        {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops!", nil) message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            return YES;
+        }
         
         UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         activityView.center = self.view.center;
@@ -193,16 +217,23 @@
         [textField resignFirstResponder];
         [APIQuery createAccountWithUsername:self.usernameField.text email:self.emailField.text password:self.passwordField.text block:^(NSError *error)
          {
-             [activityView stopAnimating];
              if(error)
              {
-                 //Better, custom error here
+                 [activityView stopAnimating];
                  [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
              }
              else
              {
-                 //Popup a message saying an email has been sent, and to verify it?
-                 [self.navigationController popViewControllerAnimated:YES];
+                 [APIQuery validateAccountWithUsername:self.usernameField.text password:self.passwordField.text block:^(NSError *error)
+                  {
+                      [activityView stopAnimating];
+                      if(error)
+                      {
+                          [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"You're account was successfully created, but we couldn't log you in immediately. Try logging in again in a few minutes." delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+                      }
+                      
+                      [self.navigationController popViewControllerAnimated:YES];
+                  }];
              }
          }];
     }

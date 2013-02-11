@@ -156,9 +156,11 @@
         [self.view addSubview:activityView];
         [activityView startAnimating];
         [textField resignFirstResponder];
+        
         [APIQuery validateAccountWithUsername:self.usernameField.text password:self.passwordField.text block:^(NSError *error)
          {
              [activityView stopAnimating];
+             
              if(error)
              {
                  //Better, custom error here

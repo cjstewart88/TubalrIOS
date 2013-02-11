@@ -93,6 +93,11 @@
 		BE6349B616AB6A0600BE4396 /* TableSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6349B516AB6A0600BE4396 /* TableSectionView.m */; };
 		BE6349D616AB7C8100BE4396 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6349D516AB7C8000BE4396 /* SearchResultsViewController.m */; };
 		BE6349E116AB8CEF00BE4396 /* JustSimilarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6349E016AB8CEF00BE4396 /* JustSimilarView.m */; };
+		BE66342016C86B1100B41985 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE66341F16C86B1100B41985 /* MessageUI.framework */; };
+		BE66342316C876DE00B41985 /* TeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342216C876DE00B41985 /* TeamViewController.m */; };
+		BE66342616C88F8800B41985 /* TopGenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342516C88F8800B41985 /* TopGenresViewController.m */; };
+		BE66342916C8973800B41985 /* AllGenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342816C8973700B41985 /* AllGenresViewController.m */; };
+		BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342B16C89DBE00B41985 /* SubredditViewController.m */; };
 		BEA2F86816A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */; };
 		BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86B16A0BBD1005E7CC4 /* PlaylistManager.m */; };
 		BEA2F87916A0E8F4005E7CC4 /* btn-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA2F87016A0E8F4005E7CC4 /* btn-back@2x.png */; };
@@ -275,6 +280,15 @@
 		BE6349D516AB7C8000BE4396 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		BE6349DF16AB8CEF00BE4396 /* JustSimilarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustSimilarView.h; sourceTree = "<group>"; };
 		BE6349E016AB8CEF00BE4396 /* JustSimilarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustSimilarView.m; sourceTree = "<group>"; };
+		BE66341F16C86B1100B41985 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		BE66342116C876DE00B41985 /* TeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamViewController.h; sourceTree = "<group>"; };
+		BE66342216C876DE00B41985 /* TeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamViewController.m; sourceTree = "<group>"; };
+		BE66342416C88F8800B41985 /* TopGenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopGenresViewController.h; sourceTree = "<group>"; };
+		BE66342516C88F8800B41985 /* TopGenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopGenresViewController.m; sourceTree = "<group>"; };
+		BE66342716C8973700B41985 /* AllGenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllGenresViewController.h; sourceTree = "<group>"; };
+		BE66342816C8973700B41985 /* AllGenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllGenresViewController.m; sourceTree = "<group>"; };
+		BE66342A16C89DBE00B41985 /* SubredditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubredditViewController.h; sourceTree = "<group>"; };
+		BE66342B16C89DBE00B41985 /* SubredditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubredditViewController.m; sourceTree = "<group>"; };
 		BEA2F86616A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+objectForKeyList.h"; sourceTree = "<group>"; };
 		BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+objectForKeyList.m"; sourceTree = "<group>"; };
 		BEA2F86A16A0BBD1005E7CC4 /* PlaylistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistManager.h; sourceTree = "<group>"; };
@@ -354,6 +368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE66342016C86B1100B41985 /* MessageUI.framework in Frameworks */,
 				BE5C0F4916AE44A4009389C3 /* MobileCoreServices.framework in Frameworks */,
 				BE5C0F4716AE449C009389C3 /* SystemConfiguration.framework in Frameworks */,
 				BE3514E816AC838400683505 /* QuartzCore.framework in Frameworks */,
@@ -409,6 +424,14 @@
 				BEF72EE516BEDF23006E04A4 /* LoginViewController.m */,
 				BEF72EEA16BF752A006E04A4 /* CreateAccountViewController.h */,
 				BEF72EEB16BF752A006E04A4 /* CreateAccountViewController.m */,
+				BE66342116C876DE00B41985 /* TeamViewController.h */,
+				BE66342216C876DE00B41985 /* TeamViewController.m */,
+				BE66342416C88F8800B41985 /* TopGenresViewController.h */,
+				BE66342516C88F8800B41985 /* TopGenresViewController.m */,
+				BE66342716C8973700B41985 /* AllGenresViewController.h */,
+				BE66342816C8973700B41985 /* AllGenresViewController.m */,
+				BE66342A16C89DBE00B41985 /* SubredditViewController.h */,
+				BE66342B16C89DBE00B41985 /* SubredditViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -620,6 +643,7 @@
 		BEF8F5A5169512FC002F241E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE66341F16C86B1100B41985 /* MessageUI.framework */,
 				BE5C0F4816AE44A4009389C3 /* MobileCoreServices.framework */,
 				BE5C0F4616AE449C009389C3 /* SystemConfiguration.framework */,
 				BE3514E716AC838400683505 /* QuartzCore.framework */,
@@ -878,6 +902,10 @@
 				BEF72EE616BEDF23006E04A4 /* LoginViewController.m in Sources */,
 				BEF72EE916BF1188006E04A4 /* LoggedInUserCell.m in Sources */,
 				BEF72EEC16BF752A006E04A4 /* CreateAccountViewController.m in Sources */,
+				BE66342316C876DE00B41985 /* TeamViewController.m in Sources */,
+				BE66342616C88F8800B41985 /* TopGenresViewController.m in Sources */,
+				BE66342916C8973800B41985 /* AllGenresViewController.m in Sources */,
+				BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,4 +16,6 @@
 + (void)validateAccountWithUsername:(NSString *)username password:(NSString *)password block:(void (^)(NSError *error))block;
 + (void)logout;
 
++ (void)librarySearchWithBlock:(void (^)(NSError *error))block;
+
 @end

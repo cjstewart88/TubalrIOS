@@ -10,7 +10,9 @@
 
 typedef enum {
     justSearch,
-    similarSearch
+    similarSearch,
+    genreSearch,
+    redditSearch
 }SearchType;
 
 @interface NowPlayingViewController : UIViewController

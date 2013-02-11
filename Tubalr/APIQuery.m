@@ -33,6 +33,7 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     if([GenreQuery checkWithString:&string])
     {
         NSMutableArray *array = [[NSMutableArray alloc] init];
+        __block int numberOfNils = 0;
         
         [EchonestQuery genreSearch:string completion:^(NSArray *arrayOfArtistSong) {
             //We have successfully returned Echonest data, now perform YouTube searches for each artist song
@@ -41,8 +42,15 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
                 [YouTubeQuery searchWithString:[arrayOfArtistSong objectAtIndex:i] completion:^(NSDictionary* videoDictionary) {
                     
                     dispatch_sync([self sharedQueue], ^{
-                        [array addObject:videoDictionary];
-                        if([array count] == [arrayOfArtistSong count])//if([array count] % 10 == 0)
+                        if(videoDictionary != nil)
+                        {
+                            [array addObject:videoDictionary];
+                        }
+                        else
+                        {
+                            numberOfNils++;
+                        }
+                        if([array count] == [arrayOfArtistSong count] - numberOfNils)
                         {
                             [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
                         }
@@ -70,6 +78,7 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 + (void)justSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
+    __block int numberOfNils = 0;
     
     [EchonestQuery artistSearch:string completion:^(NSArray *arrayOfSongs) {
         
@@ -81,9 +90,17 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
                 
                 dispatch_sync([self sharedQueue], ^{
                     if(videoDictionary != nil)
+                    {
                         [array addObject:videoDictionary];
-                    if(i == [arrayOfSongs count] - 1)
+                    }
+                    else
+                    {
+                        numberOfNils++;
+                    }
+                    if([array count] == [arrayOfSongs count] - numberOfNils)
+                    {
                         [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
+                    }
                 });
                 
             }];
@@ -94,6 +111,7 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
 + (void)similarSearchWithString:(NSString *)string completion:(void (^)(NSArray *))completion
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
+    __block int numberOfNils = 0;
     
     [EchonestQuery similarArtistSearch:string completion:^(NSArray *arrayOfArtists) {
         
@@ -104,9 +122,17 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
                 
                 dispatch_sync([self sharedQueue], ^{
                     if(videoDictionary != nil)
+                    {
                         [array addObject:videoDictionary];
-                    if(i == [arrayOfArtists count] - 1)
+                    }
+                    else
+                    {
+                        numberOfNils++;
+                    }
+                    if([array count] == [arrayOfArtists count] - numberOfNils)
+                    {
                         [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:array] shuffledArray]];
+                    }
                 });
                 
             }];
@@ -170,6 +196,27 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     [defaults setObject:nil forKey:@"token"];
     [defaults setObject:nil forKey:@"id"];
     [defaults setObject:nil forKey:@"username"];
+}
+
++ (void)librarySearchWithBlock:(void (^)(NSError *error))block
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
+    [client getPath:@"api/library.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:0];
+        [defaults setObject:[dictionary objectForKey:@"top_genres"] forKey:@"topGenres"];
+        [defaults setObject:[dictionary objectForKey:@"genres"] forKey:@"genres"];
+        [defaults setObject:[dictionary objectForKey:@"reddit"] forKey:@"subreddits"];
+        if(block)
+        {
+            block(nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        if(block)
+        {
+            block(error);
+        }
+    }];
 }
 
 #pragma mark Private

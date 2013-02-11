@@ -10,11 +10,14 @@
 #import "NowPlayingViewController.h"
 #import "SettingsViewController.h"
 #import "NavigationController.h"
+#import "SearchResultsViewController.h"
+#import "TopGenresViewController.h"
+#import "AllGenresViewController.h"
+#import "SubredditViewController.h"
 #import "GenreCell.h"
 #import "PlaylistCell.h"
 #import "SearchCell.h"
 #import "TableSectionView.h"
-#import "SearchResultsViewController.h"
 #import "JustSimilarView.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, SearchResultsViewControllerDelegate>
@@ -61,10 +64,10 @@
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
     self.searchController.delegate = self;
-    self.searchController.searchResultsDataSource = self.searchResultsViewController;
-    self.searchController.searchResultsDelegate = self.searchResultsViewController;
+//    self.searchController.searchResultsDataSource = self.searchResultsViewController;
+//    self.searchController.searchResultsDelegate = self.searchResultsViewController;
     self.searchCell.delegate = self;
-    self.searchResultsViewController.delegate = self;
+//    self.searchResultsViewController.delegate = self;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -234,7 +237,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 1)
+    {
+        TopGenresViewController *topVC = [[TopGenresViewController alloc] init];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+        [self.navigationController pushViewController:topVC animated:YES];
+    }
     
+    else if (indexPath.row == 2)
+    {
+        AllGenresViewController *allVC = [[AllGenresViewController alloc] init];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+        [self.navigationController pushViewController:allVC animated:YES];
+    }
+    
+//    else if (indexPath.row == 3)
+//    {
+//        SubredditViewController *subVC = [[SubredditViewController alloc] init];
+//        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+//        [self.navigationController pushViewController:subVC animated:YES];
+//    }
 }
 
 #pragma mark - UISearchDisplayDelegate
@@ -260,6 +282,9 @@
     CGRect tableFrame = tableView.frame;
     tableFrame.origin.y += self.justSimilarView.bounds.size.height;
     tableFrame.size.height -= self.justSimilarView.bounds.size.height;
+    [tableView setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
+//    [tableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-noise"]]];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableView setFrame:tableFrame];
 }
 

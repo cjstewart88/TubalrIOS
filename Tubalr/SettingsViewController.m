@@ -10,12 +10,13 @@
 #import "MainViewController.h"
 #import "LoginViewController.h"
 #import "CreateAccountViewController.h"
+#import "TeamViewController.h"
 #import "TableSectionView.h"
 #import "SettingsCell.h"
 #import "LoggedInUserCell.h"
 #import "APIQuery.h"
 
-@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 {
     CGFloat cellHeight;
     NSInteger cellCount;
@@ -325,8 +326,9 @@
             cell = [[LoggedInUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:LoggedInUserCellIdentifier];
         
         LoggedInUserCell *theCell = (LoggedInUserCell *)cell;
+                
+        theCell.textLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
         
-        theCell.textLabel.text = [NSString stringWithFormat:@"Cell #%d", indexPath.row];
         [theCell.logoutButton addTarget:[APIQuery class] action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -344,7 +346,84 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Break");
+    if(indexPath.section == 0)
+    {        
+        if(indexPath.row == 0)
+        {
+            if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"googlechrome://"]])
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://www.tubalr.com"]];
+            }
+            else
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.tubalr.com"]];
+            }
+        }
+        else if (indexPath.row == 1)
+        {
+            if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]])
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tweetbot://tubalr/user_profile/tubalr"]];
+            }
+            else if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]])
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=tubalr"]];
+            }
+            else
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.twitter.com/tubalr"]];
+            }
+        }
+        else if (indexPath.row == 2)
+        {
+            if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]])
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/154359441249128"]];
+            }
+            else
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/ListenToTubalr"]];
+            }
+        }
+        else if (indexPath.row == 3)
+        {
+            if ([MFMailComposeViewController canSendMail])
+            {
+                MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+                mailer.mailComposeDelegate = self;
+                [mailer setSubject:@"Tubalr iOS Support"];
+                NSArray *toRecipients = [NSArray arrayWithObjects:@"support@tubalr.com", nil];
+                [mailer setToRecipients:toRecipients];
+                [self presentViewController:mailer animated:YES completion:nil];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
+                                                                message:@"Your device isn't configured to send mail."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else if (indexPath.row == 4)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Tubalr/tubalr"]];
+        }
+        else if (indexPath.row == 5)
+        {
+            TeamViewController *teamVC = [[TeamViewController alloc] init];
+            self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+            [self.navigationController pushViewController:teamVC animated:YES];
+        }
+    }
+}
+
+#pragma mark - MFMailDelegate
+    
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
