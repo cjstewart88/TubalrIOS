@@ -129,23 +129,23 @@ static NowPlayingViewController* _nowPlayingVC;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self nowPlayingVC] == nil) {
-        self.nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:[genresArray objectAtIndex:indexPath.row] searchType:genreSearch];
+    if ([GenresViewController nowPlayingVC] == nil) {
+        [GenresViewController setNowPlayingVC:[[NowPlayingViewController alloc] initWithSearchString:[genresArray objectAtIndex:indexPath.row] searchType:genreSearch]];
     }
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    [self.navigationController pushViewController:self.nowPlayingVC animated:YES];
+    [self.navigationController pushViewController:[GenresViewController nowPlayingVC] animated:YES];
 }
 
 #pragma mark - Shared Now Playing Controller
 
--(NowPlayingViewController*)nowPlayingVC
++(NowPlayingViewController*)nowPlayingVC
 {
     return _nowPlayingVC;
 }
 
--(void)setNowPlayingVC:(NowPlayingViewController *)viewController
++(void)setNowPlayingVC:(NowPlayingViewController *)viewController
 {
     _nowPlayingVC = viewController;
 }

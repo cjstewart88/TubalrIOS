@@ -17,7 +17,7 @@
 @property(nonatomic, copy) NSString* keyPath;
 
 -(id)initWithKeyPath:(NSString*)keyPath andTitle:(NSString*)title;
--(NowPlayingViewController*)nowPlayingVC;
--(void)setNowPlayingVC:(NowPlayingViewController*)viewController;
++(NowPlayingViewController*)nowPlayingVC;
++(void)setNowPlayingVC:(NowPlayingViewController*)viewController;
 
 @end
