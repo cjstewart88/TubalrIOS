@@ -11,6 +11,7 @@
 #import "SettingsViewController.h"
 #import "NavigationController.h"
 #import "SearchResultsViewController.h"
+#import "GenresViewController.h"
 #import "TopGenresViewController.h"
 #import "AllGenresViewController.h"
 #import "SubredditViewController.h"
@@ -239,14 +240,14 @@
 {
     if (indexPath.row == 1)
     {
-        TopGenresViewController *topVC = [[TopGenresViewController alloc] init];
+        GenresViewController *topVC = [[GenresViewController alloc] initWithKeyPath:@"topGenres" andTitle:@"top genres"];
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
         [self.navigationController pushViewController:topVC animated:YES];
     }
     
     else if (indexPath.row == 2)
     {
-        AllGenresViewController *allVC = [[AllGenresViewController alloc] init];
+        GenresViewController *allVC = [[GenresViewController alloc] initWithKeyPath:@"genres" andTitle:@"all genres"];
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
         [self.navigationController pushViewController:allVC animated:YES];
     }
