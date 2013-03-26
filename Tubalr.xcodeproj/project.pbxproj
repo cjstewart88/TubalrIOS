@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3A69947170249EA00506AA6 /* GenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A69946170249EA00506AA6 /* GenresViewController.m */; };
 		BE0BD637169BC7CE0023BBBD /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */; };
 		BE0BD63C169BD4640023BBBD /* APIQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD63A169BD4640023BBBD /* APIQuery.m */; };
 		BE0BD647169E6CB60023BBBD /* EchonestQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD646169E6CB60023BBBD /* EchonestQuery.m */; };
@@ -158,6 +159,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B3A69945170249EA00506AA6 /* GenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenresViewController.h; sourceTree = "<group>"; };
+		B3A69946170249EA00506AA6 /* GenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenresViewController.m; sourceTree = "<group>"; };
 		BE0BD635169BC7CE0023BBBD /* NowPlayingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingViewController.h; sourceTree = "<group>"; };
 		BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingViewController.m; sourceTree = "<group>"; };
 		BE0BD639169BD4640023BBBD /* APIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIQuery.h; sourceTree = "<group>"; };
@@ -410,6 +413,8 @@
 		BE0BD653169E6D330023BBBD /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B3A69945170249EA00506AA6 /* GenresViewController.h */,
+				B3A69946170249EA00506AA6 /* GenresViewController.m */,
 				BE53DF23169FE8A800D17B02 /* NavigationController.h */,
 				BE53DF24169FE8A800D17B02 /* NavigationController.m */,
 				BE53DEE7169FC60800D17B02 /* MainViewController.h */,
@@ -906,6 +911,7 @@
 				BE66342616C88F8800B41985 /* TopGenresViewController.m in Sources */,
 				BE66342916C8973800B41985 /* AllGenresViewController.m in Sources */,
 				BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */,
+				B3A69947170249EA00506AA6 /* GenresViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
