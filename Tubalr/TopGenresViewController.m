@@ -20,7 +20,10 @@
 
 @end
 
+
 @implementation TopGenresViewController
+
+@synthesize nowPlayingViewController=_nowPlayingViewController;
 
 - (id)init
 {
@@ -111,9 +114,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:[topGenresArray objectAtIndex:indexPath.row] searchType:genreSearch];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-    [self.navigationController pushViewController:nowPlayingVC animated:YES];
+    if (self.nowPlayingViewController == nil) {
+        self.nowPlayingViewController = [[NowPlayingViewController alloc] initWithSearchString:[topGenresArray objectAtIndex:indexPath.row] searchType:genreSearch];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    }
+    [self.navigationController pushViewController:self.nowPlayingViewController animated:YES];
 }
 
 @end

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopGenresViewController : UIViewController
+@class NowPlayingViewController;
+
+@interface TopGenresViewController : UIViewController {
+    NowPlayingViewController *_nowPlayingViewController;
+}
+
+@property (nonatomic, strong) NowPlayingViewController *nowPlayingViewController;
 
 @end

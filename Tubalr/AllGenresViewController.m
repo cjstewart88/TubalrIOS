@@ -72,7 +72,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"top genres";
+	self.title = @"all genres";
 }
 
 - (void)fetchAllGenres

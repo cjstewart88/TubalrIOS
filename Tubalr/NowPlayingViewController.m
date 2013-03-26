@@ -98,9 +98,9 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     
     [self addPlayerTimeObserver];
     [self.playerView.player addObserver:self
-                  forKeyPath:kRateKey
-                     options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                     context:nil];
+                             forKeyPath:kRateKey
+                                options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                                context:nil];
     
     [self.playerView.player addObserver:self
                   forKeyPath:kCurrentItemKey
