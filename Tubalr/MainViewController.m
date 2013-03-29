@@ -12,8 +12,6 @@
 #import "NavigationController.h"
 #import "SearchResultsViewController.h"
 #import "GenresViewController.h"
-#import "TopGenresViewController.h"
-#import "AllGenresViewController.h"
 #import "SubredditViewController.h"
 #import "GenreCell.h"
 #import "PlaylistCell.h"
@@ -238,6 +236,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: add mechanism so there is dictionary with view controllers os we con't create a new one each time if
+    // we don't need to
     if (indexPath.row == 1)
     {
         GenresViewController *topVC = [[GenresViewController alloc] initWithKeyPath:@"topGenres" andTitle:@"top genres"];

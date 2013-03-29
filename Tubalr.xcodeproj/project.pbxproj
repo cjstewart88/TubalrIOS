@@ -96,8 +96,6 @@
 		BE6349E116AB8CEF00BE4396 /* JustSimilarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6349E016AB8CEF00BE4396 /* JustSimilarView.m */; };
 		BE66342016C86B1100B41985 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE66341F16C86B1100B41985 /* MessageUI.framework */; };
 		BE66342316C876DE00B41985 /* TeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342216C876DE00B41985 /* TeamViewController.m */; };
-		BE66342616C88F8800B41985 /* TopGenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342516C88F8800B41985 /* TopGenresViewController.m */; };
-		BE66342916C8973800B41985 /* AllGenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342816C8973700B41985 /* AllGenresViewController.m */; };
 		BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE66342B16C89DBE00B41985 /* SubredditViewController.m */; };
 		BEA2F86816A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86716A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.m */; };
 		BEA2F86C16A0BBD1005E7CC4 /* PlaylistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA2F86B16A0BBD1005E7CC4 /* PlaylistManager.m */; };
@@ -286,10 +284,6 @@
 		BE66341F16C86B1100B41985 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BE66342116C876DE00B41985 /* TeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamViewController.h; sourceTree = "<group>"; };
 		BE66342216C876DE00B41985 /* TeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamViewController.m; sourceTree = "<group>"; };
-		BE66342416C88F8800B41985 /* TopGenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopGenresViewController.h; sourceTree = "<group>"; };
-		BE66342516C88F8800B41985 /* TopGenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopGenresViewController.m; sourceTree = "<group>"; };
-		BE66342716C8973700B41985 /* AllGenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllGenresViewController.h; sourceTree = "<group>"; };
-		BE66342816C8973700B41985 /* AllGenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllGenresViewController.m; sourceTree = "<group>"; };
 		BE66342A16C89DBE00B41985 /* SubredditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubredditViewController.h; sourceTree = "<group>"; };
 		BE66342B16C89DBE00B41985 /* SubredditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubredditViewController.m; sourceTree = "<group>"; };
 		BEA2F86616A0AB6C005E7CC4 /* NSDictionary+objectForKeyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+objectForKeyList.h"; sourceTree = "<group>"; };
@@ -431,10 +425,6 @@
 				BEF72EEB16BF752A006E04A4 /* CreateAccountViewController.m */,
 				BE66342116C876DE00B41985 /* TeamViewController.h */,
 				BE66342216C876DE00B41985 /* TeamViewController.m */,
-				BE66342416C88F8800B41985 /* TopGenresViewController.h */,
-				BE66342516C88F8800B41985 /* TopGenresViewController.m */,
-				BE66342716C8973700B41985 /* AllGenresViewController.h */,
-				BE66342816C8973700B41985 /* AllGenresViewController.m */,
 				BE66342A16C89DBE00B41985 /* SubredditViewController.h */,
 				BE66342B16C89DBE00B41985 /* SubredditViewController.m */,
 			);
@@ -908,8 +898,6 @@
 				BEF72EE916BF1188006E04A4 /* LoggedInUserCell.m in Sources */,
 				BEF72EEC16BF752A006E04A4 /* CreateAccountViewController.m in Sources */,
 				BE66342316C876DE00B41985 /* TeamViewController.m in Sources */,
-				BE66342616C88F8800B41985 /* TopGenresViewController.m in Sources */,
-				BE66342916C8973800B41985 /* AllGenresViewController.m in Sources */,
 				BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */,
 				B3A69947170249EA00506AA6 /* GenresViewController.m in Sources */,
 			);

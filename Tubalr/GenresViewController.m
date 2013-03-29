@@ -24,7 +24,7 @@
 
 @synthesize keyPath=_keyPath;
 
-static NowPlayingViewController* _nowPlayingVC;
+static NowPlayingViewController* _nowPlayingVC = nil;
 
 - (id)initWithKeyPath:(NSString*)keyPath
              andTitle:(NSString*)title
@@ -129,25 +129,42 @@ static NowPlayingViewController* _nowPlayingVC;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NowPlayingViewController *vc = [[NowPlayingViewController alloc] initWithSearchString:[genresArray objectAtIndex:indexPath.row] searchType:genreSearch];
+    
     if ([GenresViewController nowPlayingVC] == nil) {
-        [GenresViewController setNowPlayingVC:[[NowPlayingViewController alloc] initWithSearchString:[genresArray objectAtIndex:indexPath.row] searchType:genreSearch]];
+        [GenresViewController setNowPlayingVC:vc];
     }
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    [self.navigationController pushViewController:[GenresViewController nowPlayingVC] animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Shared Now Playing Controller
 
 +(NowPlayingViewController*)nowPlayingVC
 {
-    return _nowPlayingVC;
+    if (_nowPlayingVC != nil) {
+        return _nowPlayingVC;
+    }
+    return nil;
 }
 
 +(void)setNowPlayingVC:(NowPlayingViewController *)viewController
 {
-    _nowPlayingVC = viewController;
+    NSLog(@"Before Re-Assignment - %@", _nowPlayingVC);
+    if (_nowPlayingVC == nil) {
+        _nowPlayingVC = viewController;
+    }
+    else if (viewController != nil && ![viewController isEqual:_nowPlayingVC]) {
+        NowPlayingViewController *oldVC = _nowPlayingVC;
+        oldVC = nil;
+        
+        [[[_nowPlayingVC playerView] player] pause];
+        
+        _nowPlayingVC = viewController;
+    }
+    NSLog(@"After Re-Assignment - %@", _nowPlayingVC);
 }
 
 
