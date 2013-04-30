@@ -24,11 +24,11 @@
     [self.slider addObserver:self forKeyPath:@"value" options:0 context:0];
     [self.slider addObserver:self forKeyPath:@"maximumValue" options:0 context:0];
     
-    [self addSubview:self.shuffleButton];
+    //[self addSubview:self.shuffleButton];
     [self addSubview:self.backButton];
     [self addSubview:self.playPauseButton];
     [self addSubview:self.nextButton];
-    [self addSubview:self.playlistButton];
+    //[self addSubview:self.playlistButton];
     [self addSubview:self.slider];
     [self addSubview:self.trackTimeLabel];
     [self addSubview:self.trackTotalLabel];
@@ -45,9 +45,9 @@
 - (void)layoutSubviews
 {
     CGRect frame;
-    frame.origin = CGPointMake(11.0f, 13.0f);
-    frame.size = CGSizeMake(self.shuffleButton.imageView.image.size.width, self.shuffleButton.imageView.image.size.height);
-    [self.shuffleButton setFrame:frame];
+//    frame.origin = CGPointMake(11.0f, 13.0f);
+//    frame.size = CGSizeMake(self.shuffleButton.imageView.image.size.width, self.shuffleButton.imageView.image.size.height);
+//    [self.shuffleButton setFrame:frame];
     
     frame.origin = CGPointMake(83.0f, 13.0f);
     frame.size = CGSizeMake(self.backButton.imageView.image.size.width, self.backButton.imageView.image.size.height);
@@ -61,9 +61,9 @@
     frame.size = CGSizeMake(self.nextButton.imageView.image.size.width, self.nextButton.imageView.image.size.height);
     [self.nextButton setFrame:frame];
     
-    frame.origin = CGPointMake(281.0f, 13.0f);
-    frame.size = CGSizeMake(self.playlistButton.imageView.image.size.width, self.playlistButton.imageView.image.size.height);
-    [self.playlistButton setFrame:frame];
+//    frame.origin = CGPointMake(281.0f, 13.0f);
+//    frame.size = CGSizeMake(self.playlistButton.imageView.image.size.width, self.playlistButton.imageView.image.size.height);
+//    [self.playlistButton setFrame:frame];
     
     frame.origin = CGPointMake(48.0f, 61.0f);
     frame.size = CGSizeMake(223.0f, 6.0f);
@@ -258,30 +258,30 @@
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     
     //Gray Vertical Lines
-    CGContextSaveGState(context); {
-        CGFloat componentsGrayVert[] = {0.247, 0.247, 0.247, 1.0};
-        CGColorRef colorGrayVert = CGColorCreate(colorspace, componentsGrayVert);
-        CGContextSetStrokeColorWithColor(context, colorGrayVert);
-        CGContextMoveToPoint(context, 50, 0);
-        CGContextAddLineToPoint(context, 50, 49);
-        CGContextMoveToPoint(context, 270.5, 0);
-        CGContextAddLineToPoint(context, 270.5, 49);
-        CGColorRelease(colorGrayVert);
-        CGContextStrokePath(context);
-    } CGContextRestoreGState(context);
+//    CGContextSaveGState(context); {
+//        CGFloat componentsGrayVert[] = {0.247, 0.247, 0.247, 1.0};
+//        CGColorRef colorGrayVert = CGColorCreate(colorspace, componentsGrayVert);
+//        CGContextSetStrokeColorWithColor(context, colorGrayVert);
+//        CGContextMoveToPoint(context, 50, 0);
+//        CGContextAddLineToPoint(context, 50, 49);
+//        CGContextMoveToPoint(context, 270.5, 0);
+//        CGContextAddLineToPoint(context, 270.5, 49);
+//        CGColorRelease(colorGrayVert);
+//        CGContextStrokePath(context);
+//    } CGContextRestoreGState(context);
     
-//    //Black Vertical Lines
-    CGContextSaveGState(context); {
-        CGFloat componentsBlackVert[] = {0.0, 0.0, 0.0, 1.0};
-        CGColorRef colorBlackVert = CGColorCreate(colorspace, componentsBlackVert);
-        CGContextSetStrokeColorWithColor(context, colorBlackVert);
-        CGContextMoveToPoint(context, 51.0, 0);
-        CGContextAddLineToPoint(context, 51.0, 49);
-        CGContextMoveToPoint(context, 269.5, 0);
-        CGContextAddLineToPoint(context, 269.5, 49);
-        CGColorRelease(colorBlackVert);
-        CGContextStrokePath(context);
-    } CGContextRestoreGState(context);
+    //Black Vertical Lines
+//    CGContextSaveGState(context); {
+//        CGFloat componentsBlackVert[] = {0.0, 0.0, 0.0, 1.0};
+//        CGColorRef colorBlackVert = CGColorCreate(colorspace, componentsBlackVert);
+//        CGContextSetStrokeColorWithColor(context, colorBlackVert);
+//        CGContextMoveToPoint(context, 51.0, 0);
+//        CGContextAddLineToPoint(context, 51.0, 49);
+//        CGContextMoveToPoint(context, 269.5, 0);
+//        CGContextAddLineToPoint(context, 269.5, 49);
+//        CGColorRelease(colorBlackVert);
+//        CGContextStrokePath(context);
+//    } CGContextRestoreGState(context);
 
     //Gray Horizontal Top Line
     CGContextSaveGState(context); {

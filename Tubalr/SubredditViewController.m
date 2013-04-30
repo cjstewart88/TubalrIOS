@@ -73,7 +73,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"top genres";
+	self.title = @"reddit playlists";
 }
 
 - (void)fetchAllSubreddits
