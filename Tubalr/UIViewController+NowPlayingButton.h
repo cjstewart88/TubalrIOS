@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Chad Zeluff. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <UIKit/UIViewController.h>
 
 @interface UIViewController (NowPlayingButton)
-
+-(void)showNowPlayingButton:(BOOL)show;
+-(void)nowPlayingButtonPressed:(id)sender;
 @end

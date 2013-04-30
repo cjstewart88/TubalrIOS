@@ -18,6 +18,7 @@
 #import "SearchCell.h"
 #import "TableSectionView.h"
 #import "JustSimilarView.h"
+#import "UIViewController+NowPlayingButton.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, SearchResultsViewControllerDelegate>
 
@@ -30,6 +31,12 @@
 @end
 
 @implementation MainViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self showNowPlayingButton:YES];
+}
 
 - (void)loadView
 {

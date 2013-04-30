@@ -10,6 +10,7 @@
 #import "NowPlayingViewController.h"
 #import "APIQuery.h"
 #import "CustomCell.h"
+#import "UIViewController+NowPlayingButton.h"
 
 @interface GenresViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -25,6 +26,12 @@
 @synthesize keyPath=_keyPath;
 
 static NowPlayingViewController* _nowPlayingVC = nil;
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self showNowPlayingButton:YES];
+}
 
 - (id)initWithKeyPath:(NSString*)keyPath
              andTitle:(NSString*)title
@@ -152,7 +159,6 @@ static NowPlayingViewController* _nowPlayingVC = nil;
 
 +(void)setNowPlayingVC:(NowPlayingViewController *)viewController
 {
-    NSLog(@"Before Re-Assignment - %@", _nowPlayingVC);
     if (_nowPlayingVC == nil) {
         _nowPlayingVC = viewController;
     }
@@ -164,7 +170,6 @@ static NowPlayingViewController* _nowPlayingVC = nil;
         
         _nowPlayingVC = viewController;
     }
-    NSLog(@"After Re-Assignment - %@", _nowPlayingVC);
 }
 
 
