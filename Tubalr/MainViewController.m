@@ -259,12 +259,12 @@
         [self.navigationController pushViewController:allVC animated:YES];
     }
     
-//    else if (indexPath.row == 3)
-//    {
-//        SubredditViewController *subVC = [[SubredditViewController alloc] init];
-//        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-//        [self.navigationController pushViewController:subVC animated:YES];
-//    }
+    else if (indexPath.row == 3)
+    {
+        SubredditViewController *subVC = [[SubredditViewController alloc] init];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+        [self.navigationController pushViewController:subVC animated:YES];
+    }
 }
 
 #pragma mark - UISearchDisplayDelegate

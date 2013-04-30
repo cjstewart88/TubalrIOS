@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) NowPlayingViewController *viewController;
 
+-(void)showNowPlayingView;
+
 @end

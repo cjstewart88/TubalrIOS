@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3120592170C671900784BDF /* btn-now-playing.png in Resources */ = {isa = PBXBuildFile; fileRef = B3120591170C671900784BDF /* btn-now-playing.png */; };
+		B3120594170C672500784BDF /* btn-now-playing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3120593170C672500784BDF /* btn-now-playing@2x.png */; };
 		B3A69947170249EA00506AA6 /* GenresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A69946170249EA00506AA6 /* GenresViewController.m */; };
+		B3A7E917171F44BE009021E3 /* UIViewController+NowPlayingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A7E916171F44BE009021E3 /* UIViewController+NowPlayingButton.m */; };
 		BE0BD637169BC7CE0023BBBD /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */; };
 		BE0BD63C169BD4640023BBBD /* APIQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD63A169BD4640023BBBD /* APIQuery.m */; };
 		BE0BD647169E6CB60023BBBD /* EchonestQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0BD646169E6CB60023BBBD /* EchonestQuery.m */; };
@@ -157,8 +160,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B3120591170C671900784BDF /* btn-now-playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-now-playing.png"; sourceTree = "<group>"; };
+		B3120593170C672500784BDF /* btn-now-playing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-now-playing@2x.png"; sourceTree = "<group>"; };
 		B3A69945170249EA00506AA6 /* GenresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenresViewController.h; sourceTree = "<group>"; };
 		B3A69946170249EA00506AA6 /* GenresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenresViewController.m; sourceTree = "<group>"; };
+		B3A7E915171F44BE009021E3 /* UIViewController+NowPlayingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NowPlayingButton.h"; sourceTree = "<group>"; };
+		B3A7E916171F44BE009021E3 /* UIViewController+NowPlayingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NowPlayingButton.m"; sourceTree = "<group>"; };
 		BE0BD635169BC7CE0023BBBD /* NowPlayingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingViewController.h; sourceTree = "<group>"; };
 		BE0BD636169BC7CE0023BBBD /* NowPlayingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingViewController.m; sourceTree = "<group>"; };
 		BE0BD639169BD4640023BBBD /* APIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIQuery.h; sourceTree = "<group>"; };
@@ -517,7 +524,9 @@
 				BE37973016B78F9A0069FAB2 /* btn-blue@2x.png */,
 				BE37971816B785910069FAB2 /* icon-settings-computer.png */,
 				BE37971916B785910069FAB2 /* icon-settings-computer@2x.png */,
+				B3120593170C672500784BDF /* btn-now-playing@2x.png */,
 				BE37971A16B785910069FAB2 /* icon-settings-facebook.png */,
+				B3120591170C671900784BDF /* btn-now-playing.png */,
 				BE37971B16B785910069FAB2 /* icon-settings-facebook@2x.png */,
 				BE37971C16B785910069FAB2 /* icon-settings-mail.png */,
 				BE37971D16B785910069FAB2 /* icon-settings-mail@2x.png */,
@@ -600,6 +609,8 @@
 				BE63498216AB4E7A00BE4396 /* UIColor+Additions.m */,
 				BE0C087F16ABD43F0061535D /* UIImage+Additions.h */,
 				BE0C088016ABD43F0061535D /* UIImage+Additions.m */,
+				B3A7E915171F44BE009021E3 /* UIViewController+NowPlayingButton.h */,
+				B3A7E916171F44BE009021E3 /* UIViewController+NowPlayingButton.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -824,6 +835,8 @@
 				BE37972F16B785910069FAB2 /* icon-settings-twitter@2x.png in Resources */,
 				BE37973116B78F9A0069FAB2 /* btn-blue@2x.png in Resources */,
 				BE37973316B78FA90069FAB2 /* btn-blue.png in Resources */,
+				B3120592170C671900784BDF /* btn-now-playing.png in Resources */,
+				B3120594170C672500784BDF /* btn-now-playing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,6 +913,7 @@
 				BE66342316C876DE00B41985 /* TeamViewController.m in Sources */,
 				BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */,
 				B3A69947170249EA00506AA6 /* GenresViewController.m in Sources */,
+				B3A7E917171F44BE009021E3 /* UIViewController+NowPlayingButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
