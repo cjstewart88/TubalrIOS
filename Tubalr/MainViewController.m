@@ -11,14 +11,14 @@
 #import "SettingsViewController.h"
 #import "NavigationController.h"
 #import "SearchResultsViewController.h"
-#import "TopGenresViewController.h"
-#import "AllGenresViewController.h"
+#import "GenresViewController.h"
 #import "SubredditViewController.h"
 #import "GenreCell.h"
 #import "PlaylistCell.h"
 #import "SearchCell.h"
 #import "TableSectionView.h"
 #import "JustSimilarView.h"
+#import "UIViewController+NowPlayingButton.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, SearchResultsViewControllerDelegate>
 
@@ -31,6 +31,12 @@
 @end
 
 @implementation MainViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self showNowPlayingButton:YES];
+}
 
 - (void)loadView
 {
@@ -237,26 +243,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: add mechanism so there is dictionary with view controllers os we con't create a new one each time if
+    // we don't need to
     if (indexPath.row == 1)
     {
-        TopGenresViewController *topVC = [[TopGenresViewController alloc] init];
+        GenresViewController *topVC = [[GenresViewController alloc] initWithKeyPath:@"topGenres" andTitle:@"top genres"];
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
         [self.navigationController pushViewController:topVC animated:YES];
     }
     
     else if (indexPath.row == 2)
     {
-        AllGenresViewController *allVC = [[AllGenresViewController alloc] init];
+        GenresViewController *allVC = [[GenresViewController alloc] initWithKeyPath:@"genres" andTitle:@"all genres"];
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
         [self.navigationController pushViewController:allVC animated:YES];
     }
     
-//    else if (indexPath.row == 3)
-//    {
-//        SubredditViewController *subVC = [[SubredditViewController alloc] init];
-//        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-//        [self.navigationController pushViewController:subVC animated:YES];
-//    }
+    else if (indexPath.row == 3)
+    {
+        SubredditViewController *subVC = [[SubredditViewController alloc] init];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+        [self.navigationController pushViewController:subVC animated:YES];
+    }
 }
 
 #pragma mark - UISearchDisplayDelegate
