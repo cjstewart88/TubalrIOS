@@ -7,6 +7,7 @@
 //
 
 #import "NowPlayingViewController.h"
+#import "GenresViewController.h"
 #import "APIQuery.h"
 #import "NowPlayingCell.h"
 #import "MovieControlView.h"
@@ -32,7 +33,6 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 @interface NowPlayingViewController () <UITableViewDataSource, UITableViewDelegate, MovieControlViewDelegate>
 - (void)beginSearch:(id)sender;
 
-@property (nonatomic, strong) AVView *playerView;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) MovieControlView *movieControlView;
 @property (nonatomic, strong) UITableView *bottomTableView;
@@ -98,9 +98,9 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     
     [self addPlayerTimeObserver];
     [self.playerView.player addObserver:self
-                  forKeyPath:kRateKey
-                     options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                     context:nil];
+                             forKeyPath:kRateKey
+                                options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                                context:nil];
     
     [self.playerView.player addObserver:self
                   forKeyPath:kCurrentItemKey
@@ -182,6 +182,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 {
     _arrayOfData = arrayOfData;
     [self.bottomTableView reloadData];
+    
     [self selectMoveAndPlay];
 }
 
@@ -233,9 +234,11 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)selectMoveAndPlay
 {
-    [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    [self.bottomTableView.delegate tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0]];
+    if ([[GenresViewController nowPlayingVC] isEqual:self]) {
+        [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        [self.bottomTableView.delegate tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0]];
+    }
 }
 
 - (BOOL)shouldAutorotate //iOS6
@@ -255,6 +258,10 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)backPressed:(id)sender
 {
+    if (![self isEqual:[GenresViewController nowPlayingVC]]) {
+        [GenresViewController setNowPlayingVC:self];
+    }
+    
     if(CMTimeGetSeconds(self.playerView.player.currentTime) < 5)
     {
         [self previousItem];
@@ -268,6 +275,10 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)playPausePressed:(id)sender
 {
+    if (![self isEqual:[GenresViewController nowPlayingVC]]) {
+        [GenresViewController setNowPlayingVC:self];
+    }
+    
     if ([self isPlaying])
 	{
         [self.playerView.player pause];
@@ -280,6 +291,10 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)nextPressed:(id)sender
 {
+    if (![self isEqual:[GenresViewController nowPlayingVC]]) {
+        [GenresViewController setNowPlayingVC:self];
+    }
+    
     [self nextItem];
 }
 
@@ -354,6 +369,10 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![self isEqual:[GenresViewController nowPlayingVC]]) {
+        [GenresViewController setNowPlayingVC:self];
+    }
+    
     if(_selectedCellIndex == indexPath.row) return;
     _selectedCellIndex = indexPath.row;
     

@@ -303,7 +303,7 @@
         }
         else if (indexPath.row == 3)
         {
-            cell.textLabel.text = @"support@tubalr.com";
+            cell.textLabel.text = @"listen.to.tubalr@gmail.com";
             cell.imageView.image = [UIImage imageNamed:@"icon-settings-mail"];
         }
         else if (indexPath.row == 4)
@@ -392,7 +392,7 @@
                 MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
                 mailer.mailComposeDelegate = self;
                 [mailer setSubject:@"Tubalr iOS Support"];
-                NSArray *toRecipients = [NSArray arrayWithObjects:@"support@tubalr.com", nil];
+                NSArray *toRecipients = [NSArray arrayWithObjects:@"listen.to.tubalr@gmail.com", nil];
                 [mailer setToRecipients:toRecipients];
                 [self presentViewController:mailer animated:YES completion:nil];
             }

@@ -42,9 +42,10 @@
     UIBarButtonItem *searchBarButtonItem = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     
     [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setTitleVerticalPositionAdjustment:-5.0f forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setTitleVerticalPositionAdjustment:-6.0f forBarMetrics:UIBarMetricsDefault];
     [navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                            [UIFont boldFontOfSize:24.0f], UITextAttributeFont,
+                                           
                                            [UIColor blackColor], UITextAttributeTextShadowColor,
                                            [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)], UITextAttributeTextShadowOffset,
                                            [UIColor whiteColor], UITextAttributeTextColor, nil]];
@@ -95,6 +96,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)showNowPlayingView
+{
+    
 }
 
 @end
