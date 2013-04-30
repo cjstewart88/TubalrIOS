@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AVView.h"
 
 typedef enum {
     justSearch,
@@ -18,5 +19,7 @@ typedef enum {
 @interface NowPlayingViewController : UIViewController
 
 - (id)initWithSearchString:(NSString *)string searchType:(SearchType)searchType;
+
+@property (nonatomic, strong) AVView *playerView;
 
 @end
