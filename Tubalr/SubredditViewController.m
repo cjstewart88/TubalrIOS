@@ -8,12 +8,14 @@
 
 #import "SubredditViewController.h"
 #import "NowPlayingViewController.h"
+#import "GenresViewController.h"
 #import "APIQuery.h"
 #import "CustomCell.h"
 
 @interface SubredditViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     NSDictionary *subredditDictionary;
+    NSMutableArray *subredditArray;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -45,6 +47,12 @@
         }
         else
         {
+            for (NSDictionary *cat in subredditDictionary) {
+                if (subredditArray == nil) {
+                    subredditArray = [[NSMutableArray alloc] init];
+                }
+                [subredditArray addObjectsFromArray:[cat objectForKey:@"subreddits"]];
+            }
             [self.tableView reloadData];
         }
     }
@@ -92,30 +100,41 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
-//    return [categoriesArray count];
+    long count = 0;
+    for (NSDictionary* categoryDict in subredditDictionary)
+    {
+        count += [[categoryDict objectForKey:@"subreddits"] count];
+    }
+    
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *AllGenreCellIdentifier = @"AllGenreCell";
+    static NSString *subredditCellIdentifier = @"SubredditGenreCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AllGenreCellIdentifier];
-    if(!cell)
-        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AllGenreCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subredditCellIdentifier];
+    if (!cell)
+        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:subredditCellIdentifier];
     
-//    NSString *label = [allGenresArray objectAtIndex:indexPath.row];
-//    
-//    cell.textLabel.text = label;
+    NSString *label = [subredditArray objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = label;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NowPlayingViewController *nowPlayingVC = [[NowPlayingViewController alloc] initWithSearchString:[categoriesArray objectAtIndex:indexPath.row] searchType:genreSearch];
-//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-//    [self.navigationController pushViewController:nowPlayingVC animated:YES];
+    NowPlayingViewController *vc = [[NowPlayingViewController alloc] initWithSearchString:[subredditArray objectAtIndex:indexPath.row] searchType:genreSearch];
+    
+    if ([GenresViewController nowPlayingVC] == nil) {
+        [GenresViewController setNowPlayingVC:vc];
+    }
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
