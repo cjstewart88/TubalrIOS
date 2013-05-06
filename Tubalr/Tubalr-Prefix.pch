@@ -11,5 +11,23 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <MediaPlayer/MediaPlayer.h>
+    #import <Crashlytics/Crashlytics.h>
+    #import <AVFoundation/AVFoundation.h>
+    #import <CoreMedia/CoreMedia.h>
+    #import <QuartzCore/QuartzCore.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+    #import <MessageUI/MessageUI.h>
+    #import "AFNetworking/AFNetworking.h"
     #import "TestFlight.h"
+    #import "NSArray+Shuffle.h"
+    #import "NSDictionary+objectForKeyList.h"
+    #import "NSString+FontAwesome.h"
+    #import "UIFont+Additions.h"
+    #import "GTMNSString+HTML.h"
+    #import "NSString+HTML.h"
+    #import "NSString+XMLEntities.h"
+    #import "UIColor+Additions.h"
+    #import "UIImage+Additions.h"
 #endif
