@@ -11,6 +11,7 @@
 #import "GenresViewController.h"
 #import "APIQuery.h"
 #import "CustomCell.h"
+#import "UIViewController+NowPlayingButton.h"
 
 @interface SubredditViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -82,6 +83,12 @@
 {
     [super viewDidLoad];
 	self.title = @"reddit playlists";
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self showNowPlayingButton:YES];
 }
 
 - (void)fetchAllSubreddits
