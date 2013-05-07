@@ -14,6 +14,7 @@
 #import "LBYouTubeExtractor.h"
 #import "Slider.h"
 #import "AVView.h"
+#import "UIViewController+NowPlayingButton.h"
 
 /* Asset keys */
 NSString * const kTracksKey         = @"tracks";
@@ -110,6 +111,14 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 	[self syncPlayPauseButtons];
     
     [self beginSearch:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (![self isEqual:[GenresViewController nowPlayingVC]])
+        [self showNowPlayingButton:YES];
 }
 
 - (void)dealloc
