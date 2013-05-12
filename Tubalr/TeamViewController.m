@@ -42,7 +42,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,9 +59,13 @@
     }
     else if (indexPath.row == 1)
     {
-        cell.textLabel.text = @"Chad Zeluff - Mobile Developer";
+        cell.textLabel.text = @"Kyle Bock - Mobile Developer";
     }
     else if (indexPath.row == 2)
+    {
+        cell.textLabel.text = @"Chad Zeluff - Mobile Developer";
+    }
+    else if (indexPath.row == 3)
     {
         cell.textLabel.text = @"Blake Simkins - Designer";
     }
