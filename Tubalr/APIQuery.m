@@ -81,8 +81,15 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     __block int numberOfNils = 0;
     
     [EchonestQuery artistSearch:string completion:^(NSArray *arrayOfSongs) {
+        // Echonest returned 0 songs, lets do a basic YouTube search
+        if ([arrayOfSongs count] == 0) {
+            [YouTubeQuery searchWithStringNoRestrictions:string completion:^(NSArray* videosArray) {
+                [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:videosArray] shuffledArray]];
+            }];
+            return;
+        }
         
-        //We have successfully returned Echonest data, now perform YouTube searches for artist song
+        // We have successfully returned Echonest data, now perform YouTube searches for artist song
         for(int i = 0; i < [arrayOfSongs count]; i++)
         {
             NSString *artistSongString = [NSString stringWithFormat:@"%@ %@", string, [arrayOfSongs objectAtIndex:i]];
@@ -114,6 +121,13 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     __block int numberOfNils = 0;
     
     [EchonestQuery similarArtistSearch:string completion:^(NSArray *arrayOfArtists) {
+        // Echonest returned 0 songs, lets do a basic YouTube search
+        if ([arrayOfArtists count] == 0) {
+            [YouTubeQuery searchWithStringNoRestrictions:string completion:^(NSArray* videosArray) {
+                [self callCompletionOnMainThread:completion result:[[NSArray arrayWithArray:videosArray] shuffledArray]];
+            }];
+            return;
+        }
         
         //We have successfully returned Echonest data, now perform YouTube searches for each artist
         for(int i = 0; i < [arrayOfArtists count]; i++)
