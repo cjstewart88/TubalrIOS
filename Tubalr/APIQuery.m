@@ -219,6 +219,27 @@ NSString *const kAPITrackURL                = @"http://www.tubalr.com";
     }];
 }
 
++ (void)reportVideoWatchedWithVideoID:(NSString *)videoid videotitle:(NSString *)videotitle
+{
+    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.tubalr.com/"]];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    
+    NSString *user_id = nil;
+    if ([user stringForKey:@"id"]) {
+        user_id = [user stringForKey:@"id"];
+    }
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:videoid, @"video_id", videotitle, @"video_title", @"ios", @"user_agent", user_id, @"user_id", nil];
+
+    [client postPath:@"api/analytics/report_watched_video" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        // Do some kind of report here...
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        // Do some kind of report here...
+    }];
+
+}
+
 #pragma mark Private
 
 +(dispatch_queue_t)sharedQueue
