@@ -8,7 +8,7 @@
 
 #import "YouTubeQuery.h"
 
-NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/mobile/videos?q=%@&orderby=relevance&start-index=1&max-results=10&v=2&alt=json&format=1";
+NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/mobile/videos?q=%@&orderby=relevance&start-index=1&max-results=%@&v=2&alt=json&format=1";
 
 @implementation YouTubeQuery
 
@@ -17,12 +17,48 @@ NSString *const kYouTubeQueryUrl            = @"http://gdata.youtube.com/feeds/m
 + (void)searchWithString:(NSString *)artist completion:(void (^)(NSDictionary *))completion
 {
     //Arist or Artist Song
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artist stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artist stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], @"10"]];
     
     [self searchWithUrl:url completion:completion];
 }
 
++ (void)searchWithStringNoRestrictions:(NSString *)artist completion:(void (^)(NSArray *))completion
+{
+    //Arist or Artist Song
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: kYouTubeQueryUrl, [artist stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding], @"40"]];
+    
+    [self searchWithUrlNoRestrictions:url completion:completion];
+}
+
 #pragma mark Private
+
++ (void)searchWithUrlNoRestrictions:(NSURL *)url completion:(void (^)(NSArray *))completion
+{
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        NSError *error;
+        NSMutableArray *results = [[NSMutableArray alloc] init];
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        NSDictionary *feed = [json objectForKey:@"feed"];
+        NSArray *entries = [feed objectForKey:@"entry"];
+        
+        for(NSDictionary *entry in entries)
+        {
+            if([self isUnique:entry] && [self isNotBlocked:entry]&& [self isNotUserBanned:entry])
+            {
+                NSString *theTitle = [[entry objectForKey:@"title"] objectForKey:@"$t"];
+                NSString *theYouTubeId = (NSString *)[[(NSString *)[[entry objectForKey:@"id"] objectForKey:@"$t"] componentsSeparatedByString:@":"] lastObject];
+                
+                [results addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    theTitle, @"title",
+                                    theYouTubeId, @"youtube-id", nil]];
+            }
+        }
+        
+        [self callCompletionOnMainThread:completion result:results];
+    });
+}
 
 + (void)searchWithUrl:(NSURL *)url completion:(void (^)(NSDictionary *))completion
 {
