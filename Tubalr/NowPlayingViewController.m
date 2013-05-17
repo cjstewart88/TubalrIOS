@@ -216,6 +216,10 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification
 {
+    NSDictionary *videoWatched = [self.arrayOfData objectAtIndex:_selectedCellIndex];
+    
+    [APIQuery reportVideoWatchedWithVideoID:(NSString*)[videoWatched objectForKey:@"youtube-id"]
+                                 videotitle:(NSString*)[videoWatched objectForKey:@"title"]];
     [self nextItem];
 }
 
