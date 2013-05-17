@@ -12,4 +12,6 @@
 
 + (void)searchWithString:(NSString *)artist completion:(void (^)(NSDictionary *))completion;
 
++ (void)searchWithStringNoRestrictions:(NSString *)artist completion:(void (^)(NSArray *))completion;
+
 @end
