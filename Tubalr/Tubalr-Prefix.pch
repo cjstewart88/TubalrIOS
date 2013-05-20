@@ -12,7 +12,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <MediaPlayer/MediaPlayer.h>
-    #import <Crashlytics/Crashlytics.h>
     #import <AVFoundation/AVFoundation.h>
     #import <CoreMedia/CoreMedia.h>
     #import <QuartzCore/QuartzCore.h>

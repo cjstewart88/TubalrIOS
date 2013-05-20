@@ -2,9 +2,6 @@
 //  SubredditViewController.m
 //  Tubalr
 //
-//  Created by Chad Zeluff on 2/10/13.
-//  Copyright (c) 2013 Chad Zeluff. All rights reserved.
-//
 
 #import "SubredditViewController.h"
 #import "NowPlayingViewController.h"

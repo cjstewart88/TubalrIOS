@@ -2,10 +2,6 @@
 //  GenresViewController.m
 //  Tubalr
 //
-//  Created by Kyle Bock on 3/26/13.
-//  Copyright (c) 2013 Chad Zeluff. All rights reserved.
-//
-
 #import "GenresViewController.h"
 #import "NowPlayingViewController.h"
 #import "APIQuery.h"

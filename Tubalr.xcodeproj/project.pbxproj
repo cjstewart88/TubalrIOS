@@ -22,7 +22,6 @@
 		BE0C088116ABD43F0061535D /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0C088016ABD43F0061535D /* UIImage+Additions.m */; };
 		BE0C088B16AC6CED0061535D /* btn-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0C088A16AC6CED0061535D /* btn-profile@2x.png */; };
 		BE0C088E16AC6D190061535D /* btn-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = BE0C088D16AC6D190061535D /* btn-profile.png */; };
-		BE24377416A07B28001B214E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE24377316A07B28001B214E /* Crashlytics.framework */; };
 		BE3514E416AC6E5B00683505 /* btn-cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514E216AC6E5B00683505 /* btn-cancel.png */; };
 		BE3514E516AC6E5B00683505 /* btn-cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3514E316AC6E5B00683505 /* btn-cancel@2x.png */; };
 		BE3514E816AC838400683505 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3514E716AC838400683505 /* QuartzCore.framework */; };
@@ -385,7 +384,6 @@
 				BEF8F5AB169512FC002F241E /* CoreGraphics.framework in Frameworks */,
 				BE3E501F16951A8800FFC7A1 /* libTestFlight.a in Frameworks */,
 				BE3E502216951B8F00FFC7A1 /* libz.dylib in Frameworks */,
-				BE24377416A07B28001B214E /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,7 +726,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Chad Zeluff";
+				ORGANIZATIONNAME = Tubalr;
 			};
 			buildConfigurationList = BEF8F59C169512FC002F241E /* Build configuration list for PBXProject "Tubalr" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -854,7 +852,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run e3e642bcbe351153ef65205ec65c9f9cc69d86f2";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -986,6 +984,7 @@
 		BEF8F5C1169512FC002F241E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cody Stewart (L6THM4M3JK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -998,6 +997,7 @@
 					"\"$(SRCROOT)/Tubalr\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "97BD09A9-7264-4925-B775-08D5E8F042ED";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1005,7 +1005,8 @@
 		BEF8F5C2169512FC002F241E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cody Stewart";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Cody Stewart (L6THM4M3JK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cody Stewart (L6THM4M3JK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1018,7 +1019,8 @@
 					"\"$(SRCROOT)/Tubalr\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64961B67-99F1-4C5B-9B77-8A6E6D974458";
+				PROVISIONING_PROFILE = "97BD09A9-7264-4925-B775-08D5E8F042ED";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97BD09A9-7264-4925-B775-08D5E8F042ED";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

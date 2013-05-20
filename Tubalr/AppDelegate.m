@@ -2,9 +2,6 @@
 //  AppDelegate.m
 //  Tubalr
 //
-//  Created by Chad Zeluff on 1/2/13.
-//  Copyright (c) 2013 Chad Zeluff. All rights reserved.
-//
 
 #import "AppDelegate.h"
 #import "NavigationController.h"
@@ -15,7 +12,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [TestFlight takeOff:@"eab2d4a84191015273c8368e21e964fe_MTcxMjcxMjAxMy0wMS0wMiAyMDo0NTowOS4yNTczMjI"];
-    [Crashlytics startWithAPIKey:@"e3e642bcbe351153ef65205ec65c9f9cc69d86f2"];
     
     [self applyStyleSheet];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
