@@ -25,6 +25,7 @@
 
 -(void)nowPlayingButtonPressed:(id)sender
 {
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationController pushViewController:(UIViewController*)[GenresViewController nowPlayingVC] animated:YES];
 }
 @end
