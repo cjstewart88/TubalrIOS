@@ -12,6 +12,7 @@
 #import "Slider.h"
 #import "AVView.h"
 #import "UIViewController+NowPlayingButton.h"
+#import "UIViewController+TitleBarLabel.h"
 
 /* Asset keys */
 NSString * const kTracksKey         = @"tracks";
@@ -91,8 +92,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = @"tubalr";
+    [self setTitleBarLabelWith:@"tubalr"];
     
     [self addPlayerTimeObserver];
     [self.playerView.player addObserver:self

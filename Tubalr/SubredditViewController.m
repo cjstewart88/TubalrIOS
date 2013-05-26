@@ -9,6 +9,7 @@
 #import "APIQuery.h"
 #import "CustomCell.h"
 #import "UIViewController+NowPlayingButton.h"
+#import "UIViewController+TitleBarLabel.h"
 
 @interface SubredditViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -79,7 +80,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"reddit playlists";
+    [self setTitleBarLabelWith:@"subreddits"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

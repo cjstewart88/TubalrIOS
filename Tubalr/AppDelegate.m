@@ -38,7 +38,7 @@
     UIBarButtonItem *searchBarButtonItem = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     
     [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setTitleVerticalPositionAdjustment:-6.0f forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setTitleVerticalPositionAdjustment:-3.0f forBarMetrics:UIBarMetricsDefault];
     [navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                            [UIFont boldFontOfSize:24.0f], UITextAttributeFont,
                                            
