@@ -276,7 +276,7 @@
         }
         else if (indexPath.row == 2)
         {
-            cell.textLabel.text = @"www.facebook.com/tubalr";
+            cell.textLabel.text = @"www.facebook.com/ListenToTubalr";
             cell.imageView.image = [UIImage imageNamed:@"icon-settings-facebook"];
         }
         else if (indexPath.row == 3)
