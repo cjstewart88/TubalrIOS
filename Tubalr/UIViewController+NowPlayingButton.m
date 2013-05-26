@@ -25,6 +25,6 @@
 
 -(void)nowPlayingButtonPressed:(id)sender
 {
-    [self.navigationController pushViewController:(UIViewController*)[GenresViewController nowPlayingVC] animated:NO];
+    [self.navigationController pushViewController:(UIViewController*)[GenresViewController nowPlayingVC] animated:YES];
 }
 @end
