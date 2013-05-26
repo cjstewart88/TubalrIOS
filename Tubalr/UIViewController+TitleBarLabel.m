@@ -13,7 +13,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldFontOfSize:24.0];
-    label.shadowColor = [UIColor blackColor], UITextAttributeTextShadowColor;
+    label.shadowColor = [UIColor blackColor];
     label.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = label;
     label.text = NSLocalizedString(title, @"");

@@ -87,6 +87,41 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.movieControlView];
     [self.view addSubview:self.bottomTableView];
+    
+    [self isLoading:true];
+}
+
+- (void)isLoading:(BOOL)loading
+{
+    if (loading) {
+        [self.view setUserInteractionEnabled:NO];
+        
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        
+        CGRect frame = CGRectMake(0, 0, screenWidth, screenHeight);
+        UIView *loadingView = [[UILabel alloc] initWithFrame:frame];
+        loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8];
+        loadingView.tag = 1;
+        [self.view addSubview:loadingView];
+        
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        indicator.center = self.view.center;
+        indicator.tag = 1;
+        [self.view addSubview:indicator];
+        [indicator startAnimating];
+    }
+    else {
+        [self.view setUserInteractionEnabled:YES];
+        
+        for (UIView *subview in [self.view subviews]) {
+            if (subview.tag == 1) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -185,7 +220,7 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 {
     _arrayOfData = arrayOfData;
     [self.bottomTableView reloadData];
-    
+    [self isLoading:false];
     [self selectMoveAndPlay];
 }
 
