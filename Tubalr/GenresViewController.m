@@ -7,6 +7,7 @@
 #import "APIQuery.h"
 #import "CustomCell.h"
 #import "UIViewController+NowPlayingButton.h"
+#import "UIViewController+TitleBarLabel.h"
 
 @interface GenresViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -37,7 +38,7 @@ static NowPlayingViewController* _nowPlayingVC = nil;
         return nil;
     
     self.keyPath = keyPath;
-    self.title = title;
+    [self setTitleBarLabelWith:title];
     
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:self.keyPath options:NSKeyValueObservingOptionInitial context:nil];
     

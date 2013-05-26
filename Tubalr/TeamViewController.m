@@ -5,6 +5,7 @@
 
 #import "TeamViewController.h"
 #import "CustomCell.h"
+#import "UIViewController+TitleBarLabel.h"
 
 @interface TeamViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -32,7 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"team";
+    [self setTitleBarLabelWith:@"team"];
 }
 
 #pragma mark - UITableViewDataSource

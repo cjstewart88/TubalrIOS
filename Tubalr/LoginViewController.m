@@ -5,11 +5,11 @@
 
 #import "LoginViewController.h"
 #import "APIQuery.h"
+#import "UIViewController+TitleBarLabel.h"
 
 @interface LoginViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UILabel *tubalrLabel;
 @property (nonatomic, strong) UILabel *forgotPasswordLabel;
 @property (nonatomic, strong) UITextField *usernameField;
 @property (nonatomic, strong) UITextField *passwordField;
@@ -24,11 +24,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-noise"]];
     
-    [self.view addSubview:self.tubalrLabel];
-    CGPoint newPosition = CGPointMake(self.view.center.x, 45.0f);
-    self.tubalrLabel.center = newPosition;
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tubalrLabel.frame), self.view.bounds.size.width, 110.0f) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 110.0f) style:UITableViewStyleGrouped];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-noise"]];
     self.tableView.delegate = self;
@@ -41,28 +37,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"login";
+    [self setTitleBarLabelWith:@"login"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self.usernameField becomeFirstResponder];
-}
-
-- (UILabel *)tubalrLabel
-{
-    if(_tubalrLabel == nil)
-    {
-        _tubalrLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _tubalrLabel.backgroundColor = [UIColor clearColor];
-        _tubalrLabel.font = [UIFont boldFontOfSize:50.0f];
-        _tubalrLabel.textColor = [UIColor whiteColor];
-        [_tubalrLabel setText:@"tubalr"];
-        [_tubalrLabel sizeToFit];
-    }
-    
-    return _tubalrLabel;
 }
 
 #pragma mark - UITableViewDataSource

@@ -12,6 +12,7 @@
 #import "SettingsCell.h"
 #import "LoggedInUserCell.h"
 #import "APIQuery.h"
+#import "UIViewController+TitleBarLabel.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 {
@@ -23,7 +24,6 @@
 }
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UILabel *tubalrLabel;
 @property (nonatomic, strong) UILabel *versionLabel;
 
 @property (nonatomic, strong) UIButton *createButton;
@@ -94,11 +94,8 @@
     [self.view addSubview:self.tableView];
     
     [self.view addSubview:self.versionLabel];
-    [self.view addSubview:self.tubalrLabel];
     CGPoint newPosition = CGPointMake(self.view.center.x, 475.0f);
     self.versionLabel.center = newPosition;
-    newPosition = CGPointMake(self.view.center.x, CGRectGetMinY(self.versionLabel.frame) - 16.0f);
-    self.tubalrLabel.center = newPosition;
 }
 
 - (void)fixExtraButtons
@@ -122,8 +119,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"settings";
-//    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+    [self setTitleBarLabelWith:@"settings"];
     
     UIImage *profileImage = [UIImage imageNamed:@"btn-close-left"];
     UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
@@ -164,21 +160,6 @@
     CreateAccountViewController *createVC = [[CreateAccountViewController alloc] init];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     [self.navigationController pushViewController:createVC animated:YES];
-}
-
-- (UILabel *)tubalrLabel
-{
-    if(_tubalrLabel == nil)
-    {
-        _tubalrLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _tubalrLabel.backgroundColor = [UIColor clearColor];
-        _tubalrLabel.font = [UIFont boldFontOfSize:24.0f];
-        _tubalrLabel.textColor = [UIColor whiteColor];
-        [_tubalrLabel setText:@"tubalr"];
-        [_tubalrLabel sizeToFit];
-    }
-    
-    return _tubalrLabel;
 }
 
 - (UILabel *)versionLabel
