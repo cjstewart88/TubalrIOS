@@ -185,7 +185,6 @@
 		BE0C088016ABD43F0061535D /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		BE0C088A16AC6CED0061535D /* btn-profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-profile@2x.png"; sourceTree = "<group>"; };
 		BE0C088D16AC6D190061535D /* btn-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-profile.png"; sourceTree = "<group>"; };
-		BE24377316A07B28001B214E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BE3514E216AC6E5B00683505 /* btn-cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-cancel.png"; sourceTree = "<group>"; };
 		BE3514E316AC6E5B00683505 /* btn-cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-cancel@2x.png"; sourceTree = "<group>"; };
 		BE3514E716AC838400683505 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -659,7 +658,6 @@
 				BE50BA8216A385D400672442 /* CoreMedia.framework */,
 				BEA2F8DC16A3166D005E7CC4 /* AudioToolbox.framework */,
 				BEA2F8DA16A3138D005E7CC4 /* AVFoundation.framework */,
-				BE24377316A07B28001B214E /* Crashlytics.framework */,
 				BE3E502116951B8F00FFC7A1 /* libz.dylib */,
 				BE3E501D16951A8800FFC7A1 /* libTestFlight.a */,
 				BEF8F5A6169512FC002F241E /* UIKit.framework */,
