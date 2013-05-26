@@ -54,7 +54,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     cell.backgroundColor = [UIColor clearColor];
-//    cell.textLabel.text = @"/r/dubstep";
     
     return cell;
 }

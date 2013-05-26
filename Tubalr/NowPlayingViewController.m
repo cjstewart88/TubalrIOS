@@ -5,13 +5,13 @@
 
 #import "NowPlayingViewController.h"
 #import "GenresViewController.h"
+#import "SearchResultsViewController.h"
 #import "APIQuery.h"
 #import "NowPlayingCell.h"
 #import "MovieControlView.h"
 #import "LBYouTubeExtractor.h"
 #import "Slider.h"
 #import "AVView.h"
-#import "UIViewController+NowPlayingButton.h"
 #import "UIViewController+TitleBarLabel.h"
 
 /* Asset keys */
@@ -113,9 +113,6 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if (![self isEqual:[GenresViewController nowPlayingVC]])
-        [self showNowPlayingButton:YES];
 }
 
 - (void)dealloc
@@ -244,11 +241,11 @@ static void *AVPlayerDemoPlaybackViewControllerCurrentItemObservationContext = &
 
 - (void)selectMoveAndPlay
 {
-    if ([[GenresViewController nowPlayingVC] isEqual:self]) {
-        [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-        [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-        [self.bottomTableView.delegate tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0]];
-    }
+
+    [self.bottomTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self.bottomTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.bottomTableView.delegate tableView:self.bottomTableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:_nextCellIndex inSection:0]];
+
 }
 
 - (BOOL)shouldAutorotate //iOS6
