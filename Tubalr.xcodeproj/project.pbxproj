@@ -156,6 +156,7 @@
 		BEF8F5B9169512FC002F241E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8F5B8169512FC002F241E /* Default.png */; };
 		BEF8F5BB169512FC002F241E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8F5BA169512FC002F241E /* Default@2x.png */; };
 		BEF8F5BD169512FC002F241E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF8F5BC169512FC002F241E /* Default-568h@2x.png */; };
+		C3A32AA717519CC4001C61FC /* UIViewController+TitleBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A32AA617519CC4001C61FC /* UIViewController+TitleBarLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -364,6 +365,8 @@
 		BEF8F5B8169512FC002F241E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		BEF8F5BA169512FC002F241E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BEF8F5BC169512FC002F241E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C3A32AA117519BE2001C61FC /* UIViewController+TitleBarLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TitleBarLabel.h"; sourceTree = "<group>"; };
+		C3A32AA617519CC4001C61FC /* UIViewController+TitleBarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TitleBarLabel.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -609,6 +612,8 @@
 				BE0C088016ABD43F0061535D /* UIImage+Additions.m */,
 				B3A7E915171F44BE009021E3 /* UIViewController+NowPlayingButton.h */,
 				B3A7E916171F44BE009021E3 /* UIViewController+NowPlayingButton.m */,
+				C3A32AA117519BE2001C61FC /* UIViewController+TitleBarLabel.h */,
+				C3A32AA617519CC4001C61FC /* UIViewController+TitleBarLabel.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -912,6 +917,7 @@
 				BE66342C16C89DBE00B41985 /* SubredditViewController.m in Sources */,
 				B3A69947170249EA00506AA6 /* GenresViewController.m in Sources */,
 				B3A7E917171F44BE009021E3 /* UIViewController+NowPlayingButton.m in Sources */,
+				C3A32AA717519CC4001C61FC /* UIViewController+TitleBarLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@
 #import "TableSectionView.h"
 #import "JustSimilarView.h"
 #import "UIViewController+NowPlayingButton.h"
+#import "UIViewController+TitleBarLabel.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, SearchResultsViewControllerDelegate>
 
@@ -38,6 +39,7 @@
 - (void)loadView
 {
     [super loadView];
+    [self setTitleBarLabelWith:@"tubalr"];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-noise"]];
@@ -52,7 +54,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"tubalr";
     
     UIImage *profileImage = [UIImage imageNamed:@"btn-settings"];
     UIImage *image = [profileImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, profileImage.size.width, 0, 0)];
@@ -67,10 +68,7 @@
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchCell.searchBar contentsController:self];
     self.searchController.delegate = self;
-//    self.searchController.searchResultsDataSource = self.searchResultsViewController;
-//    self.searchController.searchResultsDelegate = self.searchResultsViewController;
     self.searchCell.delegate = self;
-//    self.searchResultsViewController.delegate = self;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -187,7 +185,7 @@
                     break;
                 }
                 case 3:{
-                    cellTitle = @"Reddit Playlists";
+                    cellTitle = @"SubReddit Playlists";
                     cellImage = [UIImage imageNamed:@"icon-reddit"];
                     break;
                 }
